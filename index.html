@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoToon AI - Create Cartoon Stories</title>
+  <!-- Tailwind CSS CDN for styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: '#6366f1',
+            darkBg: '#0b0f19',
+            cardBg: '#111827'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-darkBg text-gray-100 font-sans min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center border-b border-gray-800">
+    <div class="text-2xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-500">
+      AutoToon.ai
+    </div>
+    <div class="hidden md:flex space-x-6 text-sm text-gray-300">
+      <a href="#generator" class="hover:text-white transition">AI जनरेटर</a>
+      <a href="#features" class="hover:text-white transition">फीचर्स</a>
+      <a href="#showcase" class="hover:text-white transition">कहानियाँ</a>
+    </div>
+    <a href="#generator" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-full font-medium text-sm transition">
+      फ्री में शुरू करें
+    </a>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="max-w-5xl mx-auto px-6 pt-16 pb-12 text-center">
+    <span class="inline-block py-1 px-3 rounded-full bg-indigo-900/50 border border-indigo-700/50 text-indigo-300 text-xs font-semibold mb-4">
+      ⚡ यूट्यूब और रील्स के लिए #1 कार्टून AI टूल
+    </span>
+    <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight mb-6">
+      AI से बनाएं बेहतरीन <br/>
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-500">
+        कार्टून कहानियाँ और बैकग्राउंड
+      </span>
+    </h1>
+    <p class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto mb-8">
+      सिर्फ प्रॉम्प्ट लिखें और अपने यूट्यूब वीडियो के लिए 3D कार्टून कैरेक्टर, गांव या जंगल के सीन तुरंत जनरेट करें।
+    </p>
+  </section>
+
+  <!-- Working AI Generator Tool Section -->
+  <section id="generator" class="max-w-3xl mx-auto px-6 pb-20">
+    <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 md:p-8 shadow-2xl">
+      <h2 class="text-xl font-bold mb-2 text-white">AI कार्टून इमेज जनरेटर (लाइव डेमो)</h2>
+      <p class="text-xs text-gray-400 mb-4">कोई भी सीन या कैरेक्टर लिखें (उदा: A cute 3D cartoon boy in an Indian village)</p>
+      
+      <div class="flex flex-col md:flex-row gap-3">
+        <input 
+          id="promptInput" 
+          type="text" 
+          placeholder="यहाँ अपना प्रॉम्प्ट लिखें..." 
+          value="A cute 3D Pixar style boy wearing Rajasthani turban in rural village, cinematic light"
+          class="flex-1 bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 text-sm"
+        />
+        <button 
+          id="generateBtn" 
+          onclick="generateImage()"
+          class="bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-6 py-3 rounded-xl transition text-sm flex items-center justify-center">
+          जनरेट करें 🎨
+        </button>
+      </div>
+
+      <!-- Output Screen -->
+      <div class="mt-6 border border-gray-800 rounded-xl bg-gray-950 min-h-[300px] flex items-center justify-center overflow-hidden relative">
+        <div id="loadingText" class="hidden text-indigo-400 text-sm animate-pulse">
+          ⏳ AI कार्टून बना रहा है, कृपया 5 सेकंड प्रतीक्षा करें...
+        </div>
+        <img id="resultImage" src="" alt="AI Output" class="w-full h-auto object-cover hidden rounded-xl" />
+        <span id="placeholderText" class="text-gray-600 text-xs text-center px-4">
+          ऊपर 'जनरेट करें' बटन दबाकर देखें
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="max-w-6xl mx-auto px-6 py-12 border-t border-gray-800">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-cardBg p-6 rounded-xl border border-gray-800">
+        <div class="text-3xl mb-3">🎭</div>
+        <h3 class="font-bold text-lg mb-2">कैरेक्टर कंसिस्टेंसी</h3>
+        <p class="text-gray-400 text-sm">हर सीन में एक ही जैसा कार्टून कैरेक्टर बनाएं बिना किसी अंतर के।</p>
+      </div>
+      <div class="bg-cardBg p-6 rounded-xl border border-gray-800">
+        <div class="text-3xl mb-3">🏞️</div>
+        <h3 class="font-bold text-lg mb-2">कस्टम बैकग्राउंड</h3>
+        <p class="text-gray-400 text-sm">भारतीय गांव, भूतिया हवेली या जादुई जंगल के मनपसंद बैकग्राउंड।</p>
+      </div>
+      <div class="bg-cardBg p-6 rounded-xl border border-gray-800">
+        <div class="text-3xl mb-3">⚡</div>
+        <h3 class="font-bold text-lg mb-2">100% फ्री टेस्टिंग</h3>
+        <p class="text-gray-400 text-sm">बिना क्रेडिट कार्ड या लॉगिन के तुरंत अनलिमिटेड इमेज जनरेशन।</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-gray-800 py-8 text-center text-xs text-gray-500">
+    © 2026 AutoToon AI. All rights reserved.
+  </footer>
+
+  <!-- Script for Free AI Calling -->
+  <script>
+    function generateImage() {
+      const prompt = document.getElementById('promptInput').value.trim();
+      const img = document.getElementById('resultImage');
+      const loader = document.getElementById('loadingText');
+      const placeholder = document.getElementById('placeholderText');
+      const btn = document.getElementById('generateBtn');
+
+      if (!prompt) {
+        alert("कृपया कोई प्रॉम्प्ट लिखें!");
+        return;
+      }
+
+      // UI states
+      loader.classList.remove('hidden');
+      img.classList.add('hidden');
+      placeholder.classList.add('hidden');
+      btn.disabled = true;
+      btn.innerText = "बन रहा है...";
+
+      // Using Free Pollinations.ai Image API
+      const encodedPrompt = encodeURIComponent(prompt + ", 3d cartoon style, high quality, 8k");
+      const randomSeed = Math.floor(Math.random() * 100000);
+      const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=800&height=500&seed=${randomSeed}&nologo=true`;
+
+      // Load Image
+      img.onload = () => {
+        loader.classList.add('hidden');
+        img.classList.remove('hidden');
+        btn.disabled = false;
+        btn.innerText = "जनरेट करें 🎨";
+      };
+
+      img.onerror = () => {
+        loader.classList.add('hidden');
+        placeholder.innerText = "इमेज लोड करने में समस्या हुई, कृपया दोबारा कोशिश करें।";
+        placeholder.classList.remove('hidden');
+        btn.disabled = false;
+        btn.innerText = "जनरेट करें 🎨";
+      };
+
+      img.src = imageUrl;
+    }
+  </script>
+</body>
+</html>
