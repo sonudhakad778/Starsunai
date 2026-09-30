@@ -3,26 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AutoDraft AI - Real Working Animation Studio</title>
+  <title>AutoDraft AI - Complete Timeline Animation Studio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            darkBg: '#0b0f19',
+            darkBg: '#090d16',
             cardBg: '#111827',
-            panelBg: '#1e293b'
+            panelBg: '#1f2937'
           }
         }
       }
     }
   </script>
 </head>
-<body class="bg-[#0b0f19] text-gray-100 font-sans min-h-screen">
+<body class="bg-darkBg text-gray-100 font-sans min-h-screen">
 
-  <!-- Navbar -->
-  <header class="border-b border-gray-800 bg-[#0b0f19]/90 sticky top-0 z-50 backdrop-blur">
+  <!-- Header -->
+  <header class="border-b border-gray-800 bg-[#090d16]/90 sticky top-0 z-50 backdrop-blur">
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center gap-2">
         <span class="text-xl text-indigo-400">⚡</span>
@@ -30,306 +30,301 @@
           autodraft<span class="text-indigo-400">.studio</span>
         </span>
       </div>
-      <div class="text-xs bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-3 py-1 rounded-full font-mono">
-        All Features Free 🚀
-      </div>
+      <span class="text-xs bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-3 py-1 rounded-full font-mono">
+        All-In-One Studio 🚀
+      </span>
     </div>
   </header>
 
   <main class="max-w-7xl mx-auto px-3 sm:px-6 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-    <!-- LEFT PANEL: AutoDraft Generation Tools (5 Cols) -->
+    <!-- LEFT PANEL: 3-Scene Story Pipeline (5 Cols) -->
     <div class="lg:col-span-5 space-y-4">
 
-      <!-- Step 1: Background Generator -->
-      <div class="bg-cardBg border border-gray-800 rounded-xl p-4 shadow-xl">
-        <div class="flex items-center justify-between mb-2">
-          <h3 class="text-xs font-bold uppercase tracking-wider text-indigo-400">1. AI Background Scene</h3>
-          <span class="text-[10px] text-gray-400">लेयर 1</span>
+      <!-- Scene Controller Accordion -->
+      <div class="bg-cardBg border border-gray-800 rounded-xl p-4 shadow-xl space-y-3">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xs font-bold uppercase tracking-wider text-indigo-400">1. मल्टी-सीन स्टोरी टाइमलाइन</h2>
+          <span class="text-[10px] text-gray-400">3 सीन्स पाइपलाइन</span>
         </div>
-        <div class="flex gap-1 mb-2">
-          <button onclick="setBgPrompt('Indian rural village with mud houses, sunny day')" class="bg-gray-800 hover:bg-gray-700 text-[11px] px-2 py-1 rounded">गांव</button>
-          <button onclick="setBgPrompt('Dark spooky haunted forest at night, foggy horror scene')" class="bg-gray-800 hover:bg-gray-700 text-[11px] px-2 py-1 rounded">भूतिया जंगल</button>
-          <button onclick="setBgPrompt('Magical cartoon kingdom with castle and rainbow sky')" class="bg-gray-800 hover:bg-gray-700 text-[11px] px-2 py-1 rounded">राजमहल</button>
+
+        <!-- Scene 1 Settings -->
+        <div class="border border-indigo-900/50 bg-indigo-950/20 p-2.5 rounded-lg space-y-1.5">
+          <span class="text-[11px] font-bold text-indigo-300">सीन 1 (शुरुआत):</span>
+          <input id="bgScene1" type="text" value="Indian village with clay huts and trees, daytime cartoon background" class="w-full bg-gray-900 border border-gray-700 rounded p-1.5 text-xs text-white" placeholder="सीन 1 बैकग्राउंड">
+          <textarea id="diagScene1" rows="1" class="w-full bg-gray-900 border border-gray-700 rounded p-1.5 text-xs text-white" placeholder="सीन 1 डायलॉग">नमस्ते दोस्तों! आज हम जंगल में एक रहस्यमयी गुफा की तलाश में निकल रहे हैं।</textarea>
         </div>
-        <div class="flex gap-2">
-          <input id="bgInput" type="text" value="Indian rural village with mud houses, sunny day cartoon animation" class="flex-1 bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-xs text-white">
-          <button onclick="generateBackground()" id="btnBg" class="bg-indigo-600 hover:bg-indigo-500 text-xs px-3 py-2 rounded-lg font-bold">
-            सीन बनाएं
-          </button>
+
+        <!-- Scene 2 Settings -->
+        <div class="border border-purple-900/50 bg-purple-950/20 p-2.5 rounded-lg space-y-1.5">
+          <span class="text-[11px] font-bold text-purple-300">सीन 2 (जंगल का सफर):</span>
+          <input id="bgScene2" type="text" value="Deep mysterious glowing jungle with large green plants, cartoon style" class="w-full bg-gray-900 border border-gray-700 rounded p-1.5 text-xs text-white" placeholder="सीन 2 बैकग्राउंड">
+          <textarea id="diagScene2" rows="1" class="w-full bg-gray-900 border border-gray-700 rounded p-1.5 text-xs text-white" placeholder="सीन 2 डायलॉग">देखो! रास्ता कितना डरावना और घना होता जा रहा है, ध्यान से चलना होगा!</textarea>
         </div>
+
+        <!-- Scene 3 Settings -->
+        <div class="border border-pink-900/50 bg-pink-950/20 p-2.5 rounded-lg space-y-1.5">
+          <span class="text-[11px] font-bold text-pink-300">सीन 3 (खजाना मिला):</span>
+          <input id="bgScene3" type="text" value="Magical cave interior with sparkling gold treasure chest, cartoon animation" class="w-full bg-gray-900 border border-gray-700 rounded p-1.5 text-xs text-white" placeholder="सीन 3 बैकग्राउंड">
+          <textarea id="diagScene3" rows="1" class="w-full bg-gray-900 border border-gray-700 rounded p-1.5 text-xs text-white" placeholder="सीन 3 डायलॉग">वाह! आखिरकार हमें यह जादुई खजाना मिल ही गया!</textarea>
+        </div>
+
+        <button onclick="generateAllScenes()" id="btnGenScenes" class="w-full bg-indigo-600 hover:bg-indigo-500 py-2.5 rounded-lg text-xs font-bold text-white transition">
+          तीनों सीन्स जनरेट करें 🏞️
+        </button>
       </div>
 
-      <!-- Step 2: Consistent Character Generator -->
-      <div class="bg-cardBg border border-gray-800 rounded-xl p-4 shadow-xl">
-        <div class="flex items-center justify-between mb-2">
-          <h3 class="text-xs font-bold uppercase tracking-wider text-purple-400">2. AI Character (Transparent Cutout)</h3>
-          <span class="text-[10px] text-gray-400">लेयर 2</span>
+      <!-- Character Rig Settings -->
+      <div class="bg-cardBg border border-gray-800 rounded-xl p-4 shadow-xl space-y-3">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-green-400">2. कैरेक्टर (ग्रीन स्क्रीन कटआउट)</h2>
+        <input id="charPrompt" type="text" value="Cute 3D Indian village boy wearing yellow kurta, solid green background, full body standing" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-xs text-white">
+        <div class="flex items-center gap-2">
+          <input type="checkbox" id="chromaKeyCheck" checked class="accent-indigo-500">
+          <label for="chromaKeyCheck" class="text-xs text-gray-300">हरा बैकग्राउंड हटाएं (Chroma Key Cutout)</label>
         </div>
-        <div class="flex gap-1 mb-2">
-          <button onclick="setCharPrompt('Cute Indian cartoon boy waving hand, yellow kurta')" class="bg-gray-800 hover:bg-gray-700 text-[11px] px-2 py-1 rounded">लड़का</button>
-          <button onclick="setCharPrompt('Cute cartoon girl with braids smiling')" class="bg-gray-800 hover:bg-gray-700 text-[11px] px-2 py-1 rounded">लड़की</button>
-          <button onclick="setCharPrompt('Funny talking cartoon monkey in jungle')" class="bg-gray-800 hover:bg-gray-700 text-[11px] px-2 py-1 rounded">बंदर</button>
-        </div>
-        <div class="flex gap-2">
-          <input id="charInput" type="text" value="Cute Indian cartoon boy waving hand, yellow kurta, full body" class="flex-1 bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-xs text-white">
-          <button onclick="generateCharacter()" id="btnChar" class="bg-purple-600 hover:bg-purple-500 text-xs px-3 py-2 rounded-lg font-bold">
-            कैरेक्टर बनाएं
-          </button>
-        </div>
-      </div>
-
-      <!-- Step 3: Voiceover & Lip Sync Controls -->
-      <div class="bg-cardBg border border-gray-800 rounded-xl p-4 shadow-xl">
-        <h3 class="text-xs font-bold uppercase tracking-wider text-pink-400 mb-2">3. Automatic Lip-Sync & Voice</h3>
-        <textarea id="dialogueInput" rows="2" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-xs text-white mb-2">नमस्ते दोस्तों! आज हम जंगल में खजाने की खोज करेंगे, चलिए चलते हैं!</textarea>
-        
-        <div class="grid grid-cols-2 gap-2 mb-3">
-          <div>
-            <label class="text-[10px] text-gray-400">पिच (कार्टून वॉयस):</label>
-            <input id="pitch" type="range" min="0.8" max="1.8" step="0.1" value="1.4" class="w-full accent-pink-500">
-          </div>
-          <div>
-            <label class="text-[10px] text-gray-400">स्पीड:</label>
-            <input id="rate" type="range" min="0.7" max="1.3" step="0.1" value="1" class="w-full accent-pink-500">
-          </div>
-        </div>
-
-        <div class="flex gap-2">
-          <button onclick="playAnimationWithVoice()" id="btnPlay" class="flex-1 bg-gradient-to-r from-pink-600 to-purple-600 hover:opacity-90 py-2.5 rounded-lg text-xs font-bold flex items-center justify-center gap-1">
-            ▶️ प्ले एनिमेशन + लिप-सिंक
-          </button>
-          <button onclick="stopAnimation()" class="bg-gray-800 hover:bg-gray-700 px-3 py-2.5 rounded-lg text-xs">
-            ⏹️ रोकें
-          </button>
-        </div>
+        <button onclick="generateCharacter()" id="btnChar" class="w-full bg-purple-600 hover:bg-purple-500 py-2.5 rounded-lg text-xs font-bold text-white transition">
+          कैरेक्टर जनरेट करें 🧍
+        </button>
       </div>
 
     </div>
 
-    <!-- RIGHT PANEL: Live AutoDraft Timeline Canvas Studio (7 Cols) -->
-    <div class="lg:col-span-7 space-y-3">
+    <!-- RIGHT PANEL: Timeline Canvas Studio & Controls (7 Cols) -->
+    <div class="lg:col-span-7 space-y-4">
       <div class="bg-cardBg border border-gray-800 rounded-xl p-4 shadow-2xl flex flex-col items-center">
-        <div class="w-full flex justify-between items-center mb-3">
+        <div class="w-full flex justify-between items-center mb-2">
           <span class="text-xs font-bold text-white flex items-center gap-1">
-            🎬 Canvas Studio Preview
+            🎬 AutoDraft Live Canvas
           </span>
-          <span id="studioStatus" class="text-[10px] text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded">
-            तैयार
+          <span id="currentSceneTag" class="text-[10px] text-pink-400 bg-pink-500/10 px-2 py-0.5 rounded font-mono">
+            सीन: 1 / 3
           </span>
         </div>
 
-        <!-- HTML5 Canvas Studio Screen -->
-        <div class="w-full aspect-video bg-black rounded-lg overflow-hidden border border-gray-800 relative flex items-center justify-center shadow-inner">
+        <!-- HTML5 Canvas Studio -->
+        <div class="w-full aspect-video bg-black rounded-lg overflow-hidden border border-gray-800 relative shadow-inner">
           <canvas id="studioCanvas" width="800" height="450" class="w-full h-full object-contain"></canvas>
-          
-          <div id="canvasLoader" class="absolute inset-0 bg-black/70 flex items-center justify-center text-xs text-indigo-300 hidden">
-            ⏳ AI एसेट लोड हो रहा है...
+          <div id="loaderOverlay" class="absolute inset-0 bg-black/75 flex items-center justify-center text-xs text-indigo-300 hidden">
+            ⏳ एसेट्स लोड हो रहे हैं...
           </div>
         </div>
 
-        <!-- Animation Controls Bar -->
-        <div class="w-full mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-gray-800 pt-3">
-          <div class="flex items-center gap-2">
-            <label class="text-[11px] text-gray-400">कैरेक्टर पोज़िशन (X):</label>
-            <input id="charX" type="range" min="50" max="600" value="280" oninput="updatePositions()" class="w-24 accent-indigo-500">
+        <!-- Timeline Progress Bar -->
+        <div class="w-full mt-3">
+          <div class="w-full bg-gray-800 rounded-full h-1.5 overflow-hidden">
+            <div id="timelineProgress" class="bg-indigo-500 h-1.5 w-0 transition-all duration-300"></div>
           </div>
-          
-          <!-- Video Recorder / Export Feature -->
-          <button onclick="recordAndExportVideo()" id="btnRecord" class="bg-green-600 hover:bg-green-500 text-white text-xs font-bold px-4 py-2 rounded-lg transition flex items-center gap-1">
-            🎥 MP4 वीडियो डाउनलोड करें
+          <div class="flex justify-between text-[10px] text-gray-500 mt-1">
+            <span>Scene 1</span>
+            <span>Scene 2</span>
+            <span>Scene 3</span>
+          </div>
+        </div>
+
+        <!-- Playback Actions -->
+        <div class="w-full mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-gray-800 pt-3">
+          <button onclick="playFullTimelineStory()" id="btnPlayAll" class="bg-gradient-to-r from-pink-600 to-purple-600 hover:opacity-90 text-white text-xs font-bold px-4 py-2 rounded-lg transition">
+            ▶️ पूरी कहानी प्ले करें (Auto-Play 3 Scenes)
+          </button>
+          <button onclick="recordAndExportVideo()" id="btnExport" class="bg-green-600 hover:bg-green-500 text-white text-xs font-bold px-4 py-2 rounded-lg transition">
+            🎥 पूरा वीडियो डाउनलोड करें (WebM)
           </button>
         </div>
       </div>
 
-      <!-- Instructions Note -->
-      <div class="text-[11px] text-gray-400 bg-gray-900/40 border border-gray-800/80 p-3 rounded-lg">
-        💡 <b>कैसे इस्तेमाल करें:</b> पहले 'सीन बनाएं' पर क्लिक करें, फिर 'कैरेक्टर बनाएं' दबाएं। उसके बाद '▶️ प्ले एनिमेशन' दबाने पर कैरेक्टर आवाज के साथ लिप-सिंक करेगा और आप सीधे वीडियो डाउनलोड कर सकते हैं!
+      <!-- Quick Guidance -->
+      <div class="text-[11px] text-gray-400 bg-gray-900/50 border border-gray-800 p-3 rounded-lg">
+        ⚡ <b>ऑटो-स्टोरी कैसे बनेगी:</b> पहले 'तीनों सीन्स जनरेट करें' दबाएं, फिर 'कैरेक्टर जनरेट करें'। इसके बाद जैसे ही आप 'पूरी कहानी प्ले करें' दबाएंगे—यह सीन 1 से शुरू होकर, डायलॉग बोलकर, अपने आप सीन 2 और सीन 3 तक पूरा वीडियो बनाकर तैयार कर देगा!
       </div>
     </div>
 
   </main>
 
-  <!-- AutoDraft Core Engine Scripts -->
+  <!-- AutoDraft Full Pipeline Logic -->
   <script>
     const canvas = document.getElementById('studioCanvas');
     const ctx = canvas.getContext('2d');
-    const statusText = document.getElementById('studioStatus');
-    const loader = document.getElementById('canvasLoader');
+    const loader = document.getElementById('loaderOverlay');
+    const progress = document.getElementById('timelineProgress');
+    const sceneTag = document.getElementById('currentSceneTag');
 
-    let bgImg = new Image();
+    let scenes = [
+      { bgUrl: '', bgImg: new Image(), loaded: false, text: '' },
+      { bgUrl: '', bgImg: new Image(), loaded: false, text: '' },
+      { bgUrl: '', bgImg: new Image(), loaded: false, text: '' }
+    ];
+
     let charImg = new Image();
-    let bgLoaded = false;
     let charLoaded = false;
+    let activeSceneIndex = 0;
+    let isPlaying = false;
+    let animId = null;
 
-    let charX = 280;
-    let charY = 120;
-    let charScale = 0.55;
-
-    let isAnimating = false;
-    let animFrameId = null;
-    let mouthOpen = false;
-
-    // Load Default Placeholder Assets
-    function initCanvas() {
+    // Default Canvas Screen
+    function init() {
       ctx.fillStyle = '#090d16';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#64748b';
+      ctx.fillStyle = '#6366f1';
       ctx.font = '14px sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText('AutoDraft Studio: बाईं ओर से सीन और कैरेक्टर जनरेट करें', canvas.width / 2, canvas.height / 2);
+      ctx.fillText('AutoDraft Timeline Studio: सीन्स और कैरेक्टर जनरेट करें', canvas.width / 2, canvas.height / 2);
     }
-    initCanvas();
+    init();
 
-    function setBgPrompt(val) { document.getElementById('bgInput').value = val; }
-    function setCharPrompt(val) { document.getElementById('charInput').value = val; }
-
-    function updatePositions() {
-      charX = parseInt(document.getElementById('charX').value);
-      drawFrame();
-    }
-
-    // 1. Generate Background via Free API
-    function generateBackground() {
-      const p = document.getElementById('bgInput').value.trim();
-      const btn = document.getElementById('btnBg');
+    // 1. Generate All 3 Scenes simultaneously
+    function generateAllScenes() {
       loader.classList.remove('hidden');
-      btn.disabled = true;
-      statusText.innerText = "सीन बन रहा है...";
+      const bgs = [
+        document.getElementById('bgScene1').value,
+        document.getElementById('bgScene2').value,
+        document.getElementById('bgScene3').value
+      ];
+      scenes[0].text = document.getElementById('diagScene1').value;
+      scenes[1].text = document.getElementById('diagScene2').value;
+      scenes[2].text = document.getElementById('diagScene3').value;
 
-      const prompt = encodeURIComponent(`${p}, clean animation background, 2d cartoon concept art, high resolution, 8k, landscape`);
-      const seed = Math.floor(Math.random() * 99999);
-      const url = `https://image.pollinations.ai/prompt/${prompt}?width=800&height=450&seed=${seed}&nologo=true`;
-
-      bgImg.crossOrigin = "Anonymous";
-      bgImg.onload = () => {
-        bgLoaded = true;
-        loader.classList.add('hidden');
-        btn.disabled = false;
-        statusText.innerText = "सीन तैयार!";
-        drawFrame();
-      };
-      bgImg.onerror = () => {
-        loader.classList.add('hidden');
-        btn.disabled = false;
-        alert("सीन लोड नहीं हुआ, दोबारा कोशिश करें!");
-      };
-      bgImg.src = url;
+      let loadedCount = 0;
+      bgs.forEach((prompt, idx) => {
+        const seed = Math.floor(Math.random() * 88888) + idx;
+        const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt + ", cartoon landscape, animation scene, 8k")}?width=800&height=450&seed=${seed}&nologo=true`;
+        
+        scenes[idx].bgImg.crossOrigin = "Anonymous";
+        scenes[idx].bgImg.onload = () => {
+          scenes[idx].loaded = true;
+          loadedCount++;
+          if (loadedCount === 3) {
+            loader.classList.add('hidden');
+            renderCurrentFrame(0, false);
+          }
+        };
+        scenes[idx].bgImg.src = url;
+      });
     }
 
-    // 2. Generate Character via Free API (Isolated cutout prompt)
+    // 2. Generate Character with Solid Green Background
     function generateCharacter() {
-      const p = document.getElementById('charInput').value.trim();
-      const btn = document.getElementById('btnChar');
       loader.classList.remove('hidden');
-      btn.disabled = true;
-      statusText.innerText = "कैरेक्टर बन रहा है...";
-
-      const prompt = encodeURIComponent(`${p}, standalone character, single character standing, full body, isolated character, cartoon 3d style`);
+      const prompt = document.getElementById('charPrompt').value;
       const seed = Math.floor(Math.random() * 99999);
-      const url = `https://image.pollinations.ai/prompt/${prompt}?width=512&height=768&seed=${seed}&nologo=true`;
+      const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=512&height=768&seed=${seed}&nologo=true`;
 
       charImg.crossOrigin = "Anonymous";
       charImg.onload = () => {
         charLoaded = true;
         loader.classList.add('hidden');
-        btn.disabled = false;
-        statusText.innerText = "कैरेक्टर तैयार!";
-        drawFrame();
-      };
-      charImg.onerror = () => {
-        loader.classList.add('hidden');
-        btn.disabled = false;
-        alert("कैरेक्टर लोड नहीं हुआ, पुनः प्रयास करें!");
+        renderCurrentFrame(0, false);
       };
       charImg.src = url;
     }
 
-    // Render Canvas
-    function drawFrame(motionOffset = 0, mouthState = false) {
+    // Render Canvas with Chroma Key (Green Screen Removal)
+    function renderCurrentFrame(tick = 0, isSpeaking = false) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw Background
-      if (bgLoaded) {
-        ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+      // Draw Background for Active Scene
+      if (scenes[activeSceneIndex] && scenes[activeSceneIndex].loaded) {
+        ctx.drawImage(scenes[activeSceneIndex].bgImg, 0, 0, canvas.width, canvas.height);
       } else {
-        ctx.fillStyle = '#0f172a';
+        ctx.fillStyle = '#111827';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
       }
 
-      // Draw Character with Motion & Lip-Sync Morph
+      // Draw Character with Chroma Key Filter
       if (charLoaded) {
         ctx.save();
-        const cWidth = charImg.width * charScale;
-        const cHeight = charImg.height * charScale;
+        const charW = 220;
+        const charH = 330;
+        const charX = 290;
+        const charY = 110 + (Math.sin(tick * 3) * 4); // Breathing bounce
 
-        // Slight breathing & bobbing motion
-        const bounceY = charY + Math.sin(motionOffset) * 6;
+        // Temporary Offscreen canvas to strip green screen
+        const offCanvas = document.createElement('canvas');
+        offCanvas.width = charImg.width;
+        offCanvas.height = charImg.height;
+        const offCtx = offCanvas.getContext('2d');
+        offCtx.drawImage(charImg, 0, 0);
 
-        ctx.drawImage(charImg, charX, bounceY, cWidth, cHeight);
-
-        // AutoDraft Lip-Sync Overlay
-        if (mouthState) {
-          ctx.fillStyle = "#831843"; // Dark mouth inside
-          ctx.beginPath();
-          // Position relative to character face
-          const mouthX = charX + (cWidth / 2);
-          const mouthY = bounceY + (cHeight * 0.28);
-          ctx.ellipse(mouthX, mouthY, 7, 9, 0, 0, Math.PI * 2);
-          ctx.fill();
+        if (document.getElementById('chromaKeyCheck').checked) {
+          const imgData = offCtx.getImageData(0, 0, offCanvas.width, offCanvas.height);
+          const d = imgData.data;
+          for (let i = 0; i < d.length; i += 4) {
+            const r = d[i], g = d[i + 1], b = d[i + 2];
+            // Simple chroma key formula: if green is dominant
+            if (g > 100 && g > r * 1.3 && g > b * 1.3) {
+              d[i + 3] = 0; // Make transparent
+            }
+          }
+          offCtx.putImageData(imgData, 0, 0);
         }
 
+        ctx.drawImage(offCanvas, charX, charY, charW, charH);
+
+        // Mouth Flap for Lip-Sync
+        if (isSpeaking && Math.sin(tick * 10) > 0) {
+          ctx.fillStyle = "#831843";
+          ctx.beginPath();
+          ctx.ellipse(charX + (charW / 2), charY + (charH * 0.28), 6, 8, 0, 0, Math.PI * 2);
+          ctx.fill();
+        }
         ctx.restore();
       }
     }
 
-    // 3. Play Animation with Synchronized Lip-Sync
-    function playAnimationWithVoice() {
-      const text = document.getElementById('dialogueInput').value;
-      if (!text.trim()) return;
+    // 3. Play Entire 3-Scene Timeline Sequence
+    function playFullTimelineStory() {
+      if (!charLoaded || !scenes[0].loaded) {
+        alert("पहले सीन्स और कैरेक्टर जनरेट करें!");
+        return;
+      }
 
+      isPlaying = true;
+      activeSceneIndex = 0;
+      playSceneSequence(0);
+    }
+
+    function playSceneSequence(index) {
+      if (index >= 3 || !isPlaying) {
+        isPlaying = false;
+        sceneTag.innerText = "पूरी कहानी समाप्त!";
+        progress.style.width = "100%";
+        return;
+      }
+
+      activeSceneIndex = index;
+      sceneTag.innerText = `सीन: ${index + 1} / 3`;
+      progress.style.width = `${((index + 1) / 3) * 100}%`;
+
+      const text = scenes[index].text;
       window.speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(text);
       u.lang = 'hi-IN';
-      u.pitch = parseFloat(document.getElementById('pitch').value);
-      u.rate = parseFloat(document.getElementById('rate').value);
+      u.pitch = 1.3;
 
-      isAnimating = true;
-      statusText.innerText = "एनिमेशन चल रहा है 🔴";
       let tick = 0;
-
       function loop() {
-        if (!isAnimating) return;
-        tick += 0.15;
-        // Fast mouth flap during speech
-        mouthOpen = Math.sin(tick * 3) > 0;
-        drawFrame(tick, mouthOpen);
-        animFrameId = requestAnimationFrame(loop);
+        if (!isPlaying) return;
+        tick += 0.05;
+        renderCurrentFrame(tick, true);
+        animId = requestAnimationFrame(loop);
       }
       loop();
 
       u.onend = () => {
-        stopAnimation();
-      };
-      u.onerror = () => {
-        stopAnimation();
+        cancelAnimationFrame(animId);
+        renderCurrentFrame(0, false);
+        // Pause 1 second before next scene
+        setTimeout(() => {
+          playSceneSequence(index + 1);
+        }, 1000);
       };
 
       window.speechSynthesis.speak(u);
     }
 
-    function stopAnimation() {
-      isAnimating = false;
-      if (animFrameId) cancelAnimationFrame(animFrameId);
-      window.speechSynthesis.cancel();
-      statusText.innerText = "तैयार";
-      drawFrame(0, false);
-    }
-
-    // 4. Record & Export Real Video (MP4/WebM)
+    // 4. Video Exporter
     function recordAndExportVideo() {
-      if (!bgLoaded && !charLoaded) {
-        alert("पहले सीन या कैरेक्टर जनरेट करें!");
+      if (!charLoaded || !scenes[0].loaded) {
+        alert("कृपया पहले एसेट्स तैयार करें!");
         return;
       }
 
@@ -340,25 +335,23 @@
       recorder.ondataavailable = e => chunks.push(e.data);
       recorder.onstop = () => {
         const blob = new Blob(chunks, { type: 'video/webm' });
-        const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
-        a.href = url;
-        a.download = 'autodraft-animation.webm';
+        a.href = URL.createObjectURL(blob);
+        a.download = 'autodraft-complete-story.webm';
         a.click();
-        statusText.innerText = "वीडियो डाउनलोड हो गया!";
+        sceneTag.innerText = "वीडियो डाउनलोड हो गया!";
       };
 
       recorder.start();
-      playAnimationWithVoice();
-      statusText.innerText = "वीडियो रिकॉर्ड हो रहा है...";
+      playFullTimelineStory();
 
-      // Stop record after 6 seconds or speech end
+      // Automatically stop recording after sequence ends (approx 18-20 secs)
       setTimeout(() => {
         if (recorder.state === 'recording') {
           recorder.stop();
-          stopAnimation();
+          isPlaying = false;
         }
-      }, 6000);
+      }, 18000);
     }
   </script>
 </body>
