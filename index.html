@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AutoDraft Free Studio - AI Animation & Character Creator</title>
+  <title>AutoDraft AI - Best AI Animation Tool for YouTubers</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -11,7 +11,7 @@
         extend: {
           colors: {
             brand: '#6366f1',
-            darkBg: '#090d16',
+            darkBg: '#0b0f19',
             cardBg: '#111827',
             panelBg: '#1f2937'
           }
@@ -20,184 +20,283 @@
     }
   </script>
 </head>
-<body class="bg-darkBg text-gray-100 font-sans min-h-screen">
+<body class="bg-[#0b0f19] text-gray-100 font-sans selection:bg-indigo-500 selection:text-white">
 
-  <!-- Header -->
-  <header class="border-b border-gray-800 bg-gray-900/60 sticky top-0 z-50 backdrop-blur-md">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <span class="text-xl">⚡</span>
-        <span class="font-extrabold text-lg tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-500">
-          AutoDraft Studio Free
+  <!-- 1. Header / Navbar -->
+  <header class="border-b border-gray-800 bg-[#0b0f19]/80 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="text-2xl font-black tracking-tight text-white flex items-center gap-1">
+          <span class="text-indigo-500">⚡</span> autodraft<span class="text-indigo-400">.ai</span>
         </span>
       </div>
-      <div class="text-xs bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 px-3 py-1 rounded-full font-medium">
-        क्रेडिट: अनलिमिटेड (Free)
+      <div class="hidden md:flex items-center space-x-6 text-sm text-gray-300">
+        <a href="#studio" class="hover:text-white transition">Studio Animation</a>
+        <a href="#features" class="hover:text-white transition">Features</a>
+        <a href="#channels" class="hover:text-white transition">Showcase</a>
+        <a href="#faq" class="hover:text-white transition">FAQs</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="#studio" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-full transition shadow-lg shadow-indigo-600/30">
+          Sign Up for Free
+        </a>
       </div>
     </div>
   </header>
 
-  <!-- Navigation Tabs (AutoDraft Style) -->
-  <div class="max-w-4xl mx-auto px-4 mt-6">
-    <div class="flex overflow-x-auto space-x-2 border-b border-gray-800 pb-2 text-xs font-semibold no-scrollbar">
+  <!-- 2. Hero Section -->
+  <section class="max-w-5xl mx-auto px-4 pt-14 pb-10 text-center">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-950/60 border border-indigo-700/50 text-indigo-300 text-xs font-semibold mb-6">
+      <span>⚡</span> 5x Faster Channel Growth
+    </div>
+    <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight mb-4">
+      Best AI Animation Tool <br class="hidden sm:block"/>
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-500">
+        for YouTubers
+      </span>
+    </h1>
+    <p class="text-gray-400 text-sm sm:text-lg max-w-2xl mx-auto mb-8">
+      Create stunning cartoon stories with AI. Generate consistent characters, backgrounds, and voices automatically.
+    </p>
+    <div class="flex justify-center gap-4">
+      <a href="#studio" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:opacity-90 text-white font-bold px-8 py-3.5 rounded-xl text-sm sm:text-base shadow-xl transition">
+        Create Animations Free 🚀
+      </a>
+    </div>
+  </section>
+
+  <!-- 3. Monetized Channels Section (AutoDraft Showcase) -->
+  <section id="channels" class="border-y border-gray-800 bg-[#0e1424] py-8">
+    <div class="max-w-7xl mx-auto px-4">
+      <p class="text-center text-xs font-semibold uppercase tracking-widest text-indigo-400 mb-6">
+        🔥 1500+ CHANNELS MONETIZED WITH AUTODRAFT
+      </p>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+        <div class="bg-gray-900/60 p-3 rounded-xl border border-gray-800">
+          <p class="font-bold text-sm text-white">Kahani Toonbox</p>
+          <p class="text-xs text-green-400 font-semibold mt-1">12M Views • $ Monetized</p>
+        </div>
+        <div class="bg-gray-900/60 p-3 rounded-xl border border-gray-800">
+          <p class="font-bold text-sm text-white">Scary Zone Hub</p>
+          <p class="text-xs text-green-400 font-semibold mt-1">7M Views • $ Monetized</p>
+        </div>
+        <div class="bg-gray-900/60 p-3 rounded-xl border border-gray-800">
+          <p class="font-bold text-sm text-white">AatmaLok Tales</p>
+          <p class="text-xs text-green-400 font-semibold mt-1">7M Views • $ Monetized</p>
+        </div>
+        <div class="bg-gray-900/60 p-3 rounded-xl border border-gray-800">
+          <p class="font-bold text-sm text-white">Jim Jam Toons</p>
+          <p class="text-xs text-green-400 font-semibold mt-1">32M Views • $ Monetized</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Stats Counter -->
+  <section class="max-w-6xl mx-auto px-4 py-12">
+    <div class="grid grid-cols-3 gap-4 text-center border border-gray-800 rounded-2xl bg-gray-900/30 p-6">
+      <div>
+        <p class="text-2xl sm:text-4xl font-extrabold text-indigo-400">400K+</p>
+        <p class="text-xs text-gray-400 mt-1">Trusted Creators</p>
+      </div>
+      <div>
+        <p class="text-2xl sm:text-4xl font-extrabold text-purple-400">6M+ Mins</p>
+        <p class="text-xs text-gray-400 mt-1">Animation Created</p>
+      </div>
+      <div>
+        <p class="text-2xl sm:text-4xl font-extrabold text-pink-400">30M+</p>
+        <p class="text-xs text-gray-400 mt-1">Assets Generated</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. WORKING LIVE AUTODRAFT STUDIO -->
+  <section id="studio" class="max-w-4xl mx-auto px-4 py-8">
+    <div class="text-center mb-6">
+      <span class="text-xs font-bold uppercase tracking-wider text-indigo-400">Studio Level Animations</span>
+      <h2 class="text-2xl sm:text-3xl font-bold mt-1 text-white">AutoDraft Live Workspace</h2>
+      <p class="text-xs text-gray-400 mt-1">नीचे दिए गए टूल्स से अपनी कहानी के कैरेक्टर, बैकग्राउंड और वॉयस तुरंत बनाएं</p>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="flex space-x-2 border-b border-gray-800 pb-2 text-xs font-semibold overflow-x-auto no-scrollbar mb-4">
       <button onclick="switchTab('turnaroundTab')" id="btn-turnaroundTab" class="tab-btn px-4 py-2 rounded-lg bg-indigo-600 text-white whitespace-nowrap">
-        🧍 कैरेक्टर टर्नअराउंड (360° व्यू)
+        🧍 Character Turnaround (360°)
       </button>
       <button onclick="switchTab('expressionTab')" id="btn-expressionTab" class="tab-btn px-4 py-2 rounded-lg bg-gray-800 text-gray-400 whitespace-nowrap">
-        🎭 एक्सप्रेशन्स & पोज़
+        🎭 100+ Expressions & Poses
       </button>
       <button onclick="switchTab('bgTab')" id="btn-bgTab" class="tab-btn px-4 py-2 rounded-lg bg-gray-800 text-gray-400 whitespace-nowrap">
-        🏞️ AI बैकग्राउंड्स
+        🏞️ AI Backgrounds
       </button>
       <button onclick="switchTab('voiceTab')" id="btn-voiceTab" class="tab-btn px-4 py-2 rounded-lg bg-gray-800 text-gray-400 whitespace-nowrap">
-        🎙️️ वॉयस & लिप-सिंक
+        🎙️ AI Voiceover & Lip-Sync
       </button>
     </div>
-  </div>
 
-  <main class="max-w-4xl mx-auto px-4 py-6">
-
-    <!-- 1. CHARACTER TURNAROUND (AutoDraft Core Feature) -->
-    <section id="turnaroundTab" class="tab-content bg-cardBg border border-gray-800 rounded-2xl p-5 shadow-xl space-y-4">
+    <!-- TAB 1: Character Turnaround -->
+    <div id="turnaroundTab" class="tab-content bg-[#111827] border border-gray-800 rounded-2xl p-5 shadow-2xl space-y-4">
       <div class="flex justify-between items-center">
         <div>
-          <h2 class="text-base font-bold text-white">कैरेक्टर टर्नअराउंड मॉडल (Character Turnaround)</h2>
-          <p class="text-xs text-gray-400">एनीमेशन के लिए एक ही कैरेक्टर का फ्रंट, साइड और बैक व्यू शीट</p>
+          <h3 class="text-sm font-bold text-white">Consistent Character Turnaround Sheet</h3>
+          <p class="text-[11px] text-gray-400">कैरेक्टर के Front, Side और Back व्यूज ताकि वीडियो में चेहरा न बदले</p>
         </div>
-        <span class="text-xs text-indigo-400 bg-indigo-500/10 px-2 py-1 rounded">2D/3D Asset</span>
+        <span class="text-[10px] bg-indigo-500/20 text-indigo-400 px-2 py-0.5 rounded font-mono">100% Free</span>
       </div>
-
-      <div>
-        <label class="block text-xs font-semibold text-gray-300 mb-1">कैरेक्टर का विवरण:</label>
-        <input id="charPrompt" type="text" value="A cute Indian village boy wearing yellow kurta, cartoon character" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-indigo-500">
-      </div>
-
-      <div class="flex gap-2">
-        <button onclick="generateTurnaround()" id="turnaroundBtn" class="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2.5 rounded-xl text-sm transition">
-          टर्नअराउंड शीट बनाएं (Front, Side, Back) ✨
-        </button>
-      </div>
-
-      <div class="border border-gray-800 rounded-xl bg-gray-950 min-h-[260px] flex items-center justify-center p-2 relative">
-        <div id="tLoader" class="hidden text-indigo-400 text-xs animate-pulse">⏳ टर्नअराउंड शीट जनरेट हो रही है...</div>
-        <img id="tImg" src="" class="w-full h-auto max-h-[400px] object-contain hidden rounded-lg">
-        <span id="tPlaceholder" class="text-gray-600 text-xs">बटन दबाकर 360° कैरेक्टर शीट देखें</span>
+      <input id="charPrompt" type="text" value="Cute 3D Indian village boy wearing yellow kurta, cartoon character" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-indigo-500">
+      <button onclick="generateTurnaround()" id="turnaroundBtn" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2.5 rounded-xl text-sm transition">
+        जनरेट करें (Front, Side, Back Sheet) ✨
+      </button>
+      <div class="border border-gray-800 rounded-xl bg-gray-950 min-h-[240px] flex items-center justify-center p-2 relative">
+        <div id="tLoader" class="hidden text-indigo-400 text-xs animate-pulse">⏳ कैरेक्टर टर्नअराउंड शीट बन रही है...</div>
+        <img id="tImg" src="" class="w-full h-auto max-h-[380px] object-contain hidden rounded-lg">
+        <span id="tPlaceholder" class="text-gray-600 text-xs">बटन पर क्लिक करके प्रीव्यू देखें</span>
       </div>
       <div id="tDl" class="hidden text-right">
-        <button onclick="downloadImage('tImg')" class="text-xs bg-gray-800 text-indigo-300 px-3 py-1.5 rounded-lg border border-gray-700">📥 शीट डाउनलोड करें</button>
+        <button onclick="downloadImage('tImg')" class="text-xs bg-gray-800 hover:bg-gray-700 text-indigo-300 px-3 py-1.5 rounded-lg border border-gray-700">📥 डाउनलोड करें</button>
       </div>
-    </section>
+    </div>
 
-    <!-- 2. EXPRESSIONS & POSES -->
-    <section id="expressionTab" class="tab-content hidden bg-cardBg border border-gray-800 rounded-2xl p-5 shadow-xl space-y-4">
+    <!-- TAB 2: Expressions -->
+    <div id="expressionTab" class="tab-content hidden bg-[#111827] border border-gray-800 rounded-2xl p-5 shadow-2xl space-y-4">
       <div>
-        <h2 class="text-base font-bold text-white">कैरेक्टर एक्सप्रेशन्स (Expression Sheet)</h2>
-        <p class="text-xs text-gray-400">विभिन्न हाव-भाव: खुश, गुस्सा, हैरान और रोता हुआ</p>
+        <h3 class="text-sm font-bold text-white">100+ Expressions & Action Sheet</h3>
+        <p class="text-[11px] text-gray-400">Happy, Angry, Sad, और Surprised एक्सप्रेशन्स</p>
       </div>
-
-      <div>
-        <label class="block text-xs font-semibold text-gray-300 mb-1">कैरेक्टर का नाम/प्रकार:</label>
-        <input id="exprPrompt" type="text" value="A cute Pixar cartoon girl with ponytail" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-sm text-white">
-      </div>
-
-      <div class="flex gap-2">
-        <button onclick="generateExpressions()" id="exprBtn" class="flex-1 bg-purple-600 hover:bg-purple-500 text-white font-medium py-2.5 rounded-xl text-sm">
-          मल्टीपल एक्सप्रेशन्स शीट बनाएं 🎭
-        </button>
-      </div>
-
-      <div class="border border-gray-800 rounded-xl bg-gray-950 min-h-[260px] flex items-center justify-center p-2">
-        <div id="eLoader" class="hidden text-purple-400 text-xs animate-pulse">⏳ एक्सप्रेशन्स शीट बन रही है...</div>
-        <img id="eImg" src="" class="w-full h-auto max-h-[400px] object-contain hidden rounded-lg">
-        <span id="ePlaceholder" class="text-gray-600 text-xs">कैरेक्टर के सभी हाव-भाव एक शीट में देखें</span>
+      <input id="exprPrompt" type="text" value="Cute 3D animated Indian boy" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-sm text-white">
+      <button onclick="generateExpressions()" id="exprBtn" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-medium py-2.5 rounded-xl text-sm">
+        एक्सप्रेशन्स शीट बनाएं 🎭
+      </button>
+      <div class="border border-gray-800 rounded-xl bg-gray-950 min-h-[240px] flex items-center justify-center p-2">
+        <div id="eLoader" class="hidden text-purple-400 text-xs animate-pulse">⏳ एक्सप्रेशन्स शीट तैयार हो रही है...</div>
+        <img id="eImg" src="" class="w-full h-auto max-h-[380px] object-contain hidden rounded-lg">
+        <span id="ePlaceholder" class="text-gray-600 text-xs">हाव-भाव शीट यहाँ दिखाई देगी</span>
       </div>
       <div id="eDl" class="hidden text-right">
-        <button onclick="downloadImage('eImg')" class="text-xs bg-gray-800 text-purple-300 px-3 py-1.5 rounded-lg border border-gray-700">📥 एक्सप्रेशन्स डाउनलोड करें</button>
+        <button onclick="downloadImage('eImg')" class="text-xs bg-gray-800 text-purple-300 px-3 py-1.5 rounded-lg border border-gray-700">📥 डाउनलोड करें</button>
       </div>
-    </section>
+    </div>
 
-    <!-- 3. AI BACKGROUND GENERATOR -->
-    <section id="bgTab" class="tab-content hidden bg-cardBg border border-gray-800 rounded-2xl p-5 shadow-xl space-y-4">
+    <!-- TAB 3: Backgrounds -->
+    <div id="bgTab" class="tab-content hidden bg-[#111827] border border-gray-800 rounded-2xl p-5 shadow-2xl space-y-4">
       <div>
-        <h2 class="text-base font-bold text-white">एनीमेशन बैकग्राउंड जनरेटर (2D/3D Backgrounds)</h2>
-        <p class="text-xs text-gray-400">कहानियों के लिए सीन और वातावरण</p>
+        <h3 class="text-sm font-bold text-white">Studio Consistent Backgrounds</h3>
+        <p class="text-[11px] text-gray-400">गांव, भूतिया हवेली, या जादुई जंगल के बैकग्राउंड</p>
       </div>
-
-      <div class="flex flex-wrap gap-2">
-        <button onclick="setBgPrompt('Indian ancient village with mud houses and banyan tree, sunny day, cartoon animation style')" class="bg-gray-800 text-gray-300 text-xs px-3 py-1.5 rounded-lg border border-gray-700">गांव का दृश्य</button>
-        <button onclick="setBgPrompt('Spooky haunted mansion bedroom at midnight, dark fantasy animation background')" class="bg-gray-800 text-gray-300 text-xs px-3 py-1.5 rounded-lg border border-gray-700">भूतिया हवेली</button>
-        <button onclick="setBgPrompt('Magical fantasy fairy forest with glowing plants and river, cartoon animation background')" class="bg-gray-800 text-gray-300 text-xs px-3 py-1.5 rounded-lg border border-gray-700">जादुई जंगल</button>
+      <div class="flex flex-wrap gap-2 text-xs">
+        <button onclick="setBg('Indian village street with mud huts and banyan tree, sunny day cartoon style')" class="bg-gray-800 text-gray-300 px-3 py-1.5 rounded-lg border border-gray-700">भारतीय गांव</button>
+        <button onclick="setBg('Spooky dark haunted graveyard at midnight, mist and horror moon cartoon')" class="bg-gray-800 text-gray-300 px-3 py-1.5 rounded-lg border border-gray-700">भूतिया सीन</button>
+        <button onclick="setBg('Magical fantasy forest with glowing flowers and crystal river animation')" class="bg-gray-800 text-gray-300 px-3 py-1.5 rounded-lg border border-gray-700">जादुई जंगल</button>
       </div>
-
-      <input id="bgPrompt" type="text" value="Indian ancient village with mud houses and banyan tree, sunny day, cartoon animation style" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-sm text-white">
-
+      <input id="bgPrompt" type="text" value="Indian village street with mud huts and banyan tree, sunny day cartoon style" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-sm text-white">
       <button onclick="generateBg()" id="bgBtn" class="w-full bg-green-600 hover:bg-green-500 text-white font-medium py-2.5 rounded-xl text-sm">
         बैकग्राउंड जनरेट करें 🏞️
       </button>
-
-      <div class="border border-gray-800 rounded-xl bg-gray-950 min-h-[260px] flex items-center justify-center p-2">
+      <div class="border border-gray-800 rounded-xl bg-gray-950 min-h-[240px] flex items-center justify-center p-2">
         <div id="bgLoader" class="hidden text-green-400 text-xs animate-pulse">⏳ बैकग्राउंड तैयार हो रहा है...</div>
-        <img id="bgImg" src="" class="w-full h-auto max-h-[400px] object-contain hidden rounded-lg">
-        <span id="bgPlaceholder" class="text-gray-600 text-xs">बैकग्राउंड प्रीव्यू यहाँ दिखेगा</span>
+        <img id="bgImg" src="" class="w-full h-auto max-h-[380px] object-contain hidden rounded-lg">
+        <span id="bgPlaceholder" class="text-gray-600 text-xs">बैकग्राउंड यहाँ दिखेगा</span>
       </div>
       <div id="bgDl" class="hidden text-right">
-        <button onclick="downloadImage('bgImg')" class="text-xs bg-gray-800 text-green-300 px-3 py-1.5 rounded-lg border border-gray-700">📥 बैकग्राउंड डाउनलोड करें</button>
+        <button onclick="downloadImage('bgImg')" class="text-xs bg-gray-800 text-green-300 px-3 py-1.5 rounded-lg border border-gray-700">📥 डाउनलोड करें</button>
       </div>
-    </section>
+    </div>
 
-    <!-- 4. VOICEOVER & LIP SYNC -->
-    <section id="voiceTab" class="tab-content hidden bg-cardBg border border-gray-800 rounded-2xl p-5 shadow-xl space-y-4">
+    <!-- TAB 4: Voiceover -->
+    <div id="voiceTab" class="tab-content hidden bg-[#111827] border border-gray-800 rounded-2xl p-5 shadow-2xl space-y-4">
       <div>
-        <h2 class="text-base font-bold text-white">वॉयसओवर स्टूडियो (Cartoon Voiceover)</h2>
-        <p class="text-xs text-gray-400">डायलॉग लिखें और कार्टून की आवाज़ में प्ले करें</p>
+        <h3 class="text-sm font-bold text-white">AI Voiceover & Narration</h3>
+        <p class="text-[11px] text-gray-400">डायलॉग लिखें और कार्टून वॉयस में प्ले करें</p>
       </div>
-
-      <textarea id="vText" rows="3" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-sm text-white">अरे सुनो! आज रात को जंगल की तरफ मत जाना, वहां भूत का डेरा है!</textarea>
-
+      <textarea id="vText" rows="3" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-sm text-white">अरे भाई सुनो! जंगल में आज एक नया शेर आ गया है, सब भागो!</textarea>
       <div class="grid grid-cols-2 gap-3">
         <div>
-          <label class="block text-xs text-gray-400 mb-1">आवाज़ का प्रकार (Pitch):</label>
+          <label class="block text-[11px] text-gray-400 mb-1">पिच (कार्टून वॉयस):</label>
           <input id="vPitch" type="range" min="0.6" max="1.8" step="0.1" value="1.4" class="w-full accent-indigo-500">
-          <span class="text-[10px] text-gray-500">कार्टून के लिए 1.4 रखें</span>
         </div>
         <div>
-          <label class="block text-xs text-gray-400 mb-1">बोलने की रफ़्तार (Speed):</label>
+          <label class="block text-[11px] text-gray-400 mb-1">स्पीड (रफ़्तार):</label>
           <input id="vRate" type="range" min="0.7" max="1.4" step="0.1" value="1" class="w-full accent-indigo-500">
         </div>
       </div>
-
       <div class="flex gap-2">
         <button onclick="playVoice()" class="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-3 rounded-xl text-sm">
-          🔊 आवाज़ सुनें (Play)
+          🔊 प्ले करें (Play)
         </button>
         <button onclick="stopVoice()" class="bg-gray-800 text-gray-300 px-4 py-3 rounded-xl text-sm">
           ⏹️ रोकें
         </button>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </main>
+  <!-- 6. Features Grid (Built for Storytellers) -->
+  <section id="features" class="max-w-6xl mx-auto px-4 py-14 border-t border-gray-800">
+    <div class="text-center mb-10">
+      <span class="text-xs uppercase tracking-wider text-indigo-400 font-bold">Built for Storytellers</span>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Advanced Creative Controls</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-gray-900/50 p-6 rounded-2xl border border-gray-800">
+        <div class="text-3xl mb-3">🎭</div>
+        <h3 class="font-bold text-base mb-1 text-white">Consistent Characters</h3>
+        <p class="text-xs text-gray-400">एक ही कैरेक्टर हर सीन में एक जैसा दिखेगा, जिससे पूरी सीरीज या वीडियो में पहचान बनी रहे।</p>
+      </div>
+      <div class="bg-gray-900/50 p-6 rounded-2xl border border-gray-800">
+        <div class="text-3xl mb-3">🎨</div>
+        <h3 class="font-bold text-base mb-1 text-white">100+ Visual Styles</h3>
+        <p class="text-xs text-gray-400">Pixar 3D, Anime, Indian Village, और Horror थीम्स के रेडीमेड प्रीसेट्स।</p>
+      </div>
+      <div class="bg-gray-900/50 p-6 rounded-2xl border border-gray-800">
+        <div class="text-3xl mb-3">📱</div>
+        <h3 class="font-bold text-base mb-1 text-white">Multiplatform Support</h3>
+        <p class="text-xs text-gray-400">मोबाइल, लैपटॉप या टैबलेट—बिना किसी भारी सॉफ्टवेयर के सीधे ब्राउज़र में चलाएं।</p>
+      </div>
+    </div>
+  </section>
 
-  <footer class="border-t border-gray-800 py-6 text-center text-xs text-gray-500">
-    © 2026 AutoDraft Free Studio • 100% Free AI Animation Suite
+  <!-- 7. FAQs -->
+  <section id="faq" class="max-w-3xl mx-auto px-4 py-12 border-t border-gray-800">
+    <h2 class="text-xl font-bold text-center text-white mb-6">Frequently Asked Questions</h2>
+    <div class="space-y-3 text-xs">
+      <div class="bg-gray-900/60 p-4 rounded-xl border border-gray-800">
+        <p class="font-bold text-white">क्या यह टूल YouTube मोनेटाइजेशन के लिए सुरक्षित है?</p>
+        <p class="text-gray-400 mt-1">हाँ, AI द्वारा बनाई गई सामग्री का उपयोग आप अपने यूट्यूब और सोशल मीडिया चैनल्स पर बिना कॉपीराइट स्ट्राइक के कर सकते हैं।</p>
+      </div>
+      <div class="bg-gray-900/60 p-4 rounded-xl border border-gray-800">
+        <p class="font-bold text-white">क्या इसके लिए कोई क्रेडिट कार्ड या फीस की ज़रूरत है?</p>
+        <p class="text-gray-400 mt-1">नहीं, यह सेटअप पूरी तरह से फ्री APIs और GitHub Pages पर होस्ट किया गया है।</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Footer -->
+  <footer class="border-t border-gray-800 py-8 bg-[#090d16] text-center text-xs text-gray-500">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="font-bold text-gray-400">⚡ autodraft.ai free edition</p>
+      <div class="flex space-x-4">
+        <a href="#channels" class="hover:text-gray-300">Channels</a>
+        <a href="#studio" class="hover:text-gray-300">Studio</a>
+        <a href="#features" class="hover:text-gray-300">Features</a>
+      </div>
+      <p>© 2026 AutoDraft Clone. All rights reserved.</p>
+    </div>
   </footer>
 
+  <!-- Scripts -->
   <script>
-    // Tab Switching
     function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
       document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('bg-indigo-600', 'text-white');
         btn.classList.add('bg-gray-800', 'text-gray-400');
       });
-
       document.getElementById(tabId).classList.remove('hidden');
       const activeBtn = document.getElementById('btn-' + tabId);
       activeBtn.classList.add('bg-indigo-600', 'text-white');
       activeBtn.classList.remove('bg-gray-800', 'text-gray-400');
     }
 
-    // Helper to call Pollinations AI
     function renderAI(prompt, imgId, loaderId, placeId, dlId, btnId, btnOriginalText) {
       const img = document.getElementById(imgId);
       const loader = document.getElementById(loaderId);
@@ -210,7 +309,7 @@
       placeholder.classList.add('hidden');
       dl.classList.add('hidden');
       btn.disabled = true;
-      btn.innerText = "तैयार हो रहा है...";
+      btn.innerText = "Generating...";
 
       const seed = Math.floor(Math.random() * 999999);
       const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=850&height=500&seed=${seed}&nologo=true`;
@@ -225,7 +324,7 @@
 
       img.onerror = () => {
         loader.classList.add('hidden');
-        placeholder.innerText = "एरर आया, कृपया दोबारा क्लिक करें।";
+        placeholder.innerText = "Error loading. Please retry.";
         placeholder.classList.remove('hidden');
         btn.disabled = false;
         btn.innerText = btnOriginalText;
@@ -234,22 +333,19 @@
       img.src = url;
     }
 
-    // 1. Turnaround Sheet
     function generateTurnaround() {
       const p = document.getElementById('charPrompt').value.trim();
       const prompt = `character sheet turnaround of ${p}, multiple angles, front view, side view, back view, full body, white background, animation concept art, 8k, character design sheet`;
-      renderAI(prompt, 'tImg', 'tLoader', 'tPlaceholder', 'tDl', 'turnaroundBtn', 'टर्नअराउंड शीट बनाएं (Front, Side, Back) ✨');
+      renderAI(prompt, 'tImg', 'tLoader', 'tPlaceholder', 'tDl', 'turnaroundBtn', 'जनरेट करें (Front, Side, Back Sheet) ✨');
     }
 
-    // 2. Expressions Sheet
     function generateExpressions() {
       const p = document.getElementById('exprPrompt').value.trim();
       const prompt = `character facial expression sheet of ${p}, 4 different expressions happy, sad, angry, surprised, character design sheet, cartoon animation model sheet, high quality`;
-      renderAI(prompt, 'eImg', 'eLoader', 'ePlaceholder', 'eDl', 'exprBtn', 'मल्टीपल एक्सप्रेशन्स शीट बनाएं 🎭');
+      renderAI(prompt, 'eImg', 'eLoader', 'ePlaceholder', 'eDl', 'exprBtn', 'एक्सप्रेशन्स शीट बनाएं 🎭');
     }
 
-    // 3. Background
-    function setBgPrompt(val) {
+    function setBg(val) {
       document.getElementById('bgPrompt').value = val;
     }
     function generateBg() {
@@ -258,13 +354,11 @@
       renderAI(prompt, 'bgImg', 'bgLoader', 'bgPlaceholder', 'bgDl', 'bgBtn', 'बैकग्राउंड जनरेट करें 🏞️');
     }
 
-    // Download
     function downloadImage(imgId) {
       const img = document.getElementById(imgId);
       if (img.src) window.open(img.src, '_blank');
     }
 
-    // Voice
     function playVoice() {
       const txt = document.getElementById('vText').value;
       if (!txt.trim()) return;
@@ -273,11 +367,4 @@
       u.lang = 'hi-IN';
       u.pitch = parseFloat(document.getElementById('vPitch').value);
       u.rate = parseFloat(document.getElementById('vRate').value);
-      window.speechSynthesis.speak(u);
-    }
-    function stopVoice() {
-      window.speechSynthesis.cancel();
-    }
-  </script>
-</body>
-</html>
+      window.speech
