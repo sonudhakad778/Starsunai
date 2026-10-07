@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DraftAI - AI Creative Studio</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7fb;
+            color: #171923;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* HEADER */
+
+        header {
+            height: 70px;
+            background: white;
+            border-bottom: 1px solid #e5e5eb;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 5%;
+
+            gap: 30px;
+
+            position: sticky;
+            top: 0;
+
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #7057ff;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+            flex: 1;
+        }
+
+        nav a {
+            font-size: 14px;
+            color: #666;
+        }
+
+        nav a:hover {
+            color: #7057ff;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            background: #7057ff;
+            color: white;
+
+            padding: 11px 18px;
+
+            border-radius: 9px;
+
+            font-weight: 700;
+
+            border: none;
+
+            cursor: pointer;
+        }
+
+        .btn-outline {
+            background: white;
+            color: #333;
+
+            border: 1px solid #ddd;
+
+            padding: 10px 17px;
+
+            border-radius: 9px;
+
+            font-weight: 600;
+        }
+
+        /* HERO */
+
+        .hero {
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 90px 5%;
+
+            display: grid;
+
+            grid-template-columns: 1.1fr 0.9fr;
+
+            gap: 50px;
+
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-block;
+
+            color: #7057ff;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 6vw, 70px);
+
+            line-height: 1;
+
+            letter-spacing: -4px;
+
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #7057ff;
+        }
+
+        .hero p {
+            color: #666;
+
+            font-size: 18px;
+
+            line-height: 1.7;
+
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            margin-top: 30px;
+
+            display: flex;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+        }
+
+        /* HERO PREVIEW */
+
+        .preview-box {
+            background: #e9e7ff;
+
+            padding: 20px;
+
+            border-radius: 25px;
+        }
+
+        .preview-window {
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 15px;
+
+            box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+        }
+
+        .window-top {
+            color: #aaa;
+
+            font-size: 10px;
+
+            letter-spacing: 5px;
+
+            margin-bottom: 15px;
+        }
+
+        .video-preview {
+            height: 280px;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1d1e28,
+                    #6153a8
+                );
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            color: white;
+
+            font-size: 30px;
+
+            font-weight: 900;
+
+            text-align: center
