@@ -16,209 +16,417 @@
         body {
             font-family: Arial, sans-serif;
             background: #f7f7fb;
-            color: #171923;
+            color: #222;
         }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* HEADER */
 
         header {
-            height: 70px;
-            background: white;
-            border-bottom: 1px solid #e5e5eb;
-
+            background: #ffffff;
+            padding: 18px 30px;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-
-            padding: 0 5%;
-
-            gap: 30px;
-
-            position: sticky;
-            top: 0;
-
-            z-index: 100;
+            border-bottom: 1px solid #eeeeee;
         }
 
         .logo {
             font-size: 24px;
-            font-weight: 800;
-        }
-
-        .logo span {
-            color: #7057ff;
-        }
-
-        nav {
-            display: flex;
-            gap: 25px;
-            flex: 1;
+            font-weight: bold;
+            color: #6c3cff;
         }
 
         nav a {
-            font-size: 14px;
-            color: #666;
-        }
-
-        nav a:hover {
-            color: #7057ff;
-        }
-
-        .header-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn {
-            background: #7057ff;
-            color: white;
-
-            padding: 11px 18px;
-
-            border-radius: 9px;
-
-            font-weight: 700;
-
-            border: none;
-
-            cursor: pointer;
-        }
-
-        .btn-outline {
-            background: white;
+            text-decoration: none;
             color: #333;
-
-            border: 1px solid #ddd;
-
-            padding: 10px 17px;
-
-            border-radius: 9px;
-
-            font-weight: 600;
+            margin-left: 20px;
+            font-size: 15px;
         }
-
-        /* HERO */
 
         .hero {
-            max-width: 1200px;
-
-            margin: auto;
-
-            padding: 90px 5%;
-
-            display: grid;
-
-            grid-template-columns: 1.1fr 0.9fr;
-
-            gap: 50px;
-
+            min-height: 520px;
+            display: flex;
+            justify-content: center;
             align-items: center;
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #f5f0ff, #ffffff);
         }
 
-        .badge {
-            display: inline-block;
-
-            color: #7057ff;
-
-            font-size: 12px;
-
-            font-weight: 800;
-
-            letter-spacing: 2px;
-
-            margin-bottom: 18px;
+        .hero-content {
+            max-width: 850px;
         }
 
         .hero h1 {
-            font-size: clamp(42px, 6vw, 70px);
-
-            line-height: 1;
-
-            letter-spacing: -4px;
-
-            margin-bottom: 25px;
+            font-size: 52px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: #222;
         }
 
         .hero h1 span {
-            color: #7057ff;
+            color: #6c3cff;
         }
 
         .hero p {
+            font-size: 19px;
+            line-height: 1.6;
             color: #666;
-
-            font-size: 18px;
-
-            line-height: 1.7;
-
-            max-width: 600px;
+            margin-bottom: 30px;
         }
 
-        .hero-buttons {
-            margin-top: 30px;
-
-            display: flex;
-
-            gap: 12px;
-
-            flex-wrap: wrap;
+        .btn {
+            display: inline-block;
+            padding: 14px 25px;
+            margin: 7px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
         }
 
-        /* HERO PREVIEW */
-
-        .preview-box {
-            background: #e9e7ff;
-
-            padding: 20px;
-
-            border-radius: 25px;
-        }
-
-        .preview-window {
-            background: white;
-
-            border-radius: 18px;
-
-            padding: 15px;
-
-            box-shadow: 0 20px 50px rgba(0,0,0,0.12);
-        }
-
-        .window-top {
-            color: #aaa;
-
-            font-size: 10px;
-
-            letter-spacing: 5px;
-
-            margin-bottom: 15px;
-        }
-
-        .video-preview {
-            height: 280px;
-
-            border-radius: 12px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #1d1e28,
-                    #6153a8
-                );
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
+        .primary {
+            background: #6c3cff;
             color: white;
+        }
 
-            font-size: 30px;
+        .secondary {
+            background: white;
+            color: #6c3cff;
+            border: 1px solid #6c3cff;
+        }
 
-            font-weight: 900;
+        .section {
+            padding: 70px 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
 
-            text-align: center
+        .section-title {
+            text-align: center;
+            font-size: 34px;
+            margin-bottom: 40px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #eeeeee;
+            text-align: center;
+        }
+
+        .card h3 {
+            margin: 15px 0 10px;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .icon {
+            font-size: 40px;
+        }
+
+        footer {
+            background: #181818;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 15px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            DraftAI
+        </div>
+
+        <nav>
+            <a href="#features">Features</a>
+            <a href="#tools">AI Tools</a>
+            <a href="#about">About</a>
+        </nav>
+
+    </header>
+
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                Create Amazing Content
+                <span>With AI</span>
+            </h1>
+
+            <p>
+                AI की मदद से Images, Videos, Stories,
+                Characters और Voice आसानी से बनाएं।
+            </p>
+
+            <a href="#tools" class="btn primary">
+                Start Creating
+            </a>
+
+            <a href="#features" class="btn secondary">
+                Explore Features
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <section class="section" id="tools">
+
+        <h2 class="section-title">
+            AI Creative Tools
+        </h2>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="icon">🖼️</div>
+
+                <h3>
+                    Text to Image
+                </h3>
+
+                <p>
+                    अपने लिखे हुए Prompt से AI Image बनाएं।
+                </p>
+
+                <br>
+
+                <a href="#" class="btn primary">
+                    Open Tool
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">🎬</div>
+
+                <h3>
+                    AI Video Maker
+                </h3>
+
+                <p>
+                    Story और Prompt से AI Video बनाने का अनुभव।
+                </p>
+
+                <br>
+
+                <a href="#" class="btn primary">
+                    Open Tool
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">🎨</div>
+
+                <h3>
+                    Image Stylization
+                </h3>
+
+                <p>
+                    अपनी Image को अलग-अलग AI Styles में बदलें।
+                </p>
+
+                <br>
+
+                <a href="#" class="btn primary">
+                    Open Tool
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">👤</div>
+
+                <h3>
+                    Character Creator
+                </h3>
+
+                <p>
+                    अपने AI Characters तैयार करें और उन्हें Consistent रखें।
+                </p>
+
+                <br>
+
+                <a href="#" class="btn primary">
+                    Open Tool
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">🎙️</div>
+
+                <h3>
+                    AI Voice
+                </h3>
+
+                <p>
+                    Text को AI Voice में बदलने के लिए Voice Tool।
+                </p>
+
+                <br>
+
+                <a href="#" class="btn primary">
+                    Open Tool
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">✂️</div>
+
+                <h3>
+                    AI Editor
+                </h3>
+
+                <p>
+                    Images और Videos को Edit करने के लिए Creative Editor।
+                </p>
+
+                <br>
+
+                <a href="#" class="btn primary">
+                    Open Tool
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="section" id="features">
+
+        <h2 class="section-title">
+            Why DraftAI?
+        </h2>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="icon">⚡</div>
+
+                <h3>
+                    Fast
+                </h3>
+
+                <p>
+                    आसान और तेज Creative Workflow।
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">🤖</div>
+
+                <h3>
+                    AI Powered
+                </h3>
+
+                <p>
+                    भविष्य में अलग-अलग AI APIs को जोड़ा जा सकता है।
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">📱</div>
+
+                <h3>
+                    Mobile Friendly
+                </h3>
+
+                <p>
+                    मोबाइल और कंप्यूटर दोनों पर इस्तेमाल करने के लिए बनाया गया।
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="section" id="about">
+
+        <h2 class="section-title">
+            About DraftAI
+        </h2>
+
+        <p style="text-align:center; max-width:750px; margin:auto; line-height:1.8; color:#666;">
+
+            DraftAI एक AI Creative Studio का हमारा अपना प्रोजेक्ट है,
+            जिसका उद्देश्य Images, Videos, Stories, Characters और Voice
+            जैसे Creative Tools को एक ही जगह उपलब्ध कराना है।
+
+        </p>
+
+    </section>
+
+
+    <footer>
+
+        <p>
+            © 2026 DraftAI. All Rights Reserved.
+        </p>
+
+    </footer>
+
+</body>
+</html>
