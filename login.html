@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Login - DraftAI</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f6f5fb;
+color:#222;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+header{
+background:#fff;
+border-bottom:1px solid #ddd;
+padding:16px 20px;
+}
+
+.logo{
+font-size:24px;
+font-weight:bold;
+color:#6c3cff;
+text-decoration:none;
+}
+
+.container{
+width:100%;
+max-width:460px;
+margin:auto;
+padding:25px 16px 40px;
+}
+
+.card{
+background:#fff;
+border:1px solid #ddd;
+border-radius:18px;
+padding:25px 20px;
+box-shadow:0 4px 18px rgba(0,0,0,.04);
+}
+
+h1{
+text-align:center;
+font-size:32px;
+margin:5px 0 8px;
+}
+
+h1 span{
+color:#6c3cff;
+}
+
+.subtitle{
+text-align:center;
+color:#666;
+margin:0 0 25px;
+}
+
+label{
+display:block;
+font-weight:bold;
+margin:15px 0 7px;
+}
+
+input{
+width:100%;
+padding:14px;
+border:1px solid #ccc;
+border-radius:9px;
+font-size:16px;
+outline:none;
+}
+
+input:focus{
+border-color:#6c3cff;
+}
+
+.password-box{
+position:relative;
+}
+
+.password-box input{
+padding-right:75px;
+}
+
+.show{
+position:absolute;
+right:10px;
+top:9px;
+padding:8px 10px;
+border:0;
+background:transparent;
+color:#6c3cff;
+font-weight:bold;
+cursor:pointer;
+}
+
+.options{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin:15px 0;
+font-size:14px;
+}
+
+.remember{
+display:flex;
+align-items:center;
+gap:7px;
+}
+
+.remember input{
+width:auto;
+}
+
+.forgot{
+color:#6c3cff;
+text-decoration:none;
+}
+
+button{
+width:100%;
+padding:14px;
+border:0;
+border-radius:9px;
+background:#6c3cff;
+color:#fff;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+margin-top:8px;
+}
+
+button:active{
+transform:scale(.98);
+}
+
+.divider{
+display:flex;
+align-items:center;
+gap:10px;
+margin:22px 0;
+color:#999;
+}
+
+.divider:before,
+.divider:after{
+content:"";
+height:1px;
+background:#ddd;
+flex:1;
+}
+
+.signup{
+text-align:center;
+color:#666;
+}
+
+.signup a{
+color:#6c3cff;
+font-weight:bold;
+text-decoration:none;
+}
+
+.demo{
+display:none;
+background:#f0edff;
+color:#5a32cc;
+padding:12px;
+border-radius:9px;
+margin-top:15px;
+text-align:center;
+line-height:1.5;
+}
+
+.home{
+display:block;
+text-align:center;
+margin-top:20px;
+color:#555;
+text-decoration:none;
+font-weight:bold;
+}
+
+@media(max-width:500px){
+.card{
+padding:22px 17px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a class="logo" href="index.html">DraftAI</a>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h1>Welcome to <span>DraftAI</span></h1>
+
+<p class="subtitle">
+अपने account में login करें
+</p>
+
+<form onsubmit="login(event)">
+
+<label>Email</label>
+
+<input
+id="email"
+type="email"
+placeholder="example@email.com"
+required
+>
+
+<label>Password</label>
+
+<div class="password-box">
+
+<input
+id="password"
+type="password"
+placeholder="अपना password लिखें"
+required
+>
+
+<button
+type="button"
+class="show"
+onclick="togglePassword()"
+>
+Show
+</button>
+
+</div>
+
+<div class="options">
+
+<label class="remember">
+<input id="remember" type="checkbox">
+Remember me
+</label>
+
+<a class="forgot" href="#" onclick="forgotPassword(event)">
+Forgot Password?
+</a>
+
+</div>
+
+<button type="submit">
+Login
+</button>
+
+</form>
+
+<div class="demo" id="demo"></div>
+
+<div class="divider">
+<span>OR</span>
+</div>
+
+<div class="signup">
+Account नहीं है?
+<a href="signup.html">Create Account</a>
+</div>
+
+<a class="home" href="index.html">
+← Back to Home
+</a>
+
+</div>
+
+</div>
+
+<script>
+
+function togglePassword(){
+
+let p=document.getElementById("password");
+let b=document.querySelector(".show");
+
+if(p.type==="password"){
+p.type="text";
+b.innerText="Hide";
+}else{
+p.type="password";
+b.innerText="Show";
+}
+
+}
+
+
+function login(event){
+
+event.preventDefault();
+
+let email=
+document.getElementById("email").value.trim();
+
+let password=
+document.getElementById("password").value;
+
+let remember=
+document.getElementById("remember").checked;
+
+if(!email || !password){
+alert("Email और Password भरें।");
+return;
+}
+
+let demo=
+document.getElementById("demo");
+
+demo.style.display="block";
+
+demo.innerText=
+"✓ Demo Login सफल!\n\n"+
+"अभी यह frontend demo है।\n"+
+"Real account authentication बाद में backend से जोड़ा जाएगा।";
+
+if(remember){
+
+localStorage.setItem(
+"draftai_login_email",
+email
+);
+
+}
+
+}
+
+
+function forgotPassword(event){
+
+event.preventDefault();
+
+alert(
+"Password recovery system अभी demo mode में है।"
+);
+
+}
+
+</script>
+
+</body>
+</html>
