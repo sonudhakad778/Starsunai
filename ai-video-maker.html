@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Video Maker - DraftAI</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7fb;
+            color: #222;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 16px 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .logo {
+            color: #6c3cff;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .back {
+            color: #555;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: auto;
+            padding: 35px 18px 60px;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .title h1 {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .title h1 span {
+            color: #6c3cff;
+        }
+
+        .title p {
+            color: #666;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        .workspace {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 25px;
+        }
+
+        .panel {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+        }
+
+        .panel h2 {
+            font-size: 21px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 18px;
+            margin-bottom: 8px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 170px;
+            resize: vertical;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: #6c3cff;
+        }
+
+        select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: white;
+            font-size: 15px;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .option-box {
+            background: #fafafa;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 13px;
+            margin-top: 18px;
+        }
+
+        .option-box label {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: normal;
+        }
+
+        .option-box input {
+            width: 18px;
+            height: 18px;
+        }
+
+        .generate-btn {
+            width: 100%;
+            padding: 15px;
+            margin-top: 25px;
+            border: none;
+            border-radius: 11px;
+            background: #6c3cff;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .generate-btn:hover {
+            background: #5928e6;
+        }
+
+        .preview {
+            min-height: 600px;
+            background: #111;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .preview-content {
+            color: #aaa;
+            padding: 30px;
+        }
+
+        .preview-icon {
+            font-size: 70px;
+            margin-bottom: 15px;
+        }
+
+        .preview-content h3 {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .loading {
+            display: none;
+            color: white;
+            font-size: 18px;
+        }
+
+        .loading-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .video-result {
+            display: none;
+            width: 100%;
+            height: 100%;
+            min-height: 600px;
+            background: #222;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+        }
+
+        .video-result .video-icon {
+            font-size: 80px;
+            margin-bottom: 15px;
+        }
+
+        .scenes {
+            margin-top: 35px;
+        }
+
+        .scenes h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .scene-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .scene {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 13px;
+            padding: 18px;
+        }
+
+        .scene-number {
+            color: #6c3cff;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .scene p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        footer {
+            background: #181818;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 850px) {
+
+            .workspace {
+                grid-template-columns: 1fr;
+            }
+
+            .scene-list {
+                grid-template-columns: 1fr;
+            }
+
+            .title h1 {
+                font-size: 32px;
+            }
+
+            .preview {
+                min-height: 400px;
+            }
+
+            .video-result {
+                min-height: 400px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+    <header>
+
+        <a href="index.html" class="logo">
+            DraftAI
+        </a>
+
+        <a href="index.html" class="back">
+            ← वापस Home
+        </a>
+
+    </header>
+
+
+    <main class="container">
+
+
+        <div class="title">
+
+            <h1>
+                AI <span>Video Maker</span>
+            </h1>
+
+            <p>
+                अपनी कहानी या Prompt लिखिए और AI Video बनाने का Workflow तैयार कीजिए।
+            </p>
+
+        </div>
+
+
+        <div class="workspace">
+
+
+            <!-- SETTINGS PANEL -->
+
+            <div class="panel">
+
+                <h2>
+                    🎬 Create Video
+                </h2>
+
+
+                <label for="story">
+                    Story / Video Prompt
+                </label>
+
+                <textarea
+                    id="story"
+                    placeholder="उदाहरण: एक गरीब किसान मेहनत करके अपने खेत को हरा-भरा बनाता है और अंत में उसकी मेहनत सफल होती है..."
+                ></textarea>
+
+
+                <div class="row">
+
+                    <div>
+
+                        <label for="duration">
+                            Duration
+                        </label>
+
+                        <select id="duration">
+
+                            <option value="10">
+                                10 Seconds
+                            </option>
+
+                            <option value="30">
+                                30 Seconds
+                            </option>
+
+                            <option value="60">
+                                1 Minute
+                            </option>
+
+                            <option value="120">
+                                2 Minutes
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label for="ratio">
+                            Aspect Ratio
+                        </label>
+
+                        <select id="ratio">
+
+                            <option value="16:9">
+                                16:9 Landscape
+                            </option>
+
+                            <option value="9:16">
+                                9:16 Shorts
+                            </option>
+
+                            <option value="1:1">
+                                1:1 Square
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <label for="style">
+                    Video Style
+                </label>
+
+                <select id="style">
+
+                    <option value="cinematic">
+                        Cinematic
+                    </option>
+
+                    <option value="realistic">
+                        Ultra Realistic
+                    </option>
+
+                    <option value="2d">
+                        2D Animation
+                    </option>
+
+                    <option value="3d">
+                        3D Animation
+                    </option>
+
+                    <option value="cartoon">
+                        Indian Cartoon
+                    </option>
+
+                </select>
+
+
+                <label for="voice">
+                    Voice / Narration
+                </label>
+
+                <select id="voice">
+
+                    <option value="hindi-male">
+                        Hindi Male Voice
+                    </option>
+
+                    <option value="hindi-female">
+                        Hindi Female Voice
+                    </option>
+
+                    <option value="none">
+                        No Voice
+                    </option>
+
+                </select>
+
+
+                <div class="option-box">
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            id="characterLock"
+                        >
+
+                        Character Consistency Lock
+
+                    </label>
+
+                </div>
+
+
+                <div class="option-box">
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            id="subtitles"
+                        >
+
+                        Add Hindi Subtitles
+
+                    </label>
+
+                </div>
+
+
+                <button
+                    class="generate-btn"
+                    onclick="generateVideo()"
+                >
+                    🎬 Generate Video
+                </button>
+
+
+            </div>
+
+
+            <!-- VIDEO PREVIEW -->
+
+            <div class="panel">
+
+                <h2>
+                    🎥 Video Preview
+                </h2>
+
+
+                <div class="preview">
+
+
+                    <div
+                        class="preview-content"
+                        id="previewContent"
+                    >
+
+                        <div class="preview-icon">
+                            🎬
+                        </div>
+
+                        <h3>
+                            आपका Video यहाँ दिखाई देगा
+                        </h3>
+
+                        <p>
+                            Story लिखें और Generate Video दबाएँ।
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="loading"
+                        id="loading"
+                    >
+
+                        <div class="loading-icon">
+                            ⏳
+                        </div>
+
+                        <p>
+                            Video Workflow तैयार हो रहा है...
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="video-result"
+                        id="videoResult"
+                    >
+
+                        <div class="video-icon">
+                            🎞️
+                        </div>
+
+                        <h3>
+                            Video Project Ready
+                        </h3>
+
+                        <p>
+                            असली AI Video Generation API
+                            बाद में जोड़ी जाएगी।
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SCENES -->
+
+        <section class="scenes">
+
+            <h2>
+                🎞️ AI Story Scenes
+            </h2>
+
+
+            <div class="scene-list">
+
+
+                <div class="scene">
+
+                    <div class="scene-number">
+                        Scene 01
+                    </div>
+
+                    <p>
+                        आपकी कहानी का पहला दृश्य यहाँ तैयार होगा।
+                    </p>
+
+                </div>
+
+
+                <div class="scene">
+
+                    <div class="scene-number">
+                        Scene 02
+                    </div>
+
+                    <p>
+                        दूसरा दृश्य और Character Action यहाँ आएगा।
+                    </p>
+
+                </div>
+
+
+                <div class="scene">
+
+                    <div class="scene-number">
+                        Scene 03
+                    </div>
+
+                    <p>
+                        तीसरा दृश्य और Dialogue यहाँ आएगा।
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 DraftAI - AI Creative Studio
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        function generateVideo() {
+
+            const story =
+                document.getElementById("story").value.trim();
+
+            const preview =
+                document.getElementById("previewContent");
+
+            const loading =
+                document.getElementById("loading");
+
+            const result =
+                document.getElementById("videoResult");
+
+
+            if (story === "") {
+
+                alert("कृपया पहले Story या Video Prompt लिखें।");
+
+                return;
+            }
+
+
+            preview.style.display = "none";
+
+            result.style.display = "none";
+
+            loading.style.display = "block";
+
+
+            setTimeout(function() {
+
+                loading.style.display = "none";
+
+                result.style.display = "flex";
+
+            }, 1500);
+
+        }
+
+    </script>
+
+
+</body>
+                              </html>
