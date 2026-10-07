@@ -2,284 +2,297 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AI Editor - DraftAI</title>
 
 <style>
-*{
-box-sizing:border-box;
-}
-
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#f6f5fb;
-color:#222;
-}
-
-header{
-background:#fff;
-border-bottom:1px solid #ddd;
-padding:15px 18px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-position:sticky;
-top:0;
-z-index:10;
-}
-
-.logo{
-font-size:23px;
-font-weight:bold;
-color:#6c3cff;
-text-decoration:none;
-}
-
-.back{
-text-decoration:none;
-color:#555;
-font-weight:bold;
-}
-
-.container{
-max-width:1000px;
-margin:auto;
-padding:25px 16px 50px;
-}
-
-h1{
-text-align:center;
-font-size:34px;
-margin:10px 0;
-}
-
-h1 span{
-color:#6c3cff;
-}
-
-.subtitle{
-text-align:center;
-color:#666;
-margin-bottom:25px;
-font-size:16px;
-}
-
-.card{
-background:#fff;
-border:1px solid #ddd;
-border-radius:18px;
-padding:20px;
-margin-bottom:20px;
-}
-
-.card h2{
-margin-top:0;
-font-size:22px;
-}
-
-label{
-display:block;
-font-weight:bold;
-margin:15px 0 7px;
-}
-
-input,
-textarea,
-select{
-width:100%;
-padding:13px;
-border:1px solid #ccc;
-border-radius:9px;
-font-size:16px;
-background:#fff;
-}
-
-textarea{
-height:150px;
-resize:vertical;
-}
-
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:15px;
-}
-
-.preview{
-min-height:220px;
-border:2px dashed #ccc;
-border-radius:14px;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:20px;
-color:#888;
-background:#fafafa;
-}
-
-.upload{
-border:2px dashed #bbb;
-padding:25px;
-border-radius:12px;
-text-align:center;
-cursor:pointer;
-margin-top:10px;
-}
-
-.upload input{
-display:none;
-}
-
-.timeline{
-margin-top:15px;
-}
-
-.scene{
-background:#f8f7fc;
-border:1px solid #ddd;
-border-radius:12px;
-padding:15px;
-margin-bottom:12px;
-}
-
-.scene-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:10px;
-}
-
-.scene-title{
-font-weight:bold;
-}
-
-.scene button{
-padding:7px 12px;
-font-size:13px;
-border:1px solid #d33;
-background:#fff;
-color:#d33;
-border-radius:7px;
-}
-
-.buttons{
-display:flex;
-flex-wrap:wrap;
-gap:10px;
-margin-top:20px;
-}
-
-button{
-padding:13px 19px;
-border-radius:9px;
-font-size:15px;
-font-weight:bold;
-cursor:pointer;
-}
-
-.primary{
-background:#6c3cff;
-color:#fff;
-border:0;
-}
-
-.secondary{
-background:#fff;
-color:#6c3cff;
-border:1px solid #6c3cff;
-}
-
-.danger{
-background:#fff;
-color:#d33;
-border:1px solid #d33;
-}
-
-.status{
-margin-top:15px;
-padding:13px;
-border-radius:9px;
-background:#f0edff;
-color:#5a32cc;
-display:none;
-}
-
-@media(max-width:650px){
-
-.grid{
-grid-template-columns:1fr;
-}
-
-h1{
-font-size:28px;
-}
-
-.container{
-padding:20px 12px 40px;
-}
-
-.card{
-padding:16px;
-}
-
-.buttons button{
-flex:1;
-min-width:130px;
-}
-
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f6f5fb;color:#222}
+header{background:#fff;border-bottom:1px solid #ddd;padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:23px;font-weight:bold;color:#6c3cff;text-decoration:none}
+.back{color:#555;text-decoration:none;font-weight:bold}
+.container{max-width:900px;margin:auto;padding:25px 15px 50px}
+h1{text-align:center;font-size:34px;margin:10px 0}
+h1 span{color:#6c3cff}
+.sub{text-align:center;color:#666;font-size:17px;margin-bottom:25px}
+.card{background:#fff;border:1px solid #ddd;border-radius:16px;padding:20px;margin-bottom:18px}
+h2{margin-top:0}
+label{display:block;font-weight:bold;margin:15px 0 7px}
+input,textarea,select{width:100%;padding:13px;border:1px solid #ccc;border-radius:9px;font-size:16px;background:#fff}
+textarea{height:130px;resize:vertical}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.upload{display:block;border:2px dashed #bbb;border-radius:10px;padding:20px;text-align:center;cursor:pointer}
+.upload input{display:none}
+.preview{min-height:200px;border:2px dashed #ccc;border-radius:12px;padding:20px;text-align:center;display:flex;align-items:center;justify-content:center;color:#888;white-space:pre-line}
+.scene{background:#f8f7fc;border:1px solid #ddd;border-radius:10px;padding:15px;margin:10px 0}
+.scenehead{display:flex;justify-content:space-between;align-items:center}
+button{padding:12px 18px;border-radius:9px;font-size:15px;font-weight:bold;cursor:pointer}
+.primary{background:#6c3cff;color:#fff;border:0}
+.secondary{background:#fff;color:#6c3cff;border:1px solid #6c3cff}
+.danger{background:#fff;color:#d33;border:1px solid #d33}
+.buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.status{display:none;background:#f0edff;color:#5a32cc;padding:12px;border-radius:9px;margin-top:15px}
+@media(max-width:650px){.grid{grid-template-columns:1fr}h1{font-size:29px}.card{padding:16px}.buttons button{flex:1}}
 </style>
 </head>
 
 <body>
 
 <header>
-
 <a class="logo" href="index.html">DraftAI</a>
-
-<a class="back" href="dashboard.html">
-← Dashboard
-</a>
-
+<a class="back" href="dashboard.html">← Dashboard</a>
 </header>
-
 
 <div class="container">
 
 <h1>AI <span>Editor</span></h1>
-
-<p class="subtitle">
-अपने project को edit, organize और preview करें।
-</p>
-
-
-<!-- PROJECT -->
+<p class="sub">अपने project को edit, organize और preview करें।</p>
 
 <div class="card">
-
 <h2>Project Details</h2>
 
 <label>Project Name</label>
-
-<input
-id="projectName"
-type="text"
-placeholder="जैसे: मेरी नई वीडियो"
-/>
+<input id="project" placeholder="जैसे: मेरी नई वीडियो">
 
 <label>Script / Main Text</label>
+<textarea id="script" placeholder="यहाँ अपनी कहानी या वीडियो script लिखें..."></textarea>
+</div>
 
-<textarea
-id="mainText"
-placeholder="यहाँ अपनी कहानी या वीडियो script लिखें..."
-></textarea>
+<div class="card">
+<h2>Text Settings</h2>
+
+<div class="grid">
+
+<div>
+<label>Font</label>
+<select id="font">
+<option>Arial</option>
+<option>Georgia</option>
+<option>Verdana</option>
+<option>Times New Roman</option>
+</select>
+</div>
+
+<div>
+<label>Text Size</label>
+<select id="size">
+<option>16px</option>
+<option>20px</option>
+<option>24px</option>
+<option>30px</option>
+<option>36px</option>
+<option>44px</option>
+</select>
+</div>
+
+<div>
+<label>Text Position</label>
+<select id="position">
+<option>Center</option>
+<option>Top</option>
+<option>Bottom</option>
+<option>Left</option>
+<option>Right</option>
+</select>
+</div>
+
+<div>
+<label>Text Style</label>
+<select id="style">
+<option>Normal</option>
+<option>Bold</option>
+<option>Italic</option>
+<option>Bold + Italic</option>
+</select>
+</div>
+
+</div>
+</div>
+
+<div class="card">
+<h2>Media</h2>
+
+<label class="upload">
+📁 Choose Image / Video
+<input id="media" type="file" accept="image/*,video/*" onchange="media()">
+</label>
+
+<p id="mediaName">कोई media select नहीं किया गया।</p>
+</div>
+
+<div class="card">
+<h2>Audio</h2>
+
+<label class="upload">
+🎵 Choose Audio
+<input id="audio" type="file" accept="audio/*" onchange="audio()">
+</label>
+
+<p id="audioName">कोई audio select नहीं किया गया।</p>
+</div>
+
+<div class="card">
+<h2>Preview</h2>
+
+<div class="preview" id="preview">
+🎬<br><br>आपके project का preview यहाँ दिखाई देगा।
+</div>
+
+<div class="buttons">
+<button class="primary" onclick="previewProject()">▶ Preview</button>
+<button class="secondary" onclick="resetPreview()">↻ Reset</button>
+</div>
+</div>
+
+<div class="card">
+<h2>Timeline / Scenes</h2>
+
+<p style="color:#777">अपने video scenes यहाँ manage करें।</p>
+
+<div id="scenes">
+
+<div class="scene">
+<div class="scenehead">
+<b>Scene 1</b>
+<button class="danger" onclick="del(this)">Delete</button>
+</div>
+
+<label>Scene Text</label>
+<textarea placeholder="Scene 1 का text..."></textarea>
+</div>
 
 </div>
 
-
-<!-- TEXT SETTINGS -->
+<button class="secondary" onclick="addScene()">+ Add Scene</button>
+</div>
 
 <div class="card">
+<h2>Project Actions</h2>
+
+<div class="buttons">
+<button class="primary" onclick="save()">💾 Save Project</button>
+<button class="secondary" onclick="download()">⬇ Export</button>
+<button class="secondary" onclick="clearAll()">Clear</button>
+</div>
+
+<div class="status" id="status"></div>
+</div>
+
+</div>
+
+<script>
+
+let count=1;
+
+function media(){
+let f=document.getElementById("media").files[0];
+if(f)document.getElementById("mediaName").innerText="Selected: "+f.name;
+}
+
+function audio(){
+let f=document.getElementById("audio").files[0];
+if(f)document.getElementById("audioName").innerText="Selected: "+f.name;
+}
+
+function addScene(){
+count++;
+let d=document.createElement("div");
+d.className="scene";
+d.innerHTML=
+'<div class="scenehead"><b>Scene '+count+
+'</b><button class="danger" onclick="del(this)">Delete</button></div>'+
+'<label>Scene Text</label>'+
+'<textarea placeholder="Scene '+count+' का text..."></textarea>';
+document.getElementById("scenes").appendChild(d);
+}
+
+function del(b){
+b.closest(".scene").remove();
+}
+
+function previewProject(){
+
+let text=document.getElementById("script").value;
+
+if(!text.trim()){
+alert("पहले script लिखें।");
+return;
+}
+
+let name=document.getElementById("project").value||"Untitled Project";
+
+document.getElementById("preview").innerText=
+"🎬 "+name+"\n\n"+text+"\n\n✓ Preview Ready";
+}
+
+function resetPreview(){
+document.getElementById("preview").innerHTML=
+"🎬<br><br>आपके project का preview यहाँ दिखाई देगा।";
+}
+
+function save(){
+
+let name=document.getElementById("project").value;
+
+if(!name.trim()){
+alert("पहले Project Name लिखें।");
+return;
+}
+
+localStorage.setItem("draftai_project",name);
+localStorage.setItem("draftai_script",
+document.getElementById("script").value);
+
+let s=document.getElementById("status");
+s.style.display="block";
+s.innerText="✓ Project browser में save हो गया।";
+}
+
+function download(){
+
+let text=document.getElementById("script").value;
+
+if(!text.trim()){
+alert("Export करने से पहले script लिखें।");
+return;
+}
+
+let name=document.getElementById("project").value||"draftai-project";
+
+let data="DraftAI AI Editor Project\n\n"+
+"Project: "+name+"\n\n"+
+"Script:\n"+text;
+
+let blob=new Blob([data],{type:"text/plain"});
+let url=URL.createObjectURL(blob);
+let a=document.createElement("a");
+
+a.href=url;
+a.download="draftai-project.txt";
+a.click();
+
+URL.revokeObjectURL(url);
+}
+
+function clearAll(){
+
+document.getElementById("project").value="";
+document.getElementById("script").value="";
+document.getElementById("media").value="";
+document.getElementById("audio").value="";
+
+document.getElementById("mediaName").innerText=
+"कोई media select नहीं किया गया।";
+
+document.getElementById("audioName").innerText=
+"कोई audio select नहीं किया गया।";
+
+resetPreview();
+
+document.getElementById("status").style.display="none";
+}
+
+</script>
+
+</body>
+</html>
