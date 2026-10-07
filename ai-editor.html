@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Editor - DraftAI</title>
+
+<style>
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f6f5fb;
+color:#222;
+}
+
+header{
+background:#fff;
+border-bottom:1px solid #ddd;
+padding:15px 18px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:10;
+}
+
+.logo{
+font-size:23px;
+font-weight:bold;
+color:#6c3cff;
+text-decoration:none;
+}
+
+.back{
+text-decoration:none;
+color:#555;
+font-weight:bold;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:25px 16px 50px;
+}
+
+h1{
+text-align:center;
+font-size:34px;
+margin:10px 0;
+}
+
+h1 span{
+color:#6c3cff;
+}
+
+.subtitle{
+text-align:center;
+color:#666;
+margin-bottom:25px;
+font-size:16px;
+}
+
+.card{
+background:#fff;
+border:1px solid #ddd;
+border-radius:18px;
+padding:20px;
+margin-bottom:20px;
+}
+
+.card h2{
+margin-top:0;
+font-size:22px;
+}
+
+label{
+display:block;
+font-weight:bold;
+margin:15px 0 7px;
+}
+
+input,
+textarea,
+select{
+width:100%;
+padding:13px;
+border:1px solid #ccc;
+border-radius:9px;
+font-size:16px;
+background:#fff;
+}
+
+textarea{
+height:150px;
+resize:vertical;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+.preview{
+min-height:220px;
+border:2px dashed #ccc;
+border-radius:14px;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:20px;
+color:#888;
+background:#fafafa;
+}
+
+.upload{
+border:2px dashed #bbb;
+padding:25px;
+border-radius:12px;
+text-align:center;
+cursor:pointer;
+margin-top:10px;
+}
+
+.upload input{
+display:none;
+}
+
+.timeline{
+margin-top:15px;
+}
+
+.scene{
+background:#f8f7fc;
+border:1px solid #ddd;
+border-radius:12px;
+padding:15px;
+margin-bottom:12px;
+}
+
+.scene-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+}
+
+.scene-title{
+font-weight:bold;
+}
+
+.scene button{
+padding:7px 12px;
+font-size:13px;
+border:1px solid #d33;
+background:#fff;
+color:#d33;
+border-radius:7px;
+}
+
+.buttons{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:20px;
+}
+
+button{
+padding:13px 19px;
+border-radius:9px;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.primary{
+background:#6c3cff;
+color:#fff;
+border:0;
+}
+
+.secondary{
+background:#fff;
+color:#6c3cff;
+border:1px solid #6c3cff;
+}
+
+.danger{
+background:#fff;
+color:#d33;
+border:1px solid #d33;
+}
+
+.status{
+margin-top:15px;
+padding:13px;
+border-radius:9px;
+background:#f0edff;
+color:#5a32cc;
+display:none;
+}
+
+@media(max-width:650px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
+h1{
+font-size:28px;
+}
+
+.container{
+padding:20px 12px 40px;
+}
+
+.card{
+padding:16px;
+}
+
+.buttons button{
+flex:1;
+min-width:130px;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<a class="logo" href="index.html">DraftAI</a>
+
+<a class="back" href="dashboard.html">
+← Dashboard
+</a>
+
+</header>
+
+
+<div class="container">
+
+<h1>AI <span>Editor</span></h1>
+
+<p class="subtitle">
+अपने project को edit, organize और preview करें।
+</p>
+
+
+<!-- PROJECT -->
+
+<div class="card">
+
+<h2>Project Details</h2>
+
+<label>Project Name</label>
+
+<input
+id="projectName"
+type="text"
+placeholder="जैसे: मेरी नई वीडियो"
+/>
+
+<label>Script / Main Text</label>
+
+<textarea
+id="mainText"
+placeholder="यहाँ अपनी कहानी या वीडियो script लिखें..."
+></textarea>
+
+</div>
+
+
+<!-- TEXT SETTINGS -->
+
+<div class="card">
