@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Projects - DraftAI</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f6f5fb;
+color:#222;
+}
+
+header{
+background:#fff;
+border-bottom:1px solid #ddd;
+padding:16px 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-size:23px;
+font-weight:bold;
+color:#6c3cff;
+text-decoration:none;
+}
+
+.back{
+text-decoration:none;
+color:#555;
+font-weight:bold;
+}
+
+.container{
+max-width:950px;
+margin:auto;
+padding:25px 15px 50px;
+}
+
+h1{
+text-align:center;
+font-size:34px;
+margin:10px 0;
+}
+
+h1 span{
+color:#6c3cff;
+}
+
+.sub{
+text-align:center;
+color:#666;
+font-size:17px;
+margin-bottom:25px;
+}
+
+.toolbar{
+background:#fff;
+border:1px solid #ddd;
+border-radius:16px;
+padding:16px;
+margin-bottom:20px;
+}
+
+.search{
+width:100%;
+padding:14px;
+border:1px solid #ccc;
+border-radius:10px;
+font-size:16px;
+}
+
+.buttons{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:14px;
+}
+
+button{
+padding:12px 18px;
+border-radius:9px;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.primary{
+background:#6c3cff;
+color:#fff;
+border:0;
+}
+
+.secondary{
+background:#fff;
+color:#6c3cff;
+border:1px solid #6c3cff;
+}
+
+.danger{
+background:#fff;
+color:#d33;
+border:1px solid #d33;
+}
+
+.projects{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:16px;
+}
+
+.card{
+background:#fff;
+border:1px solid #ddd;
+border-radius:16px;
+padding:18px;
+}
+
+.icon{
+font-size:38px;
+margin-bottom:10px;
+}
+
+.title{
+font-size:21px;
+font-weight:bold;
+margin-bottom:8px;
+}
+
+.info{
+color:#777;
+font-size:14px;
+line-height:1.6;
+}
+
+.empty{
+background:#fff;
+border:2px dashed #ccc;
+border-radius:16px;
+padding:40px 20px;
+text-align:center;
+color:#777;
+grid-column:1/-1;
+}
+
+.status{
+display:none;
+background:#f0edff;
+color:#5a32cc;
+padding:12px;
+border-radius:9px;
+margin-top:15px;
+}
+
+@media(max-width:650px){
+.projects{
+grid-template-columns:1fr;
+}
+h1{
+font-size:29px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<a class="logo" href="index.html">DraftAI</a>
+
+<a class="back" href="dashboard.html">
+← Dashboard
+</a>
+
+</header>
+
+
+<div class="container">
+
+<h1>My <span>Projects</span></h1>
+
+<p class="sub">
+अपने बनाए हुए projects यहाँ manage करें।
+</p>
+
+
+<div class="toolbar">
+
+<input
+class="search"
+id="search"
+placeholder="🔍 Project search करें..."
+oninput="searchProjects()"
+>
+
+<div class="buttons">
+
+<button class="primary" onclick="newProject()">
+＋ New Project
+</button>
+
+<button class="secondary" onclick="loadProjects()">
+↻ Refresh
+</button>
+
+</div>
+
+<div class="status" id="status"></div>
+
+</div>
+
+
+<div class="projects" id="projects"></div>
+
+</div>
+
+
+<script>
+
+let projectList=[];
+
+
+/* LOAD PROJECTS */
+
+function loadProjects(){
+
+projectList=[];
+
+
+/* AI Editor project */
+
+let editorName=
+localStorage.getItem("draftai_project");
+
+let editorScript=
+localStorage.getItem("draftai_script");
+
+if(editorName){
+
+projectList.push({
+id:"editor",
+name:editorName,
+type:"AI Editor",
+icon:"✏️",
+script:editorScript||"",
+date:"Saved in browser"
+});
+
+}
+
+
+/* Demo projects */
+
+projectList.push({
+id:"demo1",
+name:"My First AI Video",
+type:"AI Video",
+icon:"🎬",
+script:"Demo AI Video Project",
+date:"Demo Project"
+});
+
+projectList.push({
+id:"demo2",
+name:"My Storyboard",
+type:"Storyboard",
+icon:"🎞️",
+script:"Demo Storyboard Project",
+date:"Demo Project"
+});
+
+renderProjects(projectList);
+
+}
+
+
+/* DISPLAY */
+
+function renderProjects(list){
+
+let box=
+document.getElementById("projects");
+
+box.innerHTML="";
+
+if(list.length===0){
+
+box.innerHTML=
+'<div class="empty">'+
+'<div style="font-size:45px">📁</div>'+
+'<h2>No Projects Found</h2>'+
+'<p>अभी कोई project नहीं मिला।</p>'+
+'</div>';
+
+return;
+
+}
+
+list.forEach(function(p){
+
+let card=
+document.createElement("div");
+
+card.className="card";
+
+card.innerHTML=
+
+'<div class="icon">'+p.icon+'</div>'+
+
+'<div class="title">'+
+escapeHTML(p.name)+
+'</div>'+
+
+'<div class="info">'+
+'Type: '+p.type+
+'<br>'+
+p.date+
+'</div>'+
+
+'<div class="buttons">'+
+
+'<button class="primary" onclick="openProject(\''+
+p.id+'\')">Open / Edit</button>'+
+
+'<button class="secondary" onclick="exportProject(\''+
+p.id+'\')">Export</button>'+
+
+'<button class="danger" onclick="deleteProject(\''+
+p.id+'\')">Delete</button>'+
+
+'</div>';
+
+box.appendChild(card);
+
+});
+
+}
+
+
+/* SEARCH */
+
+function searchProjects(){
+
+let q=
+document.getElementById("search")
+.value
+.toLowerCase()
+.trim();
+
+let result=
+projectList.filter(function(p){
+
+return(
+p.name.toLowerCase().includes(q) ||
+p.type.toLowerCase().includes(q)
+);
+
+});
+
+renderProjects(result);
+
+}
+
+
+/* NEW PROJECT */
+
+function newProject(){
+
+window.location.href="ai-editor.html";
+
+}
+
+
+/* OPEN */
+
+function openProject(id){
+
+if(id==="editor"){
+
+window.location.href="ai-editor.html";
+
+return;
+
+}
+
+alert(
+"यह demo project है।\n\nReal project editor बाद में connect किया जाएगा।"
+);
+
+}
+
+
+/* DELETE */
+
+function deleteProject(id){
+
+if(id!=="editor"){
+
+alert(
+"Demo project को delete करने के लिए अभी कोई permanent data नहीं है।"
+);
+
+return;
+
+}
+
+let ok=
+confirm(
+"क्या आप इस saved project को delete करना चाहते हैं?"
+);
+
+if(!ok)return;
+
+localStorage.removeItem("draftai_project");
+localStorage.removeItem("draftai_script");
+
+showStatus("✓ Project delete हो गया।");
+
+loadProjects();
+
+}
+
+
+/* EXPORT */
+
+function exportProject(id){
+
+let p=
+projectList.find(function(x){
+return x.id===id;
+});
+
+if(!p)return;
+
+let data=
+"DraftAI Project\n\n"+
+"Project Name: "+p.name+
+"\nType: "+p.type+
+"\n\nContent:\n"+
+p.script;
+
+let blob=
+new Blob(
+[data],
+{type:"text/plain"}
+);
+
+let url=
+URL.createObjectURL(blob);
+
+let a=
+document.createElement("a");
+
+a.href=url;
+
+a.download=
+p.name.replace(/[^a-z0-9]/gi,"-")+
+"-project.txt";
+
+a.click();
+
+URL.revokeObjectURL(url);
+
+}
+
+
+/* STATUS */
+
+function showStatus(message){
+
+let s=
+document.getElementById("status");
+
+s.style.display="block";
+
+s.innerText=message;
+
+setTimeout(function(){
+s.style.display="none";
+},2500);
+
+}
+
+
+/* SAFE TEXT */
+
+function escapeHTML(text){
+
+return String(text)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+/* START */
+
+loadProjects();
+
+</script>
+
+</body>
+</html>
