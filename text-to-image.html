@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Text to Image - DraftAI</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7fb;
+            color: #222;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 16px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #6c3cff;
+            text-decoration: none;
+        }
+
+        .back {
+            text-decoration: none;
+            color: #555;
+            font-size: 15px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 35px 18px 60px;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .title h1 {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .title h1 span {
+            color: #6c3cff;
+        }
+
+        .title p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .workspace {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 25px;
+        }
+
+        .panel {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+        }
+
+        .panel h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            margin-top: 18px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            resize: vertical;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: #6c3cff;
+        }
+
+        select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: white;
+            font-size: 15px;
+        }
+
+        .generate-btn {
+            width: 100%;
+            margin-top: 25px;
+            padding: 15px;
+            border: none;
+            border-radius: 11px;
+            background: #6c3cff;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .generate-btn:hover {
+            background: #5928e6;
+        }
+
+        .preview {
+            min-height: 520px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: #fafafa;
+            border: 2px dashed #ddd;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .preview-content {
+            padding: 30px;
+            color: #888;
+        }
+
+        .preview-icon {
+            font-size: 70px;
+            margin-bottom: 15px;
+        }
+
+        .preview h3 {
+            color: #444;
+            margin-bottom: 8px;
+        }
+
+        .preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: none;
+        }
+
+        .loading {
+            display: none;
+            color: #6c3cff;
+            font-weight: bold;
+        }
+
+        .examples {
+            margin-top: 35px;
+        }
+
+        .examples h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .example-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .example {
+            background: white;
+            border: 1px solid #e5e5e5;
+            padding: 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .example:hover {
+            border-color: #6c3cff;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background: #181818;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 800px) {
+
+            .workspace {
+                grid-template-columns: 1fr;
+            }
+
+            .example-list {
+                grid-template-columns: 1fr;
+            }
+
+            .title h1 {
+                font-size: 31px;
+            }
+
+            .preview {
+                min-height: 350px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <a href="index.html" class="logo">
+            DraftAI
+        </a>
+
+        <a href="index.html" class="back">
+            ← वापस Home
+        </a>
+
+    </header>
+
+
+    <main class="container">
+
+        <div class="title">
+
+            <h1>
+                Text <span>to Image</span>
+            </h1>
+
+            <p>
+                अपने विचार को एक Prompt में लिखिए और AI Image तैयार कीजिए।
+            </p>
+
+        </div>
+
+
+        <div class="workspace">
+
+
+            <!-- LEFT PANEL -->
+
+            <div class="panel">
+
+                <h2>
+                    🪄 Create Image
+                </h2>
+
+
+                <label for="prompt">
+                    आपका Prompt
+                </label>
+
+                <textarea
+                    id="prompt"
+                    placeholder="उदाहरण: एक भारतीय गांव में सूर्यास्त के समय खेत में चलता हुआ किसान, cinematic lighting, ultra realistic..."
+                ></textarea>
+
+
+                <label for="style">
+                    Image Style
+                </label>
+
+                <select id="style">
+
+                    <option value="realistic">
+                        Ultra Realistic
+                    </option>
+
+                    <option value="cinematic">
+                        Cinematic
+                    </option>
+
+                    <option value="digital">
+                        Digital Art
+                    </option>
+
+                    <option value="anime">
+                        Anime
+                    </option>
+
+                    <option value="cartoon">
+                        Cartoon
+                    </option>
+
+                </select>
+
+
+                <label for="ratio">
+                    Image Size
+                </label>
+
+                <select id="ratio">
+
+                    <option value="1024x1024">
+                        Square 1:1
+                    </option>
+
+                    <option value="1280x720">
+                        Landscape 16:9
+                    </option>
+
+                    <option value="720x1280">
+                        Portrait 9:16
+                    </option>
+
+                    <option value="1024x1536">
+                        Portrait 2:3
+                    </option>
+
+                </select>
+
+
+                <button
+                    class="generate-btn"
+                    onclick="generateImage()"
+                >
+                    ✨ Generate Image
+                </button>
+
+            </div>
+
+
+            <!-- RIGHT PANEL -->
+
+            <div class="panel">
+
+                <h2>
+                    🖼️ Preview
+                </h2>
+
+                <div class="preview">
+
+                    <div
+                        class="preview-content"
+                        id="previewContent"
+                    >
+
+                        <div class="preview-icon">
+                            🖼️
+                        </div>
+
+                        <h3>
+                            आपकी Image यहाँ दिखाई देगी
+                        </h3>
+
+                        <p>
+                            पहले अपना Prompt लिखें और
+                            Generate Image दबाएँ।
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="loading"
+                        id="loading"
+                    >
+                        ⏳ Image तैयार हो रही है...
+                    </div>
+
+
+                    <img
+                        id="resultImage"
+                        alt="Generated Image"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- EXAMPLES -->
+
+        <section class="examples">
+
+            <h2>
+                💡 Prompt Examples
+            </h2>
+
+
+            <div class="example-list">
+
+
+                <div
+                    class="example"
+                    onclick="usePrompt(this)"
+                >
+                    एक भारतीय किसान खेत में खड़ा है,
+                    सूर्यास्त, cinematic lighting,
+                    ultra realistic photography
+                </div>
+
+
+                <div
+                    class="example"
+                    onclick="usePrompt(this)"
+                >
+                    राजस्थान का सुंदर रेगिस्तान,
+                    ऊँट और पारंपरिक गांव,
+                    golden sunset, cinematic
+                </div>
+
+
+                <div
+                    class="example"
+                    onclick="usePrompt(this)"
+                >
+                    एक futuristic Indian city at night,
+                    neon lights, cinematic,
+                    highly detailed
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 DraftAI - AI Creative Studio
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        function usePrompt(element) {
+
+            document.getElementById("prompt").value =
+                element.innerText;
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+
+        function generateImage() {
+
+            const prompt =
+                document.getElementById("prompt").value.trim();
+
+            const loading =
+                document.getElementById("loading");
+
+            const previewContent =
+                document.getElementById("previewContent");
+
+            const resultImage =
+                document.getElementById("resultImage");
+
+
+            if (prompt === "") {
+
+                alert("कृपया पहले अपना Prompt लिखें।");
+
+                return;
+            }
+
+
+            previewContent.style.display = "none";
+
+            resultImage.style.display = "none";
+
+            loading.style.display = "block";
+
+
+            /*
+                अभी यह Demo है।
+
+                असली AI Image Generation API
+                बाद में यहाँ जोड़ी जाएगी।
+            */
+
+            setTimeout(function() {
+
+                loading.style.display = "none";
+
+                previewContent.innerHTML = `
+
+                    <div class="preview-icon">
+                        ✨
+                    </div>
+
+                    <h3>
+                        Prompt तैयार है!
+                    </h3>
+
+                    <p>
+                        असली AI Image Generation API
+                        अगले चरण में जोड़ी जाएगी।
+                    </p>
+
+                `;
+
+                previewContent.style.display = "block";
+
+            }, 1200);
+
+        }
+
+    </script>
+
+</body>
+                  </html>
