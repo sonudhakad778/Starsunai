@@ -43,7 +43,6 @@ background:#fff;
 border:1px solid #ddd;
 border-radius:18px;
 padding:25px 20px;
-box-shadow:0 4px 18px rgba(0,0,0,.04);
 }
 
 h1{
@@ -91,9 +90,11 @@ padding-right:75px;
 
 .show{
 position:absolute;
-right:10px;
-top:9px;
+right:8px;
+top:8px;
+width:auto;
 padding:8px 10px;
+margin:0;
 border:0;
 background:transparent;
 color:#6c3cff;
@@ -113,6 +114,8 @@ font-size:14px;
 display:flex;
 align-items:center;
 gap:7px;
+font-weight:normal;
+margin:0;
 }
 
 .remember input{
@@ -124,7 +127,7 @@ color:#6c3cff;
 text-decoration:none;
 }
 
-button{
+.main-btn{
 width:100%;
 padding:14px;
 border:0;
@@ -134,11 +137,25 @@ color:#fff;
 font-size:16px;
 font-weight:bold;
 cursor:pointer;
-margin-top:8px;
 }
 
-button:active{
-transform:scale(.98);
+.message{
+display:none;
+margin-top:15px;
+padding:13px;
+border-radius:9px;
+text-align:center;
+line-height:1.5;
+}
+
+.success{
+background:#eaf8ee;
+color:#20743a;
+}
+
+.error{
+background:#fff0f0;
+color:#c62828;
 }
 
 .divider{
@@ -168,17 +185,6 @@ font-weight:bold;
 text-decoration:none;
 }
 
-.demo{
-display:none;
-background:#f0edff;
-color:#5a32cc;
-padding:12px;
-border-radius:9px;
-margin-top:15px;
-text-align:center;
-line-height:1.5;
-}
-
 .home{
 display:block;
 text-align:center;
@@ -186,12 +192,6 @@ margin-top:20px;
 color:#555;
 text-decoration:none;
 font-weight:bold;
-}
-
-@media(max-width:500px){
-.card{
-padding:22px 17px;
-}
 }
 </style>
 </head>
@@ -251,19 +251,23 @@ Show
 Remember me
 </label>
 
-<a class="forgot" href="#" onclick="forgotPassword(event)">
+<a
+class="forgot"
+href="#"
+onclick="forgotPassword(event)"
+>
 Forgot Password?
 </a>
 
 </div>
 
-<button type="submit">
+<button class="main-btn" type="submit">
 Login
 </button>
 
 </form>
 
-<div class="demo" id="demo"></div>
+<div class="message" id="message"></div>
 
 <div class="divider">
 <span>OR</span>
@@ -286,15 +290,15 @@ Account नहीं है?
 
 function togglePassword(){
 
-let p=document.getElementById("password");
-let b=document.querySelector(".show");
+let input=document.getElementById("password");
+let button=document.querySelector(".show");
 
-if(p.type==="password"){
-p.type="text";
-b.innerText="Hide";
+if(input.type==="password"){
+input.type="text";
+button.innerText="Hide";
 }else{
-p.type="password";
-b.innerText="Show";
+input.type="password";
+button.innerText="Show";
 }
 
 }
@@ -310,32 +314,95 @@ document.getElementById("email").value.trim();
 let password=
 document.getElementById("password").value;
 
-let remember=
-document.getElementById("remember").checked;
+let saved=
+localStorage.getItem("draftai_user");
 
-if(!email || !password){
-alert("Email और Password भरें।");
+let message=
+document.getElementById("message");
+
+
+if(!saved){
+
+showMessage(
+"अभी कोई account नहीं मिला। पहले Sign Up करें।",
+"error"
+);
+
 return;
+
 }
 
-let demo=
-document.getElementById("demo");
+let user;
 
-demo.style.display="block";
+try{
 
-demo.innerText=
-"✓ Demo Login सफल!\n\n"+
-"अभी यह frontend demo है।\n"+
-"Real account authentication बाद में backend से जोड़ा जाएगा।";
+user=JSON.parse(saved);
 
-if(remember){
+}catch(e){
+
+showMessage(
+"Account data में समस्या है। दोबारा Sign Up करें।",
+"error"
+);
+
+return;
+
+}
+
+
+/*
+Password verification के लिए
+Signup page में password भी save होना जरूरी है।
+*/
+
+if(
+email===user.email &&
+password===user.password
+){
+
+localStorage.setItem(
+"draftai_logged_in",
+"true"
+);
 
 localStorage.setItem(
 "draftai_login_email",
 email
 );
 
+showMessage(
+"✓ Login सफल! Dashboard खोला जा रहा है...",
+"success"
+);
+
+setTimeout(function(){
+
+window.location.href="dashboard.html";
+
+},1000);
+
+}else{
+
+showMessage(
+"❌ Email या Password गलत है।",
+"error"
+);
+
 }
+
+}
+
+
+function showMessage(text,type){
+
+let box=
+document.getElementById("message");
+
+box.style.display="block";
+
+box.className="message "+type;
+
+box.innerText=text;
 
 }
 
@@ -345,7 +412,7 @@ function forgotPassword(event){
 event.preventDefault();
 
 alert(
-"Password recovery system अभी demo mode में है।"
+"Password recovery अभी demo mode में है।"
 );
 
 }
