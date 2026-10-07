@@ -42,6 +42,7 @@ body{
 .header a{
   color:#aaa;
   text-decoration:none;
+  font-size:14px;
 }
 
 .container{
@@ -122,25 +123,35 @@ select:focus{
   gap:12px;
 }
 
+.button-row{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:10px;
+  margin-top:20px;
+}
+
 .btn{
   width:100%;
-  padding:14px;
+  padding:14px 10px;
   border:0;
   border-radius:10px;
   background:#7c5cff;
   color:white;
-  font-size:15px;
+  font-size:14px;
   font-weight:bold;
   cursor:pointer;
-  margin-top:20px;
 }
 
 .btn:hover{
   opacity:.9;
 }
 
-.btn.secondary{
-  background:#202638;
+.btn.clear{
+  background:#252c3e;
+}
+
+.btn.download{
+  background:#168a57;
 }
 
 .preview{
@@ -165,17 +176,14 @@ select:focus{
   line-height:1.5;
 }
 
-.result{
-  display:none;
-}
-
-.result-box{
+.details{
+  margin-top:20px;
   background:#0b101c;
   border:1px solid #30384d;
   border-radius:12px;
-  padding:18px;
-  line-height:1.6;
+  padding:16px;
   color:#b9c0d0;
+  line-height:1.6;
   word-break:break-word;
 }
 
@@ -189,7 +197,7 @@ select:focus{
 .footer{
   text-align:center;
   color:#687084;
-  padding:40px 20px;
+  padding:40px 20px 25px;
   font-size:13px;
 }
 
@@ -211,6 +219,10 @@ select:focus{
     grid-template-columns:1fr;
   }
 
+  .button-row{
+    grid-template-columns:1fr;
+  }
+
   .container{
     padding:30px 15px;
   }
@@ -226,9 +238,9 @@ select:focus{
     Draft<span>AI</span>
   </div>
 
-  <div>
-    <a href="dashboard.html">← Dashboard</a>
-  </div>
+  <a href="dashboard.html">
+    ← Dashboard
+  </a>
 
 </header>
 
@@ -249,11 +261,11 @@ select:focus{
 
   <div class="workspace">
 
-    <!-- LEFT -->
+    <!-- LEFT SIDE -->
 
     <section class="card">
 
-      <h2>Image Prompt</h2>
+      <h2>📝 Image Prompt</h2>
 
       <label>
         Describe your image
@@ -261,7 +273,7 @@ select:focus{
 
       <textarea
         id="prompt"
-        placeholder="उदाहरण: एक भारतीय गाँव में सूर्यास्त के समय खेत में खड़ा किसान, cinematic lighting, realistic photography..."
+        placeholder="उदाहरण: एक भारतीय गाँव में सूर्यास्त के समय खेत में खड़ा किसान, cinematic lighting, ultra realistic photography..."
       ></textarea>
 
 
@@ -273,6 +285,7 @@ select:focus{
 
           <select id="style">
 
+            <option>Ultra Realistic</option>
             <option>Realistic</option>
             <option>Cinematic</option>
             <option>Digital Art</option>
@@ -280,7 +293,6 @@ select:focus{
             <option>3D</option>
             <option>Watercolor</option>
             <option>Fantasy</option>
-            <option>Photorealistic</option>
 
           </select>
 
@@ -293,11 +305,11 @@ select:focus{
 
           <select id="size">
 
-            <option>1024 × 1024</option>
-            <option>1024 × 1536</option>
-            <option>1536 × 1024</option>
-            <option>1280 × 720</option>
-            <option>720 × 1280</option>
+            <option>Square 1:1</option>
+            <option>Portrait 9:16</option>
+            <option>Landscape 16:9</option>
+            <option>Landscape 4:3</option>
+            <option>Portrait 3:4</option>
 
           </select>
 
@@ -340,20 +352,34 @@ select:focus{
       </div>
 
 
-      <button
-        class="btn"
-        onclick="generateImage()"
-      >
-        ✨ Generate Image
-      </button>
+      <!-- ALL BUTTONS ALWAYS VISIBLE -->
+
+      <div class="button-row">
+
+        <button
+          class="btn"
+          onclick="generateImage()"
+        >
+          ✨ Generate
+        </button>
 
 
-      <button
-        class="btn secondary"
-        onclick="clearPrompt()"
-      >
-        Clear
-      </button>
+        <button
+          class="btn clear"
+          onclick="clearAll()"
+        >
+          🗑️ Clear
+        </button>
+
+
+        <button
+          class="btn download"
+          onclick="downloadDetails()"
+        >
+          ⬇️ Download
+        </button>
+
+      </div>
 
 
       <div
@@ -364,11 +390,11 @@ select:focus{
     </section>
 
 
-    <!-- RIGHT -->
+    <!-- RIGHT SIDE -->
 
     <section class="card">
 
-      <h2>Preview</h2>
+      <h2>🖼️ Preview</h2>
 
       <div
         class="preview"
@@ -391,26 +417,17 @@ select:focus{
 
 
       <div
-        class="result"
-        id="result"
+        class="details"
+        id="details"
       >
 
-        <h2 style="margin-top:22px;">
+        <strong>
           Generation Details
-        </h2>
+        </strong>
 
-        <div
-          class="result-box"
-          id="resultBox"
-        ></div>
+        <br><br>
 
-
-        <button
-          class="btn secondary"
-          onclick="downloadPrompt()"
-        >
-          ⬇️ Download Details
-        </button>
+        अभी कोई image generate नहीं हुई है।
 
       </div>
 
@@ -430,7 +447,7 @@ select:focus{
 
 <script>
 
-let lastPrompt = "";
+let generatedData = "";
 
 
 function generateImage(){
@@ -466,7 +483,23 @@ function generateImage(){
   }
 
 
-  lastPrompt = prompt;
+  generatedData =
+    "DraftAI Text to Image\n\n" +
+
+    "Prompt:\n" +
+    prompt +
+
+    "\n\nStyle: " +
+    style +
+
+    "\nImage Size: " +
+    size +
+
+    "\nQuality: " +
+    quality +
+
+    "\nNumber of Images: " +
+    count;
 
 
   document.getElementById("preview").innerHTML =
@@ -475,34 +508,46 @@ function generateImage(){
 
     "<div class='preview-icon'>✨</div>" +
 
-    "<h3>Image Generation Ready</h3>" +
+    "<h3>Prompt तैयार है!</h3>" +
 
-    "<p style='margin-top:10px'>" +
+    "<p style='margin-top:12px'>" +
 
-    "आपका prompt successfully तैयार है।<br>" +
-
-    "अगले चरण में इसे real AI image generation API से जोड़ा जाएगा।" +
+    "AI Image Generation API अगले चरण में जोड़ी जाएगी।" +
 
     "</p>" +
 
     "</div>";
 
 
-  document.getElementById("resultBox").innerText =
+  document.getElementById("details").innerHTML =
 
-    "Prompt: " + prompt +
+    "<strong>Generation Details</strong>" +
 
-    "\n\nStyle: " + style +
+    "<br><br>" +
 
-    "\nSize: " + size +
+    "<b>Prompt:</b><br>" +
 
-    "\nQuality: " + quality +
+    prompt +
 
-    "\nImages: " + count;
+    "<br><br>" +
 
+    "<b>Style:</b> " +
+    style +
 
-  document.getElementById("result").style.display =
-    "block";
+    "<br>" +
+
+    "<b>Size:</b> " +
+    size +
+
+    "<br>" +
+
+    "<b>Quality:</b> " +
+    quality +
+
+    "<br>" +
+
+    "<b>Images:</b> " +
+    count;
 
 
   document.getElementById("message").innerText =
@@ -517,14 +562,24 @@ function generateImage(){
 }
 
 
-function clearPrompt(){
+function clearAll(){
 
   document.getElementById("prompt").value = "";
 
-  document.getElementById("message").innerText = "";
+  document.getElementById("style").selectedIndex = 0;
 
-  document.getElementById("result").style.display =
-    "none";
+  document.getElementById("size").selectedIndex = 0;
+
+  document.getElementById("quality").selectedIndex = 0;
+
+  document.getElementById("count").selectedIndex = 0;
+
+
+  generatedData = "";
+
+
+  document.getElementById("message").innerText =
+    "🗑️ सभी fields clear हो गईं।";
 
 
   document.getElementById("preview").innerHTML =
@@ -537,46 +592,62 @@ function clearPrompt(){
 
     "</div>";
 
+
+  document.getElementById("details").innerHTML =
+
+    "<strong>Generation Details</strong>" +
+
+    "<br><br>" +
+
+    "अभी कोई image generate नहीं हुई है।";
+
 }
 
 
-function downloadPrompt(){
+function downloadDetails(){
 
-  if(!lastPrompt){
+  if(!generatedData){
 
-    alert("पहले Generate Image दबाइए।");
+    const prompt =
+      document.getElementById("prompt")
+      .value
+      .trim();
 
-    return;
+
+    if(!prompt){
+
+      alert(
+        "पहले Prompt लिखें या Generate दबाएँ।"
+      );
+
+      return;
+    }
+
+
+    generatedData =
+      "DraftAI Text to Image\n\n" +
+
+      "Prompt:\n" +
+      prompt +
+
+      "\n\nStyle: " +
+      document.getElementById("style").value +
+
+      "\nImage Size: " +
+      document.getElementById("size").value +
+
+      "\nQuality: " +
+      document.getElementById("quality").value +
+
+      "\nNumber of Images: " +
+      document.getElementById("count").value;
+
   }
-
-
-  const style =
-    document.getElementById("style").value;
-
-  const size =
-    document.getElementById("size").value;
-
-
-  const text =
-
-    "DraftAI Text to Image\n\n" +
-
-    "Prompt:\n" +
-
-    lastPrompt +
-
-    "\n\nStyle: " +
-
-    style +
-
-    "\nSize: " +
-
-    size;
 
 
   const blob =
     new Blob(
-      [text],
+      [generatedData],
       {type:"text/plain"}
     );
 
@@ -585,19 +656,28 @@ function downloadPrompt(){
     URL.createObjectURL(blob);
 
 
-  const a =
+  const link =
     document.createElement("a");
 
 
-  a.href = url;
+  link.href = url;
 
-  a.download =
-    "draftai-image-prompt.txt";
+  link.download =
+    "draftai-text-to-image.txt";
 
-  a.click();
+
+  document.body.appendChild(link);
+
+  link.click();
+
+  document.body.removeChild(link);
 
 
   URL.revokeObjectURL(url);
+
+
+  document.getElementById("message").innerText =
+    "✅ Download शुरू हो गया।";
 
 }
 
