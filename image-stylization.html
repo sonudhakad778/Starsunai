@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Image Stylization - DraftAI</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#f7f7fb;
+ color:#222
+}
+header{
+ background:#fff;
+ padding:16px 20px;
+ border-bottom:1px solid #ddd;
+ display:flex;
+ justify-content:space-between;
+ align-items:center
+}
+.logo{
+ color:#6c3cff;
+ font-size:23px;
+ font-weight:bold;
+ text-decoration:none
+}
+.back{
+ color:#555;
+ text-decoration:none
+}
+.container{
+ max-width:900px;
+ margin:auto;
+ padding:30px 16px
+}
+h1{
+ text-align:center;
+ font-size:34px;
+ margin:10px 0
+}
+h1 span{color:#6c3cff}
+.subtitle{
+ text-align:center;
+ color:#666;
+ margin-bottom:25px;
+ font-size:17px
+}
+.box{
+ background:#fff;
+ border:1px solid #ddd;
+ border-radius:16px;
+ padding:20px;
+ margin-bottom:20px
+}
+h2{margin-top:0}
+.upload{
+ border:2px dashed #bbb;
+ border-radius:14px;
+ padding:40px 20px;
+ text-align:center;
+ background:#fafafa
+}
+.upload-icon{
+ font-size:45px;
+ margin-bottom:10px
+}
+input[type=file]{display:none}
+.upload label{
+ display:inline-block;
+ background:#6c3cff;
+ color:white;
+ padding:12px 20px;
+ border-radius:9px;
+ font-weight:bold;
+ cursor:pointer
+}
+#fileName{
+ margin-top:15px;
+ color:#666
+}
+label.title{
+ display:block;
+ font-weight:bold;
+ margin:18px 0 7px
+}
+select{
+ width:100%;
+ padding:13px;
+ border:1px solid #ccc;
+ border-radius:9px;
+ font-size:16px
+}
+.grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:15px
+}
+.preview{
+ min-height:220px;
+ border:2px dashed #ccc;
+ border-radius:12px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
+ color:#888;
+ padding:20px;
+ margin-top:20px
+}
+.actions{
+ display:flex;
+ gap:10px;
+ flex-wrap:wrap;
+ margin-top:20px
+}
+button{
+ padding:13px 20px;
+ border-radius:9px;
+ font-size:15px;
+ font-weight:bold;
+ cursor:pointer
+}
+.primary{
+ background:#6c3cff;
+ color:white;
+ border:0
+}
+.secondary{
+ background:white;
+ color:#6c3cff;
+ border:1px solid #6c3cff
+}
+@media(max-width:650px){
+ .grid{grid-template-columns:1fr}
+ h1{font-size:28px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a class="logo" href="index.html">DraftAI</a>
+<a class="back" href="dashboard.html">← Dashboard</a>
+</header>
+
+<div class="container">
+
+<h1>Image <span>Stylization</span></h1>
+
+<p class="subtitle">
+अपनी image को अलग-अलग AI styles में बदलें।
+</p>
+
+<div class="box">
+
+<h2>Upload Image</h2>
+
+<div class="upload">
+
+<div class="upload-icon">🖼️</div>
+
+<p>अपनी image यहाँ चुनें</p>
+
+<label for="imageFile">Choose Image</label>
+
+<input
+ type="file"
+ id="imageFile"
+ accept="image/*"
+ onchange="showFile()">
+
+<div id="fileName">कोई image select नहीं की गई</div>
+
+</div>
+
+</div>
+
+<div class="box">
+
+<h2>Stylization Settings</h2>
+
+<label class="title">Style</label>
+
+<select id="style">
+<option>Realistic</option>
+<option>Cinematic</option>
+<option>Anime</option>
+<option>Cartoon</option>
+<option>Watercolor</option>
+<option>Oil Painting</option>
+<option>3D Art</option>
+</select>
+
+<label class="title">Strength</label>
+
+<select id="strength">
+<option>Low</option>
+<option selected>Medium</option>
+<option>High</option>
+</select>
+
+<label class="title">Aspect Ratio</label>
+
+<select id="ratio">
+<option>Original</option>
+<option>16:9</option>
+<option>9:16</option>
+<option>1:1</option>
+</select>
+
+<div class="preview" id="preview">
+Image preview यहाँ दिखाई देगा
+</div>
+
+<div class="actions">
+
+<button class="primary" onclick="stylize()">
+Stylize Image
+</button>
+
+<button class="secondary" onclick="clearAll()">
+Clear
+</button>
+
+<button class="secondary" onclick="downloadImage()">
+Download
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function showFile(){
+
+ const file=document.getElementById("imageFile").files[0];
+
+ if(file){
+  document.getElementById("fileName").innerText=
+  "✓ "+file.name;
+
+  document.getElementById("preview").innerText=
+  "✓ Image select हो गई है\n\n"+
+  "अब Stylize Image दबाएँ।";
+ }
+}
+
+function stylize(){
+
+ const file=document.getElementById("imageFile").files[0];
+
+ if(!file){
+  alert("पहले image select करें।");
+  return;
+ }
+
+ const style=document.getElementById("style").value;
+
+ document.getElementById("preview").innerText=
+ "✓ Stylization तैयार है\n\n"+
+ "Selected Style: "+style+
+ "\n\nAI Image Generation के लिए prompt ready है।";
+}
+
+function clearAll(){
+
+ document.getElementById("imageFile").value="";
+ document.getElementById("fileName").innerText=
+ "कोई image select नहीं की गई";
+
+ document.getElementById("preview").innerText=
+ "Image preview यहाँ दिखाई देगा";
+}
+
+function downloadImage(){
+
+ const text=
+ "DraftAI Image Stylization\n"+
+ "Style: "+
+ document.getElementById("style").value;
+
+ const blob=new Blob([text],{type:"text/plain"});
+
+ const link=document.createElement("a");
+
+ link.href=URL.createObjectURL(blob);
+ link.download="draftai-stylized-image.txt";
+
+ link.click();
+
+ URL.revokeObjectURL(link.href);
+}
+
+</script>
+
+</body>
+</html>
