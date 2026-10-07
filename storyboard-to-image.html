@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Storyboard to Image - DraftAI</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7fb;
+            color: #222;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 16px 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .logo {
+            color: #6c3cff;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .back {
+            color: #555;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: auto;
+            padding: 35px 18px 60px;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .title h1 {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .title h1 span {
+            color: #6c3cff;
+        }
+
+        .title p {
+            color: #666;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        .story-panel {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 18px;
+            padding: 22px;
+            margin-bottom: 25px;
+        }
+
+        .story-panel h2 {
+            margin-bottom: 18px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 130px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+            resize: vertical;
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: #6c3cff;
+        }
+
+        .top-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        select,
+        input[type="text"] {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: white;
+            font-size: 15px;
+            outline: none;
+        }
+
+        select:focus,
+        input[type="text"]:focus {
+            border-color: #6c3cff;
+        }
+
+        .scene-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .scene-header h2 {
+            font-size: 23px;
+        }
+
+        .add-btn {
+            border: none;
+            background: #6c3cff;
+            color: white;
+            padding: 11px 17px;
+            border-radius: 9px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .scene {
+            background: white;
+            border: 1px solid #e2e2e2;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 18px;
+        }
+
+        .scene-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .scene-number {
+            color: #6c3cff;
+            font-size: 19px;
+            font-weight: bold;
+        }
+
+        .delete-btn {
+            border: none;
+            background: #fff0f0;
+            color: #d33;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .scene-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .scene-full {
+            grid-column: 1 / -1;
+        }
+
+        .scene-preview {
+            margin-top: 18px;
+            min-height: 230px;
+            background: #f3f3f3;
+            border: 2px dashed #ddd;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #888;
+            padding: 20px;
+        }
+
+        .scene-preview.ready {
+            border-color: #6c3cff;
+            background: #f5f1ff;
+            color: #6c3cff;
+        }
+
+        .scene-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .scene-generate {
+            flex: 1;
+            border: none;
+            background: #6c3cff;
+            color: white;
+            padding: 13px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .scene-clear {
+            padding: 13px 18px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .bottom-actions {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .main-btn {
+            border: none;
+            background: #6c3cff;
+            color: white;
+            padding: 14px 22px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .secondary-btn {
+            border: 1px solid #6c3cff;
+            background: white;
+            color: #6c3cff;
+            padding: 14px
