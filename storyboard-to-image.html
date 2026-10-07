@@ -1,260 +1,392 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Storyboard to Image - DraftAI</title>
 
-    <title>Storyboard to Image - DraftAI</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#f7f7fb;
+ color:#222
+}
+header{
+ background:#fff;
+ padding:16px 20px;
+ border-bottom:1px solid #ddd;
+ display:flex;
+ justify-content:space-between;
+ align-items:center
+}
+.logo{
+ color:#6c3cff;
+ font-size:23px;
+ font-weight:bold;
+ text-decoration:none
+}
+.back{
+ text-decoration:none;
+ color:#555
+}
+.container{
+ max-width:1000px;
+ margin:auto;
+ padding:30px 16px
+}
+h1{
+ text-align:center;
+ margin:10px 0;
+ font-size:34px
+}
+h1 span{color:#6c3cff}
+.subtitle{
+ text-align:center;
+ color:#666;
+ margin-bottom:25px
+}
+.box{
+ background:white;
+ padding:20px;
+ border-radius:16px;
+ border:1px solid #ddd;
+ margin-bottom:20px
+}
+h2{margin-top:0}
+label{
+ display:block;
+ font-weight:bold;
+ margin:14px 0 7px
+}
+textarea,input,select{
+ width:100%;
+ padding:12px;
+ border:1px solid #ccc;
+ border-radius:9px;
+ font-size:15px
+}
+textarea{
+ min-height:120px;
+ resize:vertical
+}
+.grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:15px
+}
+button{
+ border:0;
+ padding:12px 18px;
+ border-radius:9px;
+ cursor:pointer;
+ font-weight:bold;
+ font-size:15px
+}
+.primary{
+ background:#6c3cff;
+ color:white
+}
+.secondary{
+ background:white;
+ color:#6c3cff;
+ border:1px solid #6c3cff
+}
+.danger{
+ background:#fff0f0;
+ color:#d33
+}
+.scene{
+ border:1px solid #ddd;
+ border-radius:14px;
+ padding:16px;
+ margin-top:15px
+}
+.scene-title{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:10px
+}
+.preview{
+ min-height:150px;
+ margin-top:15px;
+ border:2px dashed #ccc;
+ border-radius:10px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
+ color:#888;
+ padding:15px;
+ background:#fafafa
+}
+.actions{
+ display:flex;
+ gap:10px;
+ flex-wrap:wrap;
+ margin-top:15px
+}
+.bottom{
+ display:flex;
+ justify-content:center;
+ gap:10px;
+ flex-wrap:wrap
+}
+@media(max-width:650px){
+ .grid{grid-template-columns:1fr}
+ h1{font-size:28px}
+}
+</style>
+</head>
 
-    <style>
+<body>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<header>
+<a class="logo" href="index.html">DraftAI</a>
+<a class="back" href="dashboard.html">← Dashboard</a>
+</header>
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f7f7fb;
-            color: #222;
-        }
+<div class="container">
 
-        header {
-            background: #ffffff;
-            padding: 16px 22px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #e5e5e5;
-        }
+<h1>Storyboard <span>to Image</span></h1>
+<p class="subtitle">
+अपनी कहानी को अलग-अलग scenes में बदलें और image prompts तैयार करें।
+</p>
 
-        .logo {
-            color: #6c3cff;
-            font-size: 24px;
-            font-weight: bold;
-            text-decoration: none;
-        }
+<div class="box">
+<h2>Story Details</h2>
 
-        .back {
-            color: #555;
-            text-decoration: none;
-            font-size: 15px;
-        }
+<label>Story / Script</label>
+<textarea id="story" placeholder="यहाँ अपनी कहानी या script लिखें..."></textarea>
 
-        .container {
-            max-width: 1150px;
-            margin: auto;
-            padding: 35px 18px 60px;
-        }
+<div class="grid">
 
-        .title {
-            text-align: center;
-            margin-bottom: 35px;
-        }
+<div>
+<label>Character</label>
+<select id="character">
+<option>Default Character</option>
+<option>Indian Farmer</option>
+<option>Indian Boy</option>
+<option>Indian Girl</option>
+<option>King</option>
+</select>
+</div>
 
-        .title h1 {
-            font-size: 40px;
-            margin-bottom: 12px;
-        }
+<div>
+<label>Image Style</label>
+<select id="style">
+<option>Realistic</option>
+<option>Cinematic</option>
+<option>2D Animation</option>
+<option>3D Animation</option>
+<option>Anime</option>
+</select>
+</div>
 
-        .title h1 span {
-            color: #6c3cff;
-        }
+<div>
+<label>Aspect Ratio</label>
+<select id="ratio">
+<option>16:9</option>
+<option>9:16</option>
+<option>1:1</option>
+</select>
+</div>
 
-        .title p {
-            color: #666;
-            font-size: 17px;
-            line-height: 1.6;
-        }
+</div>
+</div>
 
-        .story-panel {
-            background: white;
-            border: 1px solid #e5e5e5;
-            border-radius: 18px;
-            padding: 22px;
-            margin-bottom: 25px;
-        }
+<div class="box">
 
-        .story-panel h2 {
-            margin-bottom: 18px;
-        }
+<div class="scene-title">
+<h2>Scenes</h2>
+<button class="primary" onclick="addScene()">+ Add Scene</button>
+</div>
 
-        textarea {
-            width: 100%;
-            min-height: 130px;
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            padding: 14px;
-            font-size: 15px;
-            font-family: Arial, sans-serif;
-            resize: vertical;
-            outline: none;
-        }
+<div id="scenes"></div>
 
-        textarea:focus {
-            border-color: #6c3cff;
-        }
+</div>
 
-        .top-options {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-top: 18px;
-        }
+<div class="box bottom">
 
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
+<button class="primary" onclick="generateAll()">
+Generate All Scenes
+</button>
 
-        select,
-        input[type="text"] {
-            width: 100%;
-            padding: 13px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            background: white;
-            font-size: 15px;
-            outline: none;
-        }
+<button class="secondary" onclick="saveStory()">
+Save Storyboard
+</button>
 
-        select:focus,
-        input[type="text"]:focus {
-            border-color: #6c3cff;
-        }
+<button class="secondary" onclick="downloadStory()">
+Download
+</button>
 
-        .scene-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 18px;
-        }
+</div>
 
-        .scene-header h2 {
-            font-size: 23px;
-        }
+</div>
 
-        .add-btn {
-            border: none;
-            background: #6c3cff;
-            color: white;
-            padding: 11px 17px;
-            border-radius: 9px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+<script>
 
-        .scene {
-            background: white;
-            border: 1px solid #e2e2e2;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 18px;
-        }
+let sceneCount=0;
 
-        .scene-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 18px;
-        }
+function addScene(){
 
-        .scene-number {
-            color: #6c3cff;
-            font-size: 19px;
-            font-weight: bold;
-        }
+ sceneCount++;
 
-        .delete-btn {
-            border: none;
-            background: #fff0f0;
-            color: #d33;
-            padding: 8px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
+ const div=document.createElement("div");
+ div.className="scene";
+ div.id="scene"+sceneCount;
 
-        .scene-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
+ div.innerHTML=`
+ <div class="scene-title">
+   <strong>Scene ${sceneCount}</strong>
+   <button class="danger" onclick="deleteScene(${sceneCount})">
+   Delete
+   </button>
+ </div>
 
-        .scene-full {
-            grid-column: 1 / -1;
-        }
+ <label>Scene Prompt</label>
+ <textarea class="prompt"
+ placeholder="इस scene में क्या दिखाई देना चाहिए?"></textarea>
 
-        .scene-preview {
-            margin-top: 18px;
-            min-height: 230px;
-            background: #f3f3f3;
-            border: 2px dashed #ddd;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: #888;
-            padding: 20px;
-        }
+ <div class="grid">
 
-        .scene-preview.ready {
-            border-color: #6c3cff;
-            background: #f5f1ff;
-            color: #6c3cff;
-        }
+ <div>
+ <label>Location</label>
+ <input class="location" placeholder="Village, City, Forest...">
+ </div>
 
-        .scene-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 18px;
-        }
+ <div>
+ <label>Camera Angle</label>
+ <select class="camera">
+  <option>Wide Shot</option>
+  <option>Medium Shot</option>
+  <option>Close Up</option>
+  <option>Low Angle</option>
+  <option>High Angle</option>
+ </select>
+ </div>
 
-        .scene-generate {
-            flex: 1;
-            border: none;
-            background: #6c3cff;
-            color: white;
-            padding: 13px;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+ </div>
 
-        .scene-clear {
-            padding: 13px 18px;
-            border: 1px solid #ddd;
-            background: white;
-            border-radius: 10px;
-            cursor: pointer;
-        }
+ <div class="preview">
+ Scene preview यहाँ दिखाई देगा
+ </div>
 
-        .bottom-actions {
-            background: white;
-            border: 1px solid #e5e5e5;
-            border-radius: 16px;
-            padding: 20px;
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+ <div class="actions">
 
-        .main-btn {
-            border: none;
-            background: #6c3cff;
-            color: white;
-            padding: 14px 22px;
-            border-radius: 10px;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+ <button class="primary"
+ onclick="generateScene(${sceneCount})">
+ Generate Scene
+ </button>
 
-        .secondary-btn {
-            border: 1px solid #6c3cff;
-            background: white;
-            color: #6c3cff;
-            padding: 14px
+ <button class="secondary"
+ onclick="clearScene(${sceneCount})">
+ Clear
+ </button>
+
+ </div>
+ `;
+
+ document.getElementById("scenes").appendChild(div);
+}
+
+function deleteScene(id){
+ const scene=document.getElementById("scene"+id);
+ if(scene) scene.remove();
+}
+
+function clearScene(id){
+
+ const scene=document.getElementById("scene"+id);
+
+ scene.querySelector(".prompt").value="";
+ scene.querySelector(".location").value="";
+ scene.querySelector(".preview").innerText=
+ "Scene preview यहाँ दिखाई देगा";
+
+ scene.querySelector(".preview").classList.remove("ready");
+}
+
+function generateScene(id){
+
+ const scene=document.getElementById("scene"+id);
+ const prompt=scene.querySelector(".prompt").value.trim();
+ const preview=scene.querySelector(".preview");
+
+ if(!prompt){
+  alert("पहले Scene Prompt लिखें।");
+  return;
+ }
+
+ preview.innerText=
+ "✓ Scene "+id+" तैयार है\n\n"+
+ "AI Image Generation के लिए prompt ready है।";
+
+ preview.classList.add("ready");
+}
+
+function generateAll(){
+
+ const scenes=document.querySelectorAll(".scene");
+
+ if(scenes.length===0){
+  alert("पहले कम से कम एक scene बनाएं।");
+  return;
+ }
+
+ scenes.forEach((scene,index)=>{
+
+  const prompt=scene.querySelector(".prompt").value.trim();
+
+  if(prompt){
+   const preview=scene.querySelector(".preview");
+
+   preview.innerText=
+   "✓ Scene "+(index+1)+" तैयार है\n\n"+
+   "AI Image Generation के लिए prompt ready है।";
+
+   preview.classList.add("ready");
+  }
+
+ });
+
+ alert("सभी उपलब्ध scenes तैयार हो गए हैं।");
+}
+
+function saveStory(){
+
+ localStorage.setItem(
+  "draftai_story",
+  document.getElementById("story").value
+ );
+
+ alert("Storyboard browser में save हो गया।");
+}
+
+function downloadStory(){
+
+ const story=document.getElementById("story").value;
+
+ const blob=new Blob(
+  [story || "DraftAI Storyboard"],
+  {type:"text/plain"}
+ );
+
+ const link=document.createElement("a");
+
+ link.href=URL.createObjectURL(blob);
+ link.download="draftai-storyboard.txt";
+
+ link.click();
+
+ URL.revokeObjectURL(link.href);
+}
+
+addScene();
+
+</script>
+
+</body>
+</html>
