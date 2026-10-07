@@ -1,683 +1,648 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>AI Video Maker - DraftAI</title>
-
-    <style>
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #f7f7fb;
-            color: #222;
-        }
-
-        header {
-            background: #ffffff;
-            padding: 16px 22px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #e5e5e5;
-        }
-
-        .logo {
-            color: #6c3cff;
-            font-size: 24px;
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-        .back {
-            color: #555;
-            text-decoration: none;
-            font-size: 15px;
-        }
-
-        .container {
-            max-width: 1150px;
-            margin: auto;
-            padding: 35px 18px 60px;
-        }
-
-        .title {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-
-        .title h1 {
-            font-size: 40px;
-            margin-bottom: 12px;
-        }
-
-        .title h1 span {
-            color: #6c3cff;
-        }
-
-        .title p {
-            color: #666;
-            font-size: 17px;
-            line-height: 1.6;
-        }
-
-        .workspace {
-            display: grid;
-            grid-template-columns: 400px 1fr;
-            gap: 25px;
-        }
-
-        .panel {
-            background: white;
-            border: 1px solid #e5e5e5;
-            border-radius: 18px;
-            padding: 22px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
-        }
-
-        .panel h2 {
-            font-size: 21px;
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-            margin-top: 18px;
-            margin-bottom: 8px;
-        }
-
-        textarea {
-            width: 100%;
-            min-height: 170px;
-            resize: vertical;
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            padding: 14px;
-            font-size: 15px;
-            font-family: Arial, sans-serif;
-            outline: none;
-        }
-
-        textarea:focus {
-            border-color: #6c3cff;
-        }
-
-        select {
-            width: 100%;
-            padding: 13px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            background: white;
-            font-size: 15px;
-        }
-
-        .row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        .option-box {
-            background: #fafafa;
-            border: 1px solid #e5e5e5;
-            border-radius: 12px;
-            padding: 13px;
-            margin-top: 18px;
-        }
-
-        .option-box label {
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: normal;
-        }
-
-        .option-box input {
-            width: 18px;
-            height: 18px;
-        }
-
-        .generate-btn {
-            width: 100%;
-            padding: 15px;
-            margin-top: 25px;
-            border: none;
-            border-radius: 11px;
-            background: #6c3cff;
-            color: white;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .generate-btn:hover {
-            background: #5928e6;
-        }
-
-        .preview {
-            min-height: 600px;
-            background: #111;
-            border-radius: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .preview-content {
-            color: #aaa;
-            padding: 30px;
-        }
-
-        .preview-icon {
-            font-size: 70px;
-            margin-bottom: 15px;
-        }
-
-        .preview-content h3 {
-            color: white;
-            margin-bottom: 10px;
-        }
-
-        .loading {
-            display: none;
-            color: white;
-            font-size: 18px;
-        }
-
-        .loading-icon {
-            font-size: 45px;
-            margin-bottom: 15px;
-        }
-
-        .video-result {
-            display: none;
-            width: 100%;
-            height: 100%;
-            min-height: 600px;
-            background: #222;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            color: white;
-        }
-
-        .video-result .video-icon {
-            font-size: 80px;
-            margin-bottom: 15px;
-        }
-
-        .scenes {
-            margin-top: 35px;
-        }
-
-        .scenes h2 {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .scene-list {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .scene {
-            background: white;
-            border: 1px solid #e5e5e5;
-            border-radius: 13px;
-            padding: 18px;
-        }
-
-        .scene-number {
-            color: #6c3cff;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .scene p {
-            color: #666;
-            line-height: 1.5;
-        }
-
-        footer {
-            background: #181818;
-            color: white;
-            text-align: center;
-            padding: 25px;
-            margin-top: 30px;
-        }
-
-        @media (max-width: 850px) {
-
-            .workspace {
-                grid-template-columns: 1fr;
-            }
-
-            .scene-list {
-                grid-template-columns: 1fr;
-            }
-
-            .title h1 {
-                font-size: 32px;
-            }
-
-            .preview {
-                min-height: 400px;
-            }
-
-            .video-result {
-                min-height: 400px;
-            }
-        }
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AI Video Maker - DraftAI</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b0d12;color:#fff;font-family:Arial,sans-serif}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.top{height:64px;background:#11151d;border-bottom:1px solid #292e39;display:flex;align-items:center;justify-content:space-between;padding:0 18px;position:sticky;top:0;z-index:10}
+.logo{font-size:22px;font-weight:800}.logo b{color:#7c5cff}
+.actions{display:flex;gap:8px}
+.btn{border:1px solid #343a48;background:#191e27;color:#fff;border-radius:8px;padding:10px 14px}
+.primary{background:#7657e8;border:0;color:white;border-radius:8px;padding:11px 16px;font-weight:bold}
+.layout{display:grid;grid-template-columns:210px 1fr 280px;min-height:calc(100vh - 64px)}
+.side{background:#10131a;border-right:1px solid #292e39;padding:15px 10px}
+.stitle{font-size:11px;color:#737b8c;text-transform:uppercase;padding:8px}
+.step{padding:11px 12px;border-radius:8px;color:#9da5b5;margin:3px 0;display:flex;gap:10px;align-items:center;font-size:13px}
+.step.active{background:#281e50;color:white;border:1px solid #4a3798}
+.num{width:24px;height:24px;border-radius:50%;background:#222733;display:flex;align-items:center;justify-content:center;font-size:11px}
+.active .num{background:#7657e8}
+.main{padding:20px;min-width:0}
+.head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.head h1{margin:0 0 5px;font-size:25px}.head p{margin:0;color:#8991a1;font-size:13px}
+.badge{padding:7px 10px;border:1px solid #47368d;background:#1d1735;border-radius:20px;color:#bdb0ff;font-size:11px}
+.card{background:#11151d;border:1px solid #292f3b;border-radius:12px;padding:18px;margin-bottom:15px}
+.card h2{font-size:16px;margin:0 0 14px}
+.title{display:flex;justify-content:space-between;align-items:center}
+label{display:block;color:#aeb5c3;font-size:12px;margin:0 0 7px}
+input,textarea,select{width:100%;background:#0b0e14;border:1px solid #303744;color:white;border-radius:8px;padding:11px;outline:none}
+textarea{min-height:120px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.options{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.opt{padding:12px;text-align:center;background:#151a23;border:1px solid #2d3340;border-radius:8px;font-size:12px;color:#aeb5c3}
+.opt.sel{background:#241c43;border-color:#7657e8;color:#fff}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.scene{background:#0d1016;border:1px solid #2b313d;border-radius:10px;padding:13px;margin-bottom:10px}
+.scenehead{display:flex;justify-content:space-between;margin-bottom:10px}
+.scenegrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.scene textarea{min-height:75px}
+.chip{background:#202532;color:#aeb6c5;border-radius:15px;padding:5px 8px;font-size:10px}
+.character{display:flex;align-items:center;gap:10px;background:#0d1016;border:1px solid #2b313d;border-radius:9px;padding:10px;margin:8px 0}
+.avatar{width:42px;height:42px;border-radius:8px;background:#7657e8;display:flex;align-items:center;justify-content:center;font-weight:bold}
+.cinfo{flex:1}.cinfo small{display:block;color:#7d8696;margin-top:4px}
+.timeline{border:1px solid #2b313d;border-radius:9px;overflow:hidden;background:#0c0f15}
+.thead,.track{display:grid;grid-template-columns:90px 1fr}
+.thead{height:35px;border-bottom:1px solid #292f39}
+.thead div{font-size:10px;color:#737b8b;padding:10px;border-right:1px solid #222832}
+.track{min-height:55px;border-bottom:1px solid #222832}
+.tname{padding:14px 10px;font-size:10px;color:#8c95a5;border-right:1px solid #222832}
+.tcontent{padding:9px}.clip{display:inline-block;background:#49379a;border:1px solid #7657e8;border-radius:5px;padding:9px 13px;font-size:10px;margin-right:5px}
+.right{background:#10131a;border-left:1px solid #292e39;padding:15px}
+.preview{height:190px;border:1px solid #303641;border-radius:9px;background:#050609;display:flex;align-items:center;justify-content:center;position:relative}
+.screen{width:88%;height:75%;border:1px solid #383f4b;border-radius:6px;display:flex;align-items:center;justify-content:center;text-align:center;color:#727b8b;font-size:12px;padding:15px}
+.play{position:absolute;width:43px;height:43px;border:0;border-radius:50%;background:#7657e8;color:white}
+.stat{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #242a34;font-size:12px}
+.stat span:last-child{color:#b5a8ff}
+.hidden{display:none}
+.toast{position:fixed;right:15px;bottom:15px;background:#191e27;border:1px solid #383f4c;padding:12px 16px;border-radius:8px;display:none;z-index:50;font-size:12px}
+@media(max-width:1000px){.layout{grid-template-columns:180px 1fr}.right{display:none}}
+@media(max-width:700px){
+.top{padding:0 10px}.actions .btn:nth-child(1){display:none}
+.layout{display:block}.side{display:flex;overflow-x:auto;border-right:0;border-bottom:1px solid #292e39;padding:7px}
+.stitle{display:none}.step{min-width:max-content;margin:0 3px}
+.main{padding:12px}.grid2,.grid3,.scenegrid{grid-template-columns:1fr}
+.options{grid-template-columns:1fr 1fr}.head h1{font-size:20px}
+}
+</style>
 </head>
 
 <body>
 
-
-    <header>
-
-        <a href="index.html" class="logo">
-            DraftAI
-        </a>
-
-        <a href="index.html" class="back">
-            ← वापस Home
-        </a>
-
-    </header>
-
-
-    <main class="container">
-
-
-        <div class="title">
-
-            <h1>
-                AI <span>Video Maker</span>
-            </h1>
-
-            <p>
-                अपनी कहानी या Prompt लिखिए और AI Video बनाने का Workflow तैयार कीजिए।
-            </p>
-
-        </div>
-
-
-        <div class="workspace">
-
-
-            <!-- SETTINGS PANEL -->
-
-            <div class="panel">
-
-                <h2>
-                    🎬 Create Video
-                </h2>
-
-
-                <label for="story">
-                    Story / Video Prompt
-                </label>
-
-                <textarea
-                    id="story"
-                    placeholder="उदाहरण: एक गरीब किसान मेहनत करके अपने खेत को हरा-भरा बनाता है और अंत में उसकी मेहनत सफल होती है..."
-                ></textarea>
-
-
-                <div class="row">
-
-                    <div>
-
-                        <label for="duration">
-                            Duration
-                        </label>
-
-                        <select id="duration">
-
-                            <option value="10">
-                                10 Seconds
-                            </option>
-
-                            <option value="30">
-                                30 Seconds
-                            </option>
-
-                            <option value="60">
-                                1 Minute
-                            </option>
-
-                            <option value="120">
-                                2 Minutes
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div>
-
-                        <label for="ratio">
-                            Aspect Ratio
-                        </label>
-
-                        <select id="ratio">
-
-                            <option value="16:9">
-                                16:9 Landscape
-                            </option>
-
-                            <option value="9:16">
-                                9:16 Shorts
-                            </option>
-
-                            <option value="1:1">
-                                1:1 Square
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-
-                <label for="style">
-                    Video Style
-                </label>
-
-                <select id="style">
-
-                    <option value="cinematic">
-                        Cinematic
-                    </option>
-
-                    <option value="realistic">
-                        Ultra Realistic
-                    </option>
-
-                    <option value="2d">
-                        2D Animation
-                    </option>
-
-                    <option value="3d">
-                        3D Animation
-                    </option>
-
-                    <option value="cartoon">
-                        Indian Cartoon
-                    </option>
-
-                </select>
-
-
-                <label for="voice">
-                    Voice / Narration
-                </label>
-
-                <select id="voice">
-
-                    <option value="hindi-male">
-                        Hindi Male Voice
-                    </option>
-
-                    <option value="hindi-female">
-                        Hindi Female Voice
-                    </option>
-
-                    <option value="none">
-                        No Voice
-                    </option>
-
-                </select>
-
-
-                <div class="option-box">
-
-                    <label>
-
-                        <input
-                            type="checkbox"
-                            id="characterLock"
-                        >
-
-                        Character Consistency Lock
-
-                    </label>
-
-                </div>
-
-
-                <div class="option-box">
-
-                    <label>
-
-                        <input
-                            type="checkbox"
-                            id="subtitles"
-                        >
-
-                        Add Hindi Subtitles
-
-                    </label>
-
-                </div>
-
-
-                <button
-                    class="generate-btn"
-                    onclick="generateVideo()"
-                >
-                    🎬 Generate Video
-                </button>
-
-
-            </div>
-
-
-            <!-- VIDEO PREVIEW -->
-
-            <div class="panel">
-
-                <h2>
-                    🎥 Video Preview
-                </h2>
-
-
-                <div class="preview">
-
-
-                    <div
-                        class="preview-content"
-                        id="previewContent"
-                    >
-
-                        <div class="preview-icon">
-                            🎬
-                        </div>
-
-                        <h3>
-                            आपका Video यहाँ दिखाई देगा
-                        </h3>
-
-                        <p>
-                            Story लिखें और Generate Video दबाएँ।
-                        </p>
-
-                    </div>
-
-
-                    <div
-                        class="loading"
-                        id="loading"
-                    >
-
-                        <div class="loading-icon">
-                            ⏳
-                        </div>
-
-                        <p>
-                            Video Workflow तैयार हो रहा है...
-                        </p>
-
-                    </div>
-
-
-                    <div
-                        class="video-result"
-                        id="videoResult"
-                    >
-
-                        <div class="video-icon">
-                            🎞️
-                        </div>
-
-                        <h3>
-                            Video Project Ready
-                        </h3>
-
-                        <p>
-                            असली AI Video Generation API
-                            बाद में जोड़ी जाएगी।
-                        </p>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- SCENES -->
-
-        <section class="scenes">
-
-            <h2>
-                🎞️ AI Story Scenes
-            </h2>
-
-
-            <div class="scene-list">
-
-
-                <div class="scene">
-
-                    <div class="scene-number">
-                        Scene 01
-                    </div>
-
-                    <p>
-                        आपकी कहानी का पहला दृश्य यहाँ तैयार होगा।
-                    </p>
-
-                </div>
-
-
-                <div class="scene">
-
-                    <div class="scene-number">
-                        Scene 02
-                    </div>
-
-                    <p>
-                        दूसरा दृश्य और Character Action यहाँ आएगा।
-                    </p>
-
-                </div>
-
-
-                <div class="scene">
-
-                    <div class="scene-number">
-                        Scene 03
-                    </div>
-
-                    <p>
-                        तीसरा दृश्य और Dialogue यहाँ आएगा।
-                    </p>
-
-                </div>
-
-
-            </div>
-
-        </section>
-
-
-    </main>
-
-
-    <footer>
-
-        <p>
-            © 2026 DraftAI - AI Creative Studio
-        </p>
-
-    </footer>
-
-
-    <script>
-
-        function generateVideo() {
-
-            const story =
-                document.getElementById("story").value.trim();
-
-            const preview =
-                document.getElementById("previewContent");
-
-            const loading =
-                document.getElementById("loading");
-
-            const result =
-                document.getElementById("videoResult");
-
-
-            if (story === "") {
-
-                alert("कृपया पहले Story या Video Prompt लिखें।");
-
-                return;
-            }
-
-
-            preview.style.display = "none";
-
-            result.style.display = "none";
-
-            loading.style.display = "block";
-
-
-            setTimeout(function() {
-
-                loading.style.display = "none";
-
-                result.style.display = "flex";
-
-            }, 1500);
-
-        }
-
-    </script>
-
-
-</body>
-                              </html>
+<header class="top">
+<div class="logo">Draft<b>AI</b></div>
+<div class="actions">
+<button class="btn" onclick="home()">Home</button>
+<button class="btn" onclick="save()">💾 Save</button>
+<button class="primary" onclick="go(8)">Export</button>
+</div>
+</header>
+
+<div class="layout">
+
+<aside class="side">
+<div class="stitle">VIDEO WORKFLOW</div>
+
+<div class="step active" onclick="go(1,this)"><span class="num">1</span>Idea & Script</div>
+<div class="step" onclick="go(2,this)"><span class="num">2</span>Storyboard</div>
+<div class="step" onclick="go(3,this)"><span class="num">3</span>Characters</div>
+<div class="step" onclick="go(4,this)"><span class="num">4</span>Backgrounds</div>
+<div class="step" onclick="go(5,this)"><span class="num">5</span>Voice</div>
+<div class="step" onclick="go(6,this)"><span class="num">6</span>Animation</div>
+<div class="step" onclick="go(7,this)"><span class="num">7</span>Timeline</div>
+<div class="step" onclick="go(8,this)"><span class="num">8</span>Export</div>
+</aside>
+
+<main class="main">
+
+<div class="head">
+<div>
+<h1>AI Video Maker</h1>
+<p>Create complete AI videos from idea to final export.</p>
+</div>
+<div class="badge">AI VIDEO STUDIO</div>
+</div>
+
+<!-- 1 -->
+<section id="s1">
+
+<div class="card">
+<h2>🎬 Create Your Video</h2>
+
+<label>Story / Video Prompt</label>
+<textarea id="prompt" placeholder="उदाहरण: एक गरीब किसान मेहनत करके अपने खेत को हरा-भरा बनाता है और अंत में उसकी मेहनत सफल होती है..."></textarea>
+
+<div class="row">
+<button class="primary" onclick="script()">✨ Generate Script</button>
+<button class="btn" onclick="clearAll()">Clear</button>
+</div>
+</div>
+
+<div class="card">
+<h2>⚙️ Video Settings</h2>
+
+<div class="grid3">
+<div>
+<label>Duration</label>
+<select id="duration">
+<option>30 Seconds</option>
+<option>1 Minute</option>
+<option>2 Minutes</option>
+<option>3 Minutes</option>
+<option>5 Minutes</option>
+<option>10 Minutes</option>
+</select>
+</div>
+
+<div>
+<label>Language</label>
+<select id="language">
+<option>Hindi</option>
+<option>English</option>
+<option>Bengali</option>
+<option>Gujarati</option>
+<option>Marathi</option>
+<option>Punjabi</option>
+<option>Tamil</option>
+<option>Telugu</option>
+<option>Urdu</option>
+</select>
+</div>
+
+<div>
+<label>Aspect Ratio</label>
+<select id="ratio">
+<option>16:9 YouTube</option>
+<option>9:16 Shorts / Reels</option>
+<option>1:1 Square</option>
+</select>
+</div>
+</div>
+
+<br>
+
+<label>Video Style</label>
+<div class="options">
+<div class="opt sel" onclick="choose(this)">2D Indian Toon</div>
+<div class="opt" onclick="choose(this)">Cinematic</div>
+<div class="opt" onclick="choose(this)">Realistic</div>
+<div class="opt" onclick="choose(this)">3D Animation</div>
+</div>
+
+<br>
+
+<label>Reference File</label>
+<input type="file">
+
+</div>
+
+<div class="card">
+<h2>📝 AI Script</h2>
+<textarea id="scriptbox" placeholder="Generated script will appear here..."></textarea>
+
+<div class="row">
+<button class="primary" onclick="makeScenes()">Create Storyboard →</button>
+<button class="btn" onclick="copyScript()">Copy Script</button>
+</div>
+</div>
+
+</section>
+
+<!-- 2 -->
+<section id="s2" class="hidden">
+<div class="card">
+<div class="title">
+<h2>🎞 Storyboard</h2>
+<button class="primary" onclick="addScene()">+ Add Scene</button>
+</div>
+<div id="scenes"></div>
+<div class="row">
+<button class="primary" onclick="toast('All scenes generation started')">✨ Generate All Scenes</button>
+<button class="btn" onclick="toast('Storyboard saved')">💾 Save Storyboard</button>
+</div>
+</div>
+</section>
+
+<!-- 3 -->
+<section id="s3" class="hidden">
+
+<div class="card">
+<h2>👤 Character Creator</h2>
+
+<div class="grid2">
+<div>
+<label>Character Name</label>
+<input id="charname" placeholder="Example: Raju">
+</div>
+<div>
+<label>Character Type</label>
+<select>
+<option>Human</option>
+<option>Cartoon</option>
+<option>Animal</option>
+<option>Fantasy</option>
+</select>
+</div>
+</div>
+
+<br>
+
+<label>Character Description</label>
+<textarea id="chardesc" placeholder="Age, face, hairstyle, clothes, body type, personality, accessories..."></textarea>
+
+<div class="row">
+<button class="primary" onclick="character()">Create Character</button>
+<button class="btn">Upload Reference</button>
+</div>
+</div>
+
+<div class="card">
+<h2>Character Library</h2>
+<div id="chars">
+<div class="character">
+<div class="avatar">R</div>
+<div class="cinfo"><b>Raju</b><small>Main character • Consistency enabled</small></div>
+<span class="chip">LOCKED</span>
+</div>
+</div>
+</div>
+
+</section>
+
+<!-- 4 -->
+<section id="s4" class="hidden">
+
+<div class="card">
+<h2>🌄 AI Backgrounds & Assets</h2>
+
+<label>Background Prompt</label>
+<textarea id="bgprompt" placeholder="Indian village at sunrise, green fields, mud houses, cinematic lighting..."></textarea>
+
+<div class="row">
+<button class="primary" onclick="toast('Background generation started')">✨ Generate Background</button>
+<button class="btn">Upload Asset</button>
+</div>
+</div>
+
+<div class="card">
+<h2>Asset Library</h2>
+<div class="grid2">
+<div class="character"><div class="avatar">🏡</div><div class="cinfo"><b>Indian Village</b><small>Background • 16:9</small></div></div>
+<div class="character"><div class="avatar">🌾</div><div class="cinfo"><b>Farm Field</b><small>Environment</small></div></div>
+<div class="character"><div class="avatar">🏠</div><div class="cinfo"><b>House Interior</b><small>Background</small></div></div>
+<div class="character"><div class="avatar">🌅</div><div class="cinfo"><b>Sunset</b><small>Sky Background</small></div></div>
+</div>
+</div>
+
+</section>
+
+<!-- 5 -->
+<section id="s5" class="hidden">
+
+<div class="card">
+<h2>🎙 AI Voiceover</h2>
+
+<div class="grid2">
+<div>
+<label>Voice</label>
+<select>
+<option>Hindi Male - Natural</option>
+<option>Hindi Female - Natural</option>
+<option>Hindi Male - Deep</option>
+<option>Hindi Female - Emotional</option>
+<option>English Male</option>
+<option>English Female</option>
+</select>
+</div>
+
+<div>
+<label>Voice Style</label>
+<select>
+<option>Natural</option>
+<option>Storytelling</option>
+<option>Emotional</option>
+<option>Dramatic</option>
+<option>Energetic</option>
+<option>Calm</option>
+</select>
+</div>
+
+<div>
+<label>Speed</label>
+<input type="range" min=".5" max="1.5" step=".1" value="1">
+</div>
+
+<div>
+<label>Pitch</label>
+<input type="range" min="-10" max="10" value="0">
+</div>
+</div>
+
+<br>
+
+<label>Voiceover Text</label>
+<textarea id="voicetext"></textarea>
+
+<div class="row">
+<button class="primary" onclick="toast('AI voice generation started')">🎙 Generate Voice</button>
+<button class="btn" onclick="toast('Voice preview started')">▶ Preview</button>
+</div>
+</div>
+
+</section>
+
+<!-- 6 -->
+<section id="s6" class="hidden">
+
+<div class="card">
+<h2>🎥 Animation & Motion</h2>
+
+<div class="grid2">
+
+<div>
+<label>Animation</label>
+<select>
+<option>Natural Motion</option>
+<option>Character Action</option>
+<option>Lip Sync</option>
+<option>Expression Animation</option>
+<option>Zoom & Pan</option>
+</select>
+</div>
+
+<div>
+<label>Camera Movement</label>
+<select>
+<option>Static</option>
+<option>Zoom In</option>
+<option>Zoom Out</option>
+<option>Pan Left</option>
+<option>Pan Right</option>
+<option>Tracking Shot</option>
+</select>
+</div>
+
+<div>
+<label>Expression</label>
+<select>
+<option>Neutral</option>
+<option>Happy</option>
+<option>Sad</option>
+<option>Angry</option>
+<option>Surprised</option>
+<option>Emotional</option>
+</select>
+</div>
+
+<div>
+<label>Motion Strength</label>
+<input type="range" min="0" max="100" value="60">
+</div>
+
+</div>
+
+<br>
+
+<label>Motion Prompt</label>
+<textarea placeholder="Describe character movement, camera movement and environment motion..."></textarea>
+
+<button class="primary" style="margin-top:12px" onclick="toast('Animation generation started')">✨ Generate Animation</button>
+</div>
+
+</section>
+
+<!-- 7 -->
+<section id="s7" class="hidden">
+
+<div class="card">
+<div class="title">
+<h2>🎬 Timeline Editor</h2>
+<button class="btn" onclick="addClip()">+ Add Clip</button>
+</div>
+
+<div class="timeline">
+
+<div class="thead">
+<div>TRACK</div><div>0s</div>
+</div>
+
+<div class="track">
+<div class="tname">VIDEO</div>
+<div class="tcontent">
+<span class="clip">Scene 1</span>
+<span class="clip">Scene 2</span>
+<span class="clip">Scene 3</span>
+</div>
+</div>
+
+<div class="track">
+<div class="tname">VOICE</div>
+<div class="tcontent"><span class="clip">Voiceover</span></div>
+</div>
+
+<div class="track">
+<div class="tname">MUSIC</div>
+<div class="tcontent"><span class="clip">Background Music</span></div>
+</div>
+
+<div class="track">
+<div class="tname">TEXT</div>
+<div class="tcontent"><span class="clip">Subtitles</span></div>
+</div>
+
+</div>
+
+<br>
+
+<div class="grid3">
+<div><label>Transition</label><select><option>None</option><option>Fade</option><option>Dissolve</option><option>Slide</option></select></div>
+<div><label>Effect</label><select><option>None</option><option>Cinematic</option><option>Glow</option><option>Film</option></select></div>
+<div><label>Subtitles</label><select><option>Enabled</option><option>Disabled</option></select></div>
+</div>
+
+<div class="row">
+<button class="primary" onclick="toast('Timeline saved')">💾 Save Timeline</button>
+<button class="btn" onclick="toast('Preview started')">▶ Preview</button>
+</div>
+</div>
+
+</section>
+
+<!-- 8 -->
+<section id="s8" class="hidden">
+
+<div class="card">
+<h2>⬇ Export Video</h2>
+
+<div class="grid2">
+<div>
+<label>Resolution</label>
+<select><option>1080p Full HD</option><option>720p HD</option><option>4K Ultra HD</option></select>
+</div>
+<div>
+<label>Format</label>
+<select><option>MP4</option><option>WebM</option></select>
+</div>
+<div>
+<label>Frame Rate</label>
+<select><option>30 FPS</option><option>24 FPS</option><option>60 FPS</option></select>
+</div>
+<div>
+<label>Quality</label>
+<select><option>High</option><option>Standard</option><option>Maximum</option></select>
+</div>
+</div>
+
+<div class="row">
+<button class="primary" onclick="toast('Export process started')">⬇ Export Video</button>
+<button class="btn" onclick="save()">💾 Save Project</button>
+</div>
+</div>
+
+<div class="card">
+<h2>Project Summary</h2>
+<div class="stat"><span>Duration</span><span id="sumdur">30 Seconds</span></div>
+<div class="stat"><span>Language</span><span id="sumlang">Hindi</span></div>
+<div class="stat"><span>Ratio</span><span id="sumratio">16:9</span></div>
+<div class="stat"><span>Scenes</span><span id="sumscenes">3</span></div>
+<div class="stat"><span>Characters</span><span>Consistent</span></div>
+<div class="stat"><span>Voice</span><span>Ready</span></div>
+</div>
+
+</section>
+
+</main>
+
+<aside class="right">
+
+<h3>Preview</h3>
+<div class="preview">
+<div class="screen">Your AI video preview will appear here</div>
+<button class="play" onclick="toast('Preview started')">▶</button>
+</div>
+
+<h3>Project Info</h3>
+<div class="stat"><span>Scenes</span><span id="sideScenes">3</span></div>
+<div class="stat"><span>Characters</span><span>1</span></div>
+<div class="stat"><span>Voice</span><span>Ready</span></div>
+<div class="stat"><span>Assets</span><span>4</span></div>
+
+<h3>Quick Tools</h3>
+<button class="btn" style="width:100%;margin:4px 0" onclick="go(2)">Storyboard</button>
+<button class="btn" style="width:100%;margin:4px 0" onclick="go(3)">Characters</button>
+<button class="btn" style="width:100%;margin:4px 0" onclick="go(5)">AI Voice</button>
+<button class="btn" style="width:100%;margin:4px 0" onclick="go(7)">Timeline</button>
+<button class="primary" style="width:100%;margin-top:7px" onclick="go(8)">Export Video</button>
+
+</aside>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+let sceneNo=0;
+
+function go(n,el){
+for(let i=1;i<=8;i++)document.getElementById("s"+i).classList.add("hidden");
+document.getElementById("s"+n).classList.remove("hidden");
+
+document.querySelectorAll(".step").forEach(x=>x.classList.remove("active"));
+if(el)el.classList.add("active");
+else document.querySelectorAll(".step")[n-1].classList.add("active");
+
+scrollTo(0,0);
+}
+
+function toast(x){
+let t=document.getElementById("toast");
+t.innerText=x;
+t.style.display="block";
+setTimeout(()=>t.style.display="none",2200);
+}
+
+function choose(x){
+x.parentNode.querySelectorAll(".opt").forEach(a=>a.classList.remove("sel"));
+x.classList.add("sel");
+}
+
+function script(){
+
+let p=document.getElementById("prompt").value.trim();
+
+if(!p){
+toast("पहले Story / Video Prompt लिखें");
+return;
+}
+
+let s=
+"नरेशन: "+p+
+"\n\nसीन 1: कहानी की शुरुआत और मुख्य पात्र का परिचय।"+
+"\nसीन 2: मुख्य पात्र के सामने समस्या आती है।"+
+"\nसीन 3: पात्र मेहनत और संघर्ष करता है।"+
+"\nसीन 4: कहानी में बड़ा बदलाव आता है।"+
+"\nसीन 5: मेहनत का परिणाम सामने आता है।"+
+"\nसीन 6: कहानी एक प्रेरणादायक संदेश के साथ समाप्त होती है।"+
+"\n\nअंतिम संदेश: मेहनत, धैर्य और विश्वास से सफलता जरूर मिलती है।";
+
+document.getElementById("scriptbox").value=s;
+document.getElementById("voicetext").value=s;
+
+toast("AI Script तैयार है");
+}
+
+function makeScenes(){
+
+if(!document.getElementById("scriptbox").value.trim()){
+toast("पहले Script Generate करें");
+return;
+}
+
+document.getElementById("scenes").innerHTML="";
+sceneNo=0;
+
+for(let i=0;i<3;i++)addScene(false);
+
+go(2);
+toast("Storyboard तैयार है");
+}
+
+function addScene(msg=true){
+
+sceneNo++;
+
+let box=document.createElement("div");
+box.className="scene";
+
+box.innerHTML=
+'<div class="scenehead"><b>Scene '+sceneNo+'</b><span class="chip">10 Seconds</span></div>'+
+'<div class="scenegrid">'+
+'<div><label>Scene Prompt</label><textarea placeholder="Describe this scene..."></textarea></div>'+
+'<div><label>Action / Motion</label><textarea placeholder="Character action and camera movement..."></textarea></div>'+
+'<div><label>Character</label><select><option>Raju</option><option>None</option></select></div>'+
+'<div><label>Background</label><select><option>Indian Village</option><option>Farm Field</option><option>House Interior</option><option>Sunset</option></select></div>'+
+'</div>'+
+'<div class="row">'+
+'<button class="primary" onclick="toast(\'Scene generation started\')">✨ Generate</button>'+
+'<button class="btn" onclick="duplicate(this)">Duplicate</button>'+
+'<button class="btn" onclick="removeScene(this)">Delete</button>'+
+'</div>';
+
+document.getElementById("scenes").appendChild(box);
+updateScenes();
+
+if(msg)toast("New scene added");
+}
+
+function duplicate(b){
+let x=b.closest(".scene");
+let c=x.cloneNode(true);
+x.after(c);
+sceneNo++;
+renumber();
+updateScenes();
+toast("Scene duplicated");
+}
+
+function removeScene(b){
+b.closest(".scene").remove();
+renumber();
+updateScenes();
+toast("Scene deleted");
+}
+
+function renumber(){
+document.querySelectorAll(".scene").forEach((x,i)=>{
+x.querySelector("b").innerText="Scene "+(i+1);
+});
+sceneNo=document.querySelectorAll(".scene").length;
+}
+
+function updateScenes(){
+let n=document.querySelectorAll(".scene").length;
+document.
