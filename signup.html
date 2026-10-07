@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sign Up - DraftAI</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f6f5fb;
+color:#222;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+header{
+background:#fff;
+border-bottom:1px solid #ddd;
+padding:16px 20px;
+}
+
+.logo{
+font-size:24px;
+font-weight:bold;
+color:#6c3cff;
+text-decoration:none;
+}
+
+.container{
+width:100%;
+max-width:480px;
+margin:auto;
+padding:25px 16px 40px;
+}
+
+.card{
+background:#fff;
+border:1px solid #ddd;
+border-radius:18px;
+padding:25px 20px;
+}
+
+h1{
+text-align:center;
+font-size:32px;
+margin:5px 0 8px;
+}
+
+h1 span{
+color:#6c3cff;
+}
+
+.subtitle{
+text-align:center;
+color:#666;
+margin:0 0 25px;
+}
+
+label{
+display:block;
+font-weight:bold;
+margin:15px 0 7px;
+}
+
+input{
+width:100%;
+padding:14px;
+border:1px solid #ccc;
+border-radius:9px;
+font-size:16px;
+outline:none;
+}
+
+input:focus{
+border-color:#6c3cff;
+}
+
+.password-box{
+position:relative;
+}
+
+.password-box input{
+padding-right:75px;
+}
+
+.show{
+position:absolute;
+right:9px;
+top:8px;
+width:auto;
+padding:8px 10px;
+margin:0;
+background:transparent;
+color:#6c3cff;
+border:0;
+font-size:14px;
+}
+
+.terms{
+display:flex;
+align-items:flex-start;
+gap:8px;
+margin:18px 0;
+font-size:13px;
+color:#666;
+line-height:1.5;
+}
+
+.terms input{
+width:auto;
+margin-top:3px;
+}
+
+.terms a{
+color:#6c3cff;
+}
+
+.main-btn{
+width:100%;
+padding:14px;
+border:0;
+border-radius:9px;
+background:#6c3cff;
+color:#fff;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.divider{
+display:flex;
+align-items:center;
+gap:10px;
+margin:22px 0;
+color:#999;
+}
+
+.divider:before,
+.divider:after{
+content:"";
+height:1px;
+background:#ddd;
+flex:1;
+}
+
+.login{
+text-align:center;
+color:#666;
+}
+
+.login a{
+color:#6c3cff;
+font-weight:bold;
+text-decoration:none;
+}
+
+.demo{
+display:none;
+background:#f0edff;
+color:#5a32cc;
+padding:12px;
+border-radius:9px;
+margin-top:15px;
+text-align:center;
+line-height:1.5;
+}
+
+.home{
+display:block;
+text-align:center;
+margin-top:20px;
+color:#555;
+text-decoration:none;
+font-weight:bold;
+}
+
+@media(max-width:500px){
+.card{
+padding:22px 17px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a class="logo" href="index.html">DraftAI</a>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h1>Create <span>Account</span></h1>
+
+<p class="subtitle">
+DraftAI के साथ अपना creative journey शुरू करें
+</p>
+
+<form onsubmit="signup(event)">
+
+<label>Full Name</label>
+
+<input
+id="name"
+type="text"
+placeholder="अपना नाम लिखें"
+required
+>
+
+<label>Email</label>
+
+<input
+id="email"
+type="email"
+placeholder="example@email.com"
+required
+>
+
+<label>Password</label>
+
+<div class="password-box">
+
+<input
+id="password"
+type="password"
+placeholder="कम से कम 6 characters"
+required
+>
+
+<button
+type="button"
+class="show"
+onclick="togglePassword('password',this)"
+>
+Show
+</button>
+
+</div>
+
+<label>Confirm Password</label>
+
+<div class="password-box">
+
+<input
+id="confirm"
+type="password"
+placeholder="Password दोबारा लिखें"
+required
+>
+
+<button
+type="button"
+class="show"
+onclick="togglePassword('confirm',this)"
+>
+Show
+</button>
+
+</div>
+
+<div class="terms">
+
+<input id="terms" type="checkbox" required>
+
+<span>
+मैं DraftAI की
+<a href="#" onclick="terms(event)">Terms & Conditions</a>
+से सहमत हूँ।
+</span>
+
+</div>
+
+<button class="main-btn" type="submit">
+Create Account
+</button>
+
+</form>
+
+<div class="demo" id="demo"></div>
+
+<div class="divider">
+<span>OR</span>
+</div>
+
+<div class="login">
+पहले से account है?
+<a href="login.html">Login</a>
+</div>
+
+<a class="home" href="index.html">
+← Back to Home
+</a>
+
+</div>
+
+</div>
+
+<script>
+
+function togglePassword(id,button){
+
+let input=document.getElementById(id);
+
+if(input.type==="password"){
+input.type="text";
+button.innerText="Hide";
+}else{
+input.type="password";
+button.innerText="Show";
+}
+
+}
+
+
+function signup(event){
+
+event.preventDefault();
+
+let name=
+document.getElementById("name").value.trim();
+
+let email=
+document.getElementById("email").value.trim();
+
+let password=
+document.getElementById("password").value;
+
+let confirm=
+document.getElementById("confirm").value;
+
+if(password.length<6){
+
+alert("Password कम से कम 6 characters का होना चाहिए।");
+return;
+
+}
+
+if(password!==confirm){
+
+alert("दोनों passwords समान नहीं हैं।");
+return;
+
+}
+
+let user={
+name:name,
+email:email
+};
+
+localStorage.setItem(
+"draftai_user",
+JSON.stringify(user)
+);
+
+let demo=
+document.getElementById("demo");
+
+demo.style.display="block";
+
+demo.innerText=
+"✓ Account Demo में create हो गया!\n\n"+
+"अब आप Login page पर जा सकते हैं।";
+
+}
+
+
+function terms(event){
+
+event.preventDefault();
+
+alert(
+"DraftAI Terms & Conditions अभी demo mode में हैं।"
+);
+
+}
+
+</script>
+
+</body>
+</html>
