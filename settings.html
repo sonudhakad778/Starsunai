@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Settings - DraftAI</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f6f5fb;
+color:#222;
+}
+
+header{
+background:#fff;
+border-bottom:1px solid #ddd;
+padding:16px 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-size:23px;
+font-weight:bold;
+color:#6c3cff;
+text-decoration:none;
+}
+
+.back{
+color:#555;
+text-decoration:none;
+font-weight:bold;
+}
+
+.container{
+max-width:850px;
+margin:auto;
+padding:25px 15px 50px;
+}
+
+h1{
+text-align:center;
+font-size:34px;
+margin:10px 0;
+}
+
+h1 span{
+color:#6c3cff;
+}
+
+.sub{
+text-align:center;
+color:#666;
+font-size:17px;
+margin-bottom:25px;
+}
+
+.card{
+background:#fff;
+border:1px solid #ddd;
+border-radius:16px;
+padding:20px;
+margin-bottom:18px;
+}
+
+.card h2{
+margin-top:0;
+font-size:22px;
+}
+
+label{
+display:block;
+font-weight:bold;
+margin:15px 0 7px;
+}
+
+input,
+select{
+width:100%;
+padding:13px;
+border:1px solid #ccc;
+border-radius:9px;
+font-size:16px;
+background:#fff;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+padding:15px 0;
+border-bottom:1px solid #eee;
+}
+
+.row:last-child{
+border-bottom:0;
+}
+
+.row-title{
+font-weight:bold;
+}
+
+.row-desc{
+font-size:13px;
+color:#777;
+margin-top:4px;
+}
+
+.switch{
+position:relative;
+width:52px;
+height:29px;
+flex-shrink:0;
+}
+
+.switch input{
+display:none;
+}
+
+.slider{
+position:absolute;
+inset:0;
+background:#ccc;
+border-radius:30px;
+cursor:pointer;
+transition:.2s;
+}
+
+.slider:before{
+content:"";
+position:absolute;
+width:21px;
+height:21px;
+left:4px;
+top:4px;
+background:white;
+border-radius:50%;
+transition:.2s;
+}
+
+.switch input:checked + .slider{
+background:#6c3cff;
+}
+
+.switch input:checked + .slider:before{
+transform:translateX(23px);
+}
+
+.buttons{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:20px;
+}
+
+button{
+padding:13px 20px;
+border-radius:9px;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.primary{
+background:#6c3cff;
+color:white;
+border:0;
+}
+
+.secondary{
+background:white;
+color:#6c3cff;
+border:1px solid #6c3cff;
+}
+
+.danger{
+background:white;
+color:#d33;
+border:1px solid #d33;
+}
+
+.status{
+display:none;
+background:#f0edff;
+color:#5a32cc;
+padding:13px;
+border-radius:9px;
+margin-top:15px;
+}
+
+@media(max-width:650px){
+.grid{
+grid-template-columns:1fr;
+}
+
+h1{
+font-size:29px;
+}
+
+.card{
+padding:16px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<a class="logo" href="index.html">DraftAI</a>
+
+<a class="back" href="dashboard.html">
+← Dashboard
+</a>
+
+</header>
+
+
+<div class="container">
+
+<h1>⚙️ <span>Settings</span></h1>
+
+<p class="sub">
+अपने DraftAI preferences को यहाँ manage करें।
+</p>
+
+
+<!-- PROFILE -->
+
+<div class="card">
+
+<h2>👤 Profile</h2>
+
+<label>Your Name</label>
+
+<input
+id="userName"
+type="text"
+placeholder="अपना नाम लिखें"
+>
+
+<label>Email</label>
+
+<input
+id="userEmail"
+type="email"
+placeholder="example@email.com"
+>
+
+</div>
+
+
+<!-- APPEARANCE -->
+
+<div class="card">
+
+<h2>🎨 Appearance</h2>
+
+<label>Theme</label>
+
+<select id="theme">
+
+<option value="light">Light</option>
+<option value="dark">Dark</option>
+<option value="system">System Default</option>
+
+</select>
+
+</div>
+
+
+<!-- LANGUAGE -->
+
+<div class="card">
+
+<h2>🌐 Language</h2>
+
+<label>Interface Language</label>
+
+<select id="language">
+
+<option>Hindi</option>
+<option>English</option>
+<option>Hinglish</option>
+
+</select>
+
+</div>
+
+
+<!-- DEFAULT AI -->
+
+<div class="card">
+
+<h2>🤖 Default AI Settings</h2>
+
+<div class="grid">
+
+<div>
+
+<label>Default Voice</label>
+
+<select id="voice">
+
+<option>Male - Natural</option>
+<option>Male - Deep</option>
+<option>Male - Energetic</option>
+<option>Female - Natural</option>
+<option>Female - Soft</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>Default Image Style</label>
+
+<select id="imageStyle">
+
+<option>Realistic</option>
+<option>Cinematic</option>
+<option>Anime</option>
+<option>Illustration</option>
+<option>3D</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>Default Aspect Ratio</label>
+
+<select id="ratio">
+
+<option>16:9</option>
+<option>9:16</option>
+<option>1:1</option>
+<option>4:5</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>Default Audio Format</label>
+
+<select id="audio">
+
+<option>MP3</option>
+<option>WAV</option>
+
+</select>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- NOTIFICATIONS -->
+
+<div class="card">
+
+<h2>🔔 Notifications</h2>
+
+<div class="row">
+
+<div>
+
+<div class="row-title">
+Project Notifications
+</div>
+
+<div class="row-desc">
+Project save/export updates दिखाएँ।
+</div>
+
+</div>
+
+<label class="switch">
+
+<input id="projectNotify" type="checkbox" checked>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+
+<div class="row">
+
+<div>
+
+<div class="row-title">
+AI Generation Updates
+</div>
+
+<div class="row-desc">
+AI generation complete होने पर notification।
+</div>
+
+</div>
+
+<label class="switch">
+
+<input id="aiNotify" type="checkbox" checked>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+</div>
+
+
+<!-- AUTO SAVE -->
+
+<div class="card">
+
+<h2>💾 Editor</h2>
+
+<div class="row">
+
+<div>
+
+<div class="row-title">
+Auto Save</div>
+
+<div class="row-desc">
+Editor project को automatically save करें।
+</div>
+
+</div>
+
+<label class="switch">
+
+<input id="autoSave" type="checkbox" checked>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+</div>
+
+
+<!-- ACTIONS -->
+
+<div class="card">
+
+<h2>Settings Actions</h2>
+
+<div class="buttons">
+
+<button class="primary" onclick="saveSettings()">
+💾 Save Settings
+</button>
+
+<button class="secondary" onclick="loadSettings()">
+↻ Reset / Reload
+</button>
+
+<button class="danger" onclick="resetAll()">
+Reset All
+</button>
+
+</div>
+
+<div class="status" id="status"></div>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+function saveSettings(){
+
+let settings={
+
+name:document.getElementById("userName").value,
+
+email:document.getElementById("userEmail").value,
+
+theme:document.getElementById("theme").value,
+
+language:document.getElementById("language").value,
+
+voice:document.getElementById("voice").value,
+
+imageStyle:document.getElementById("imageStyle").value,
+
+ratio:document.getElementById("ratio").value,
+
+audio:document.getElementById("audio").value,
+
+projectNotify:document.getElementById("projectNotify").checked,
+
+aiNotify:document.getElementById("aiNotify").checked,
+
+autoSave:document.getElementById("autoSave").checked
+
+};
+
+localStorage.setItem(
+"draftai_settings",
+JSON.stringify(settings)
+);
+
+showStatus("✓ Settings successfully save हो गईं।");
+
+}
+
+
+function loadSettings(){
+
+let data=
+localStorage.getItem("draftai_settings");
+
+if(!data){
+
+showStatus("अभी कोई saved settings नहीं मिलीं।");
+
+return;
+
+}
+
+let s=
+JSON.parse(data);
+
+document.getElementById("userName").value=s.name||"";
+
+document.getElementById("userEmail").value=s.email||"";
+
+document.getElementById("theme").value=s.theme||"light";
+
+document.getElementById("language").value=s.language||"Hindi";
+
+document.getElementById("voice").value=s.voice||"Male - Natural";
+
+document.getElementById("imageStyle").value=s.imageStyle||"Realistic";
+
+document.getElementById("ratio").value=s.ratio||"16:9";
+
+document.getElementById("audio").value=s.audio||"MP3";
+
+document.getElementById("projectNotify").checked=
+s.projectNotify!==false;
+
+document.getElementById("aiNotify").checked=
+s.aiNotify!==false;
+
+document.getElementById("autoSave").checked=
+s.autoSave!==false;
+
+showStatus("✓ Saved settings load हो गईं।");
+
+}
+
+
+function resetAll(){
+
+let ok=
+confirm("क्या आप सभी settings reset करना चाहते हैं?");
+
+if(!ok)return;
+
+localStorage.removeItem("draftai_settings");
+
+document.getElementById("userName").value="";
+
+document.getElementById("userEmail").value="";
+
+document.getElementById("theme").value="light";
+
+document.getElementById("language").value="Hindi";
+
+document.getElementById("voice").value="Male - Natural";
+
+document.getElementById("imageStyle").value="Realistic";
+
+document.getElementById("ratio").value="16:9";
+
+document.getElementById("audio").value="MP3";
+
+document.getElementById("projectNotify").checked=true;
+
+document.getElementById("aiNotify").checked=true;
+
+document.getElementById("autoSave").checked=true;
+
+showStatus("✓ सभी settings reset हो गईं।");
+
+}
+
+
+function showStatus(message){
+
+let s=
+document.getElementById("status");
+
+s.style.display="block";
+
+s.innerText=message;
+
+setTimeout(function(){
+
+s.style.display="none";
+
+},2500);
+
+}
+
+
+loadSettings();
+
+</script>
+
+</body>
+</html>
