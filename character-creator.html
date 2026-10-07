@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Character Creator - DraftAI</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f7f7fb;
+color:#222
+}
+
+header{
+background:#fff;
+padding:16px 20px;
+border-bottom:1px solid #ddd;
+display:flex;
+justify-content:space-between;
+align-items:center
+}
+
+.logo{
+color:#6c3cff;
+font-size:23px;
+font-weight:bold;
+text-decoration:none
+}
+
+.back{
+color:#555;
+text-decoration:none
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:30px 16px
+}
+
+h1{
+text-align:center;
+font-size:34px;
+margin:10px 0
+}
+
+h1 span{color:#6c3cff}
+
+.subtitle{
+text-align:center;
+color:#666;
+font-size:17px;
+margin-bottom:25px
+}
+
+.box{
+background:#fff;
+border:1px solid #ddd;
+border-radius:16px;
+padding:20px;
+margin-bottom:20px
+}
+
+h2{margin-top:0}
+
+label{
+display:block;
+font-weight:bold;
+margin:16px 0 7px
+}
+
+input,
+textarea,
+select{
+width:100%;
+padding:13px;
+border:1px solid #ccc;
+border-radius:9px;
+font-size:15px;
+font-family:inherit
+}
+
+textarea{
+min-height:120px;
+resize:vertical
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px
+}
+
+.upload{
+border:2px dashed #bbb;
+border-radius:14px;
+padding:30px 15px;
+text-align:center;
+background:#fafafa;
+margin-top:10px
+}
+
+.upload-icon{
+font-size:45px
+}
+
+input[type=file]{
+display:none
+}
+
+.upload label{
+display:inline-block;
+background:#6c3cff;
+color:white;
+padding:12px 20px;
+border-radius:9px;
+cursor:pointer;
+margin-top:10px
+}
+
+#fileName{
+margin-top:12px;
+color:#666
+}
+
+.preview{
+min-height:230px;
+border:2px dashed #ccc;
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:#888;
+padding:20px;
+margin-top:20px
+}
+
+.actions{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-top:20px
+}
+
+button{
+padding:13px 20px;
+border-radius:9px;
+font-size:15px;
+font-weight:bold;
+cursor:pointer
+}
+
+.primary{
+background:#6c3cff;
+color:white;
+border:0
+}
+
+.secondary{
+background:white;
+color:#6c3cff;
+border:1px solid #6c3cff
+}
+
+@media(max-width:650px){
+.grid{grid-template-columns:1fr}
+h1{font-size:28px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a class="logo" href="index.html">DraftAI</a>
+<a class="back" href="dashboard.html">← Dashboard</a>
+</header>
+
+<div class="container">
+
+<h1>Character <span>Creator</span></h1>
+
+<p class="subtitle">
+अपना AI character बनाएं और future projects में इस्तेमाल करें।
+</p>
+
+<div class="box">
+
+<h2>Character Details</h2>
+
+<label>Character Name</label>
+
+<input
+id="name"
+type="text"
+placeholder="जैसे: Raju">
+
+<div class="grid">
+
+<div>
+<label>Gender</label>
+
+<select id="gender">
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+</select>
+</div>
+
+<div>
+<label>Age</label>
+
+<select id="age">
+<option>Child</option>
+<option>Teenager</option>
+<option selected>Adult</option>
+<option>Middle Age</option>
+<option>Senior</option>
+</select>
+</div>
+
+<div>
+<label>Skin Tone</label>
+
+<select id="skin">
+<option>Fair</option>
+<option>Medium</option>
+<option>Brown</option>
+<option>Dark</option>
+</select>
+</div>
+
+<div>
+<label>Body Type</label>
+
+<select id="body">
+<option>Average</option>
+<option>Muscular</option>
+<option>Slim</option>
+<option>Heavy</option>
+</select>
+</div>
+
+</div>
+
+<label>Hair Style</label>
+
+<select id="hair">
+<option>Short Hair</option>
+<option>Long Hair</option>
+<option>Curly Hair</option>
+<option>Traditional</option>
+<option>Beard</option>
+<option>Turban</option>
+</select>
+
+<label>Clothing</label>
+
+<input
+id="clothes"
+type="text"
+placeholder="जैसे: White Kurta, Dhoti and Turban">
+
+<label>Character Description</label>
+
+<textarea
+id="description"
+placeholder="Character का पूरा description यहाँ लिखें..."></textarea>
+
+</div>
+
+<div class="box">
+
+<h2>Reference Image</h2>
+
+<div class="upload">
+
+<div class="upload-icon">🧑</div>
+
+<p>Character की reference image चुनें</p>
+
+<label for="characterFile">
+Choose Image
+</label>
+
+<input
+type="file"
+id="characterFile"
+accept="image/*"
+onchange="showFile()">
+
+<div id="fileName">
+कोई image select नहीं की गई
+</div>
+
+</div>
+
+</div>
+
+<div class="box">
+
+<h2>Character Preview</h2>
+
+<div class="preview" id="preview">
+Character preview यहाँ दिखाई देगा
+</div>
+
+<div class="actions">
+
+<button
+class="primary"
+onclick="createCharacter()">
+Create Character
+</button>
+
+<button
+class="secondary"
+onclick="clearCharacter()">
+Clear
+</button>
+
+<button
+class="secondary"
+onclick="saveCharacter()">
+Save Character
+</button>
+
+<button
+class="secondary"
+onclick="downloadCharacter()">
+Download
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function showFile(){
+
+const file=
+document.getElementById("characterFile").files[0];
+
+if(file){
+
+document.getElementById("fileName").innerText=
+"✓ "+file.name;
+
+}
+
+}
+
+function createCharacter(){
+
+const name=
+document.getElementById("name").value.trim();
+
+if(!name){
+
+alert("पहले Character Name लिखें।");
+
+return;
+
+}
+
+const gender=
+document.getElementById("gender").value;
+
+const age=
+document.getElementById("age").value;
+
+const skin=
+document.getElementById("skin").value;
+
+const body=
+document.getElementById("body").value;
+
+const hair=
+document.getElementById("hair").value;
+
+const clothes=
+document.getElementById("clothes").value;
+
+document.getElementById("preview").innerText=
+"✓ Character तैयार है\n\n"+
+"Name: "+name+
+"\nGender: "+gender+
+"\nAge: "+age+
+"\nSkin: "+skin+
+"\nBody: "+body+
+"\nHair: "+hair+
+"\nClothing: "+(clothes || "Not specified")+
+"\n\nAI Character Generation के लिए prompt ready है।";
+
+}
+
+function clearCharacter(){
+
+document.getElementById("name").value="";
+document.getElementById("clothes").value="";
+document.getElementById("description").value="";
+
+document.getElementById("characterFile").value="";
+
+document.getElementById("fileName").innerText=
+"कोई image select नहीं की गई";
+
+document.getElementById("preview").innerText=
+"Character preview यहाँ दिखाई देगा";
+
+}
+
+function saveCharacter(){
+
+const name=
+document.getElementById("name").value.trim();
+
+if(!name){
+
+alert("पहले Character Name लिखें।");
+
+return;
+
+}
+
+localStorage.setItem(
+"draftai_character",
+JSON.stringify({
+name:name,
+gender:document.getElementById("gender").value,
+age:document.getElementById("age").value,
+skin:document.getElementById("skin").value,
+body:document.getElementById("body").value,
+hair:document.getElementById("hair").value,
+clothes:document.getElementById("clothes").value,
+description:document.getElementById("description").value
+})
+);
+
+alert("Character browser में save हो गया।");
+
+}
+
+function downloadCharacter(){
+
+const name=
+document.getElementById("name").value.trim() ||
+"DraftAI Character";
+
+const text=
+"DraftAI Character\n\n"+
+"Name: "+name+
+"\nGender: "+document.getElementById("gender").value+
+"\nAge: "+document.getElementById("age").value+
+"\nSkin Tone: "+document.getElementById("skin").value+
+"\nBody Type: "+document.getElementById("body").value+
+"\nHair: "+document.getElementById("hair").value+
+"\nClothing: "+document.getElementById("clothes").value+
+"\nDescription: "+document.getElementById("description").value;
+
+const blob=
+new Blob([text],{type:"text/plain"});
+
+const link=
+document.createElement("a");
+
+link.href=
+URL.createObjectURL(blob);
+
+link.download=
+"draftai-character.txt";
+
+link.click();
+
+URL.revokeObjectURL(link.href);
+
+}
+
+</script>
+
+</body>
+  </html>
