@@ -4,166 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AI Voice - DraftAI</title>
-
 <style>
 *{box-sizing:border-box}
-
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#f7f7fb;
-color:#222
-}
-
-header{
-background:#fff;
-padding:16px 20px;
-border-bottom:1px solid #ddd;
-display:flex;
-justify-content:space-between;
-align-items:center
-}
-
-.logo{
-color:#6c3cff;
-font-size:23px;
-font-weight:bold;
-text-decoration:none
-}
-
-.back{
-color:#555;
-text-decoration:none
-}
-
-.container{
-max-width:900px;
-margin:auto;
-padding:30px 16px
-}
-
-h1{
-text-align:center;
-font-size:34px;
-margin:10px 0
-}
-
+body{margin:0;font-family:Arial,sans-serif;background:#f7f7fb;color:#222}
+header{background:#fff;padding:16px 20px;border-bottom:1px solid #ddd;display:flex;justify-content:space-between}
+.logo{color:#6c3cff;font-size:23px;font-weight:bold;text-decoration:none}
+.back{color:#555;text-decoration:none}
+.container{max-width:900px;margin:auto;padding:30px 16px}
+h1{text-align:center;font-size:34px;margin:10px 0}
 h1 span{color:#6c3cff}
-
-.subtitle{
-text-align:center;
-color:#666;
-font-size:17px;
-margin-bottom:25px
-}
-
-.box{
-background:#fff;
-border:1px solid #ddd;
-border-radius:16px;
-padding:20px;
-margin-bottom:20px
-}
-
-h2{margin-top:0}
-
-label{
-display:block;
-font-weight:bold;
-margin:16px 0 7px
-}
-
-textarea,
-select,
-input[type=range]{
-width:100%
-}
-
-textarea{
-min-height:180px;
-padding:14px;
-border:1px solid #ccc;
-border-radius:10px;
-font-size:16px;
-font-family:inherit;
-resize:vertical
-}
-
-select{
-padding:13px;
-border:1px solid #ccc;
-border-radius:9px;
-font-size:16px
-}
-
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:15px
-}
-
-.range-row{
-display:flex;
-align-items:center;
-gap:12px
-}
-
-.range-row input{
-flex:1
-}
-
-.value{
-min-width:45px;
-font-weight:bold;
-text-align:center
-}
-
-.player{
-border:2px dashed #ccc;
-border-radius:12px;
-padding:25px 15px;
-text-align:center;
-color:#888;
-margin-top:20px
-}
-
-.status{
-font-size:18px;
-font-weight:bold;
-margin-bottom:15px
-}
-
-.actions{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-margin-top:20px
-}
-
-button{
-padding:13px 20px;
-border-radius:9px;
-font-size:15px;
-font-weight:bold;
-cursor:pointer
-}
-
-.primary{
-background:#6c3cff;
-color:white;
-border:0
-}
-
-.secondary{
-background:white;
-color:#6c3cff;
-border:1px solid #6c3cff
-}
-
-@media(max-width:650px){
-.grid{grid-template-columns:1fr}
-h1{font-size:28px}
-}
+.sub{text-align:center;color:#666;font-size:17px;margin-bottom:25px}
+.box{background:#fff;border:1px solid #ddd;border-radius:16px;padding:20px;margin-bottom:20px}
+label{display:block;font-weight:bold;margin:16px 0 7px}
+textarea,select{width:100%;padding:13px;border:1px solid #ccc;border-radius:9px;font-size:16px}
+textarea{height:180px;resize:vertical}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.range{display:flex;gap:12px;align-items:center}
+.range input{flex:1}
+.val{width:50px;text-align:center;font-weight:bold}
+.preview{border:2px dashed #ccc;border-radius:12px;padding:25px;text-align:center;color:#888;margin-top:20px;white-space:pre-line}
+.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+button{padding:13px 20px;border-radius:9px;font-size:15px;font-weight:bold;cursor:pointer}
+.primary{background:#6c3cff;color:white;border:0}
+.secondary{background:white;color:#6c3cff;border:1px solid #6c3cff}
+@media(max-width:650px){.grid{grid-template-columns:1fr}h1{font-size:28px}}
 </style>
 </head>
 
@@ -177,32 +41,179 @@ h1{font-size:28px}
 <div class="container">
 
 <h1>AI <span>Voice</span></h1>
-
-<p class="subtitle">
-अपनी script को AI voice के लिए तैयार करें।
-</p>
+<p class="sub">अपनी script को AI voice के लिए तैयार करें।</p>
 
 <div class="box">
-
 <h2>Voice Script</h2>
-
 <label>Text / Script</label>
-
-<textarea
-id="script"
-placeholder="यहाँ अपनी script लिखें..."></textarea>
-
+<textarea id="script" placeholder="यहाँ अपनी script लिखें..."></textarea>
 </div>
 
 <div class="box">
-
 <h2>Voice Settings</h2>
 
 <div class="grid">
 
 <div>
-
 <label>Language</label>
-
 <select id="language">
-<option>Hindi</
+<option>Hindi</option>
+<option>English</option>
+<option>Hinglish</option>
+<option>Marathi</option>
+</select>
+</div>
+
+<div>
+<label>Voice</label>
+<select id="voice">
+<option>Male - Natural</option>
+<option>Male - Deep</option>
+<option>Male - Energetic</option>
+<option>Female - Natural</option>
+<option>Female - Soft</option>
+</select>
+</div>
+
+<div>
+<label>Voice Style</label>
+<select id="style">
+<option>Natural</option>
+<option>Motivational</option>
+<option>Emotional</option>
+<option>Storytelling</option>
+<option>Documentary</option>
+</select>
+</div>
+
+<div>
+<label>Audio Format</label>
+<select id="format">
+<option>MP3</option>
+<option>WAV</option>
+</select>
+</div>
+
+</div>
+
+<label>Speed</label>
+<div class="range">
+<input id="speed" type="range" min="50" max="150" value="100" oninput="values()">
+<span class="val" id="sv">100%</span>
+</div>
+
+<label>Pitch</label>
+<div class="range">
+<input id="pitch" type="range" min="50" max="150" value="100" oninput="values()">
+<span class="val" id="pv">100%</span>
+</div>
+
+</div>
+
+<div class="box">
+<h2>Voice Preview</h2>
+
+<div class="preview" id="preview">
+Voice preview यहाँ दिखाई देगा
+</div>
+
+<div class="buttons">
+
+<button class="primary" onclick="generate()">Generate Voice</button>
+
+<button class="secondary" onclick="play()">▶ Play</button>
+
+<button class="secondary" onclick="pause()">⏸ Pause</button>
+
+<button class="secondary" onclick="clearAll()">Clear</button>
+
+<button class="secondary" onclick="download()">Download</button>
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+let ready=false;
+
+function values(){
+sv.innerText=speed.value+"%";
+pv.innerText=pitch.value+"%";
+}
+
+function generate(){
+
+if(!script.value.trim()){
+alert("पहले script लिखें।");
+return;
+}
+
+ready=true;
+
+preview.innerText=
+"✓ Voice तैयार है\n\n"+
+"Language: "+language.value+
+"\nVoice: "+voice.value+
+"\nStyle: "+style.value+
+"\n\nAI Voice के लिए audio ready है।";
+}
+
+function play(){
+
+if(!ready){
+alert("पहले Generate Voice दबाएँ।");
+return;
+}
+
+preview.innerText="▶ Voice Playing...";
+}
+
+function pause(){
+
+if(!ready){
+alert("पहले Generate Voice दबाएँ।");
+return;
+}
+
+preview.innerText="⏸ Voice Paused";
+}
+
+function clearAll(){
+
+script.value="";
+ready=false;
+preview.innerText="Voice preview यहाँ दिखाई देगा";
+}
+
+function download(){
+
+if(!ready){
+alert("पहले Generate Voice दबाएँ।");
+return;
+}
+
+let text=
+"DraftAI AI Voice\n\n"+
+"Language: "+language.value+
+"\nVoice: "+voice.value+
+"\nStyle: "+style.value+
+"\nSpeed: "+speed.value+"%"+
+"\nPitch: "+pitch.value+"%"+
+"\n\nScript:\n"+script.value;
+
+let blob=new Blob([text],{type:"text/plain"});
+let a=document.createElement("a");
+
+a.href=URL.createObjectURL(blob);
+a.download="draftai-ai-voice.txt";
+a.click();
+
+URL.revokeObjectURL(a.href);
+}
+
+</script>
+
+</body>
+</html>
