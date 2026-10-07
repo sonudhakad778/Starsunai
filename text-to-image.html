@@ -1,542 +1,607 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Text to Image - DraftAI</title>
+<title>Text to Image - DraftAI</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f7f7fb;
-            color: #222;
-        }
+body{
+  font-family:Arial,sans-serif;
+  background:#080b14;
+  color:white;
+  min-height:100vh;
+}
 
-        header {
-            background: #ffffff;
-            padding: 16px 22px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #e5e5e5;
-        }
+.header{
+  height:70px;
+  background:#0b0f1c;
+  border-bottom:1px solid #202535;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 6%;
+}
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #6c3cff;
-            text-decoration: none;
-        }
+.logo{
+  font-size:24px;
+  font-weight:bold;
+}
 
-        .back {
-            text-decoration: none;
-            color: #555;
-            font-size: 15px;
-        }
+.logo span{
+  color:#7c5cff;
+}
 
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 35px 18px 60px;
-        }
+.header a{
+  color:#aaa;
+  text-decoration:none;
+}
 
-        .title {
-            text-align: center;
-            margin-bottom: 35px;
-        }
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:40px 20px;
+}
 
-        .title h1 {
-            font-size: 38px;
-            margin-bottom: 12px;
-        }
+.title{
+  margin-bottom:30px;
+}
 
-        .title h1 span {
-            color: #6c3cff;
-        }
+.title h1{
+  font-size:34px;
+  margin-bottom:10px;
+}
 
-        .title p {
-            color: #666;
-            font-size: 16px;
-            line-height: 1.6;
-        }
+.title p{
+  color:#9da5b8;
+  line-height:1.6;
+}
 
-        .workspace {
-            display: grid;
-            grid-template-columns: 380px 1fr;
-            gap: 25px;
-        }
+.workspace{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+}
 
-        .panel {
-            background: white;
-            border: 1px solid #e5e5e5;
-            border-radius: 18px;
-            padding: 22px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
-        }
+.card{
+  background:#111625;
+  border:1px solid #252c3e;
+  border-radius:18px;
+  padding:24px;
+}
 
-        .panel h2 {
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
+.card h2{
+  font-size:20px;
+  margin-bottom:18px;
+}
 
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 8px;
-            margin-top: 18px;
-        }
+label{
+  display:block;
+  color:#dfe3ed;
+  font-size:14px;
+  margin:16px 0 8px;
+}
 
-        textarea {
-            width: 100%;
-            min-height: 150px;
-            resize: vertical;
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            padding: 14px;
-            font-size: 15px;
-            font-family: Arial, sans-serif;
-            outline: none;
-        }
+textarea,
+select{
+  width:100%;
+  border:1px solid #30384d;
+  background:#090d17;
+  color:white;
+  border-radius:10px;
+  outline:none;
+  font-size:15px;
+}
 
-        textarea:focus {
-            border-color: #6c3cff;
-        }
+textarea{
+  min-height:180px;
+  resize:vertical;
+  padding:15px;
+  line-height:1.5;
+}
 
-        select {
-            width: 100%;
-            padding: 13px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            background: white;
-            font-size: 15px;
-        }
+select{
+  padding:13px;
+}
 
-        .generate-btn {
-            width: 100%;
-            margin-top: 25px;
-            padding: 15px;
-            border: none;
-            border-radius: 11px;
-            background: #6c3cff;
-            color: white;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+textarea:focus,
+select:focus{
+  border-color:#7c5cff;
+}
 
-        .generate-btn:hover {
-            background: #5928e6;
-        }
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
 
-        .preview {
-            min-height: 520px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: #fafafa;
-            border: 2px dashed #ddd;
-            border-radius: 15px;
-            overflow: hidden;
-        }
+.btn{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:10px;
+  background:#7c5cff;
+  color:white;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:20px;
+}
 
-        .preview-content {
-            padding: 30px;
-            color: #888;
-        }
+.btn:hover{
+  opacity:.9;
+}
 
-        .preview-icon {
-            font-size: 70px;
-            margin-bottom: 15px;
-        }
+.btn.secondary{
+  background:#202638;
+}
 
-        .preview h3 {
-            color: #444;
-            margin-bottom: 8px;
-        }
+.preview{
+  min-height:330px;
+  border:1px dashed #3a4258;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:25px;
+  background:#0b101c;
+}
 
-        .preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: none;
-        }
+.preview-icon{
+  font-size:60px;
+  margin-bottom:15px;
+}
 
-        .loading {
-            display: none;
-            color: #6c3cff;
-            font-weight: bold;
-        }
+.preview p{
+  color:#8f98aa;
+  line-height:1.5;
+}
 
-        .examples {
-            margin-top: 35px;
-        }
+.result{
+  display:none;
+}
 
-        .examples h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+.result-box{
+  background:#0b101c;
+  border:1px solid #30384d;
+  border-radius:12px;
+  padding:18px;
+  line-height:1.6;
+  color:#b9c0d0;
+  word-break:break-word;
+}
 
-        .example-list {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
+.message{
+  text-align:center;
+  margin-top:15px;
+  min-height:22px;
+  color:#48e68a;
+}
 
-        .example {
-            background: white;
-            border: 1px solid #e5e5e5;
-            padding: 18px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+.footer{
+  text-align:center;
+  color:#687084;
+  padding:40px 20px;
+  font-size:13px;
+}
 
-        .example:hover {
-            border-color: #6c3cff;
-            transform: translateY(-2px);
-        }
+@media(max-width:750px){
 
-        footer {
-            background: #181818;
-            color: white;
-            text-align: center;
-            padding: 25px;
-            margin-top: 30px;
-        }
+  .header{
+    padding:0 18px;
+  }
 
-        @media (max-width: 800px) {
+  .workspace{
+    grid-template-columns:1fr;
+  }
 
-            .workspace {
-                grid-template-columns: 1fr;
-            }
+  .title h1{
+    font-size:28px;
+  }
 
-            .example-list {
-                grid-template-columns: 1fr;
-            }
+  .row{
+    grid-template-columns:1fr;
+  }
 
-            .title h1 {
-                font-size: 31px;
-            }
-
-            .preview {
-                min-height: 350px;
-            }
-        }
-    </style>
+  .container{
+    padding:30px 15px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-    <header>
+<header class="header">
 
-        <a href="index.html" class="logo">
-            DraftAI
-        </a>
+  <div class="logo">
+    Draft<span>AI</span>
+  </div>
 
-        <a href="index.html" class="back">
-            ← वापस Home
-        </a>
+  <div>
+    <a href="dashboard.html">← Dashboard</a>
+  </div>
 
-    </header>
-
-
-    <main class="container">
-
-        <div class="title">
-
-            <h1>
-                Text <span>to Image</span>
-            </h1>
-
-            <p>
-                अपने विचार को एक Prompt में लिखिए और AI Image तैयार कीजिए।
-            </p>
-
-        </div>
+</header>
 
 
-        <div class="workspace">
+<main class="container">
+
+  <section class="title">
+
+    <h1>🎨 Text to Image</h1>
+
+    <p>
+      अपने text prompt को AI image project में बदलें।
+      Style, size और quality अपनी जरूरत के अनुसार चुनें।
+    </p>
+
+  </section>
 
 
-            <!-- LEFT PANEL -->
+  <div class="workspace">
 
-            <div class="panel">
+    <!-- LEFT -->
 
-                <h2>
-                    🪄 Create Image
-                </h2>
+    <section class="card">
 
+      <h2>Image Prompt</h2>
 
-                <label for="prompt">
-                    आपका Prompt
-                </label>
+      <label>
+        Describe your image
+      </label>
 
-                <textarea
-                    id="prompt"
-                    placeholder="उदाहरण: एक भारतीय गांव में सूर्यास्त के समय खेत में चलता हुआ किसान, cinematic lighting, ultra realistic..."
-                ></textarea>
-
-
-                <label for="style">
-                    Image Style
-                </label>
-
-                <select id="style">
-
-                    <option value="realistic">
-                        Ultra Realistic
-                    </option>
-
-                    <option value="cinematic">
-                        Cinematic
-                    </option>
-
-                    <option value="digital">
-                        Digital Art
-                    </option>
-
-                    <option value="anime">
-                        Anime
-                    </option>
-
-                    <option value="cartoon">
-                        Cartoon
-                    </option>
-
-                </select>
+      <textarea
+        id="prompt"
+        placeholder="उदाहरण: एक भारतीय गाँव में सूर्यास्त के समय खेत में खड़ा किसान, cinematic lighting, realistic photography..."
+      ></textarea>
 
 
-                <label for="ratio">
-                    Image Size
-                </label>
+      <div class="row">
 
-                <select id="ratio">
+        <div>
 
-                    <option value="1024x1024">
-                        Square 1:1
-                    </option>
+          <label>Image Style</label>
 
-                    <option value="1280x720">
-                        Landscape 16:9
-                    </option>
+          <select id="style">
 
-                    <option value="720x1280">
-                        Portrait 9:16
-                    </option>
+            <option>Realistic</option>
+            <option>Cinematic</option>
+            <option>Digital Art</option>
+            <option>Anime</option>
+            <option>3D</option>
+            <option>Watercolor</option>
+            <option>Fantasy</option>
+            <option>Photorealistic</option>
 
-                    <option value="1024x1536">
-                        Portrait 2:3
-                    </option>
-
-                </select>
-
-
-                <button
-                    class="generate-btn"
-                    onclick="generateImage()"
-                >
-                    ✨ Generate Image
-                </button>
-
-            </div>
-
-
-            <!-- RIGHT PANEL -->
-
-            <div class="panel">
-
-                <h2>
-                    🖼️ Preview
-                </h2>
-
-                <div class="preview">
-
-                    <div
-                        class="preview-content"
-                        id="previewContent"
-                    >
-
-                        <div class="preview-icon">
-                            🖼️
-                        </div>
-
-                        <h3>
-                            आपकी Image यहाँ दिखाई देगी
-                        </h3>
-
-                        <p>
-                            पहले अपना Prompt लिखें और
-                            Generate Image दबाएँ।
-                        </p>
-
-                    </div>
-
-
-                    <div
-                        class="loading"
-                        id="loading"
-                    >
-                        ⏳ Image तैयार हो रही है...
-                    </div>
-
-
-                    <img
-                        id="resultImage"
-                        alt="Generated Image"
-                    >
-
-                </div>
-
-            </div>
+          </select>
 
         </div>
 
 
-        <!-- EXAMPLES -->
+        <div>
 
-        <section class="examples">
+          <label>Image Size</label>
 
-            <h2>
-                💡 Prompt Examples
-            </h2>
+          <select id="size">
 
+            <option>1024 × 1024</option>
+            <option>1024 × 1536</option>
+            <option>1536 × 1024</option>
+            <option>1280 × 720</option>
+            <option>720 × 1280</option>
 
-            <div class="example-list">
+          </select>
 
+        </div>
 
-                <div
-                    class="example"
-                    onclick="usePrompt(this)"
-                >
-                    एक भारतीय किसान खेत में खड़ा है,
-                    सूर्यास्त, cinematic lighting,
-                    ultra realistic photography
-                </div>
+      </div>
 
 
-                <div
-                    class="example"
-                    onclick="usePrompt(this)"
-                >
-                    राजस्थान का सुंदर रेगिस्तान,
-                    ऊँट और पारंपरिक गांव,
-                    golden sunset, cinematic
-                </div>
+      <div class="row">
+
+        <div>
+
+          <label>Quality</label>
+
+          <select id="quality">
+
+            <option>Standard</option>
+            <option>High</option>
+            <option>Ultra</option>
+
+          </select>
+
+        </div>
 
 
-                <div
-                    class="example"
-                    onclick="usePrompt(this)"
-                >
-                    एक futuristic Indian city at night,
-                    neon lights, cinematic,
-                    highly detailed
-                </div>
+        <div>
+
+          <label>Number of Images</label>
+
+          <select id="count">
+
+            <option>1</option>
+            <option>2</option>
+            <option>4</option>
+
+          </select>
+
+        </div>
+
+      </div>
 
 
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <footer>
-
-        <p>
-            © 2026 DraftAI - AI Creative Studio
-        </p>
-
-    </footer>
+      <button
+        class="btn"
+        onclick="generateImage()"
+      >
+        ✨ Generate Image
+      </button>
 
 
-    <script>
-
-        function usePrompt(element) {
-
-            document.getElementById("prompt").value =
-                element.innerText;
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-        }
+      <button
+        class="btn secondary"
+        onclick="clearPrompt()"
+      >
+        Clear
+      </button>
 
 
-        function generateImage() {
+      <div
+        id="message"
+        class="message"
+      ></div>
 
-            const prompt =
-                document.getElementById("prompt").value.trim();
-
-            const loading =
-                document.getElementById("loading");
-
-            const previewContent =
-                document.getElementById("previewContent");
-
-            const resultImage =
-                document.getElementById("resultImage");
+    </section>
 
 
-            if (prompt === "") {
+    <!-- RIGHT -->
 
-                alert("कृपया पहले अपना Prompt लिखें।");
+    <section class="card">
 
-                return;
-            }
+      <h2>Preview</h2>
+
+      <div
+        class="preview"
+        id="preview"
+      >
+
+        <div>
+
+          <div class="preview-icon">
+            🖼️
+          </div>
+
+          <p>
+            आपकी generated image यहाँ दिखाई देगी।
+          </p>
+
+        </div>
+
+      </div>
 
 
-            previewContent.style.display = "none";
+      <div
+        class="result"
+        id="result"
+      >
 
-            resultImage.style.display = "none";
+        <h2 style="margin-top:22px;">
+          Generation Details
+        </h2>
 
-            loading.style.display = "block";
+        <div
+          class="result-box"
+          id="resultBox"
+        ></div>
 
 
-            /*
-                अभी यह Demo है।
+        <button
+          class="btn secondary"
+          onclick="downloadPrompt()"
+        >
+          ⬇️ Download Details
+        </button>
 
-                असली AI Image Generation API
-                बाद में यहाँ जोड़ी जाएगी।
-            */
+      </div>
 
-            setTimeout(function() {
+    </section>
 
-                loading.style.display = "none";
+  </div>
 
-                previewContent.innerHTML = `
+</main>
 
-                    <div class="preview-icon">
-                        ✨
-                    </div>
 
-                    <h3>
-                        Prompt तैयार है!
-                    </h3>
+<footer class="footer">
 
-                    <p>
-                        असली AI Image Generation API
-                        अगले चरण में जोड़ी जाएगी।
-                    </p>
+  DraftAI — Text to Image Workspace
 
-                `;
+</footer>
 
-                previewContent.style.display = "block";
 
-            }, 1200);
+<script>
 
-        }
+let lastPrompt = "";
 
-    </script>
+
+function generateImage(){
+
+  const prompt =
+    document.getElementById("prompt")
+    .value
+    .trim();
+
+  const style =
+    document.getElementById("style")
+    .value;
+
+  const size =
+    document.getElementById("size")
+    .value;
+
+  const quality =
+    document.getElementById("quality")
+    .value;
+
+  const count =
+    document.getElementById("count")
+    .value;
+
+
+  if(!prompt){
+
+    document.getElementById("message").innerText =
+      "❌ पहले Image Prompt लिखिए।";
+
+    return;
+  }
+
+
+  lastPrompt = prompt;
+
+
+  document.getElementById("preview").innerHTML =
+
+    "<div>" +
+
+    "<div class='preview-icon'>✨</div>" +
+
+    "<h3>Image Generation Ready</h3>" +
+
+    "<p style='margin-top:10px'>" +
+
+    "आपका prompt successfully तैयार है।<br>" +
+
+    "अगले चरण में इसे real AI image generation API से जोड़ा जाएगा।" +
+
+    "</p>" +
+
+    "</div>";
+
+
+  document.getElementById("resultBox").innerText =
+
+    "Prompt: " + prompt +
+
+    "\n\nStyle: " + style +
+
+    "\nSize: " + size +
+
+    "\nQuality: " + quality +
+
+    "\nImages: " + count;
+
+
+  document.getElementById("result").style.display =
+    "block";
+
+
+  document.getElementById("message").innerText =
+    "✅ Image project तैयार है।";
+
+
+  localStorage.setItem(
+    "draftai_last_image_prompt",
+    prompt
+  );
+
+}
+
+
+function clearPrompt(){
+
+  document.getElementById("prompt").value = "";
+
+  document.getElementById("message").innerText = "";
+
+  document.getElementById("result").style.display =
+    "none";
+
+
+  document.getElementById("preview").innerHTML =
+
+    "<div>" +
+
+    "<div class='preview-icon'>🖼️</div>" +
+
+    "<p>आपकी generated image यहाँ दिखाई देगी।</p>" +
+
+    "</div>";
+
+}
+
+
+function downloadPrompt(){
+
+  if(!lastPrompt){
+
+    alert("पहले Generate Image दबाइए।");
+
+    return;
+  }
+
+
+  const style =
+    document.getElementById("style").value;
+
+  const size =
+    document.getElementById("size").value;
+
+
+  const text =
+
+    "DraftAI Text to Image\n\n" +
+
+    "Prompt:\n" +
+
+    lastPrompt +
+
+    "\n\nStyle: " +
+
+    style +
+
+    "\nSize: " +
+
+    size;
+
+
+  const blob =
+    new Blob(
+      [text],
+      {type:"text/plain"}
+    );
+
+
+  const url =
+    URL.createObjectURL(blob);
+
+
+  const a =
+    document.createElement("a");
+
+
+  a.href = url;
+
+  a.download =
+    "draftai-image-prompt.txt";
+
+  a.click();
+
+
+  URL.revokeObjectURL(url);
+
+}
+
+</script>
 
 </body>
-                  </html>
+</html>
