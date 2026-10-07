@@ -2,303 +2,348 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Sign Up - DraftAI</title>
 
 <style>
-*{box-sizing:border-box}
-
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#f6f5fb;
-color:#222;
-min-height:100vh;
-display:flex;
-flex-direction:column;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-header{
-background:#fff;
-border-bottom:1px solid #ddd;
-padding:16px 20px;
+body{
+  font-family:Arial, sans-serif;
+  background:#080b14;
+  color:white;
+  min-height:100vh;
+}
+
+.header{
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 7%;
+  border-bottom:1px solid #202535;
+  background:#0b0f1c;
 }
 
 .logo{
-font-size:24px;
-font-weight:bold;
-color:#6c3cff;
-text-decoration:none;
+  font-size:24px;
+  font-weight:bold;
+  color:#ffffff;
+}
+
+.logo span{
+  color:#7c5cff;
+}
+
+.back{
+  color:#aaa;
+  text-decoration:none;
+  font-size:14px;
+}
+
+.back:hover{
+  color:white;
 }
 
 .container{
-width:100%;
-max-width:480px;
-margin:auto;
-padding:25px 16px 40px;
+  width:100%;
+  max-width:500px;
+  margin:40px auto;
+  padding:20px;
 }
 
 .card{
-background:#fff;
-border:1px solid #ddd;
-border-radius:18px;
-padding:25px 20px;
+  background:#111625;
+  border:1px solid #252c3e;
+  border-radius:20px;
+  padding:30px;
+  box-shadow:0 20px 60px rgba(0,0,0,.35);
 }
 
 h1{
-text-align:center;
-font-size:32px;
-margin:5px 0 8px;
-}
-
-h1 span{
-color:#6c3cff;
+  text-align:center;
+  font-size:30px;
+  margin-bottom:10px;
 }
 
 .subtitle{
-text-align:center;
-color:#666;
-margin:0 0 25px;
+  text-align:center;
+  color:#9da5b8;
+  margin-bottom:28px;
+  line-height:1.5;
 }
 
 label{
-display:block;
-font-weight:bold;
-margin:15px 0 7px;
+  display:block;
+  margin:16px 0 8px;
+  font-size:14px;
+  color:#dfe3ed;
 }
 
 input{
-width:100%;
-padding:14px;
-border:1px solid #ccc;
-border-radius:9px;
-font-size:16px;
-outline:none;
+  width:100%;
+  padding:14px;
+  border-radius:10px;
+  border:1px solid #30384d;
+  background:#090d17;
+  color:white;
+  outline:none;
+  font-size:15px;
 }
 
 input:focus{
-border-color:#6c3cff;
+  border-color:#7c5cff;
 }
 
 .password-box{
-position:relative;
+  position:relative;
 }
 
 .password-box input{
-padding-right:75px;
+  padding-right:75px;
 }
 
-.show{
-position:absolute;
-right:9px;
-top:8px;
-width:auto;
-padding:8px 10px;
-margin:0;
-background:transparent;
-color:#6c3cff;
-border:0;
-font-size:14px;
+.show-btn{
+  position:absolute;
+  right:8px;
+  top:8px;
+  padding:7px 10px;
+  border:none;
+  border-radius:7px;
+  background:#252c3e;
+  color:#ddd;
+  cursor:pointer;
 }
 
 .terms{
-display:flex;
-align-items:flex-start;
-gap:8px;
-margin:18px 0;
-font-size:13px;
-color:#666;
-line-height:1.5;
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  margin:18px 0;
+  color:#9da5b8;
+  font-size:13px;
+  line-height:1.4;
 }
 
 .terms input{
-width:auto;
-margin-top:3px;
+  width:18px;
+  height:18px;
+  margin-top:2px;
 }
 
 .terms a{
-color:#6c3cff;
+  color:#8d78ff;
 }
 
-.main-btn{
-width:100%;
-padding:14px;
-border:0;
-border-radius:9px;
-background:#6c3cff;
-color:#fff;
-font-size:16px;
-font-weight:bold;
-cursor:pointer;
+button.main{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:11px;
+  background:linear-gradient(135deg,#7c5cff,#5b3df5);
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button.main:hover{
+  opacity:.9;
+}
+
+.message{
+  margin-top:15px;
+  text-align:center;
+  font-size:14px;
+  min-height:20px;
+}
+
+.success{
+  color:#48e68a;
+}
+
+.error{
+  color:#ff6262;
 }
 
 .divider{
-display:flex;
-align-items:center;
-gap:10px;
-margin:22px 0;
-color:#999;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:25px 0;
+  color:#687084;
+  font-size:13px;
 }
 
-.divider:before,
-.divider:after{
-content:"";
-height:1px;
-background:#ddd;
-flex:1;
+.divider::before,
+.divider::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:#292f40;
 }
 
 .login{
-text-align:center;
-color:#666;
+  text-align:center;
+  color:#9da5b8;
+  font-size:14px;
 }
 
 .login a{
-color:#6c3cff;
-font-weight:bold;
-text-decoration:none;
-}
-
-.demo{
-display:none;
-background:#f0edff;
-color:#5a32cc;
-padding:12px;
-border-radius:9px;
-margin-top:15px;
-text-align:center;
-line-height:1.5;
+  color:#8d78ff;
+  text-decoration:none;
+  font-weight:bold;
 }
 
 .home{
-display:block;
-text-align:center;
-margin-top:20px;
-color:#555;
-text-decoration:none;
-font-weight:bold;
+  text-align:center;
+  margin-top:22px;
 }
 
-@media(max-width:500px){
-.card{
-padding:22px 17px;
+.home a{
+  color:#aaa;
+  text-decoration:none;
+  font-size:14px;
 }
+
+@media(max-width:600px){
+  .header{
+    padding:0 20px;
+  }
+
+  .container{
+    margin:20px auto;
+    padding:15px;
+  }
+
+  .card{
+    padding:22px;
+  }
+
+  h1{
+    font-size:27px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<a class="logo" href="index.html">DraftAI</a>
+<header class="header">
+  <div class="logo">Draft<span>AI</span></div>
+
+  <a class="back" href="index.html">
+    ← Back to Home
+  </a>
 </header>
 
 <div class="container">
 
-<div class="card">
+  <div class="card">
 
-<h1>Create <span>Account</span></h1>
+    <h1>Create Account</h1>
 
-<p class="subtitle">
-DraftAI के साथ अपना creative journey शुरू करें
-</p>
+    <p class="subtitle">
+      DraftAI में अपना अकाउंट बनाइए और AI Creative Tools का इस्तेमाल शुरू कीजिए।
+    </p>
 
-<form onsubmit="signup(event)">
+    <form id="signupForm">
 
-<label>Full Name</label>
+      <label>Full Name</label>
+      <input
+        type="text"
+        id="name"
+        placeholder="अपना नाम लिखें"
+        required
+      >
 
-<input
-id="name"
-type="text"
-placeholder="अपना नाम लिखें"
-required
->
+      <label>Email</label>
+      <input
+        type="email"
+        id="email"
+        placeholder="example@gmail.com"
+        required
+      >
 
-<label>Email</label>
+      <label>Password</label>
 
-<input
-id="email"
-type="email"
-placeholder="example@email.com"
-required
->
+      <div class="password-box">
+        <input
+          type="password"
+          id="password"
+          placeholder="कम से कम 6 characters"
+          minlength="6"
+          required
+        >
 
-<label>Password</label>
+        <button
+          type="button"
+          class="show-btn"
+          onclick="togglePassword('password',this)"
+        >
+          Show
+        </button>
+      </div>
 
-<div class="password-box">
+      <label>Confirm Password</label>
 
-<input
-id="password"
-type="password"
-placeholder="कम से कम 6 characters"
-required
->
+      <div class="password-box">
+        <input
+          type="password"
+          id="confirmPassword"
+          placeholder="Password दोबारा लिखें"
+          minlength="6"
+          required
+        >
 
-<button
-type="button"
-class="show"
-onclick="togglePassword('password',this)"
->
-Show
-</button>
+        <button
+          type="button"
+          class="show-btn"
+          onclick="togglePassword('confirmPassword',this)"
+        >
+          Show
+        </button>
+      </div>
 
-</div>
+      <div class="terms">
 
-<label>Confirm Password</label>
+        <input type="checkbox" id="terms">
 
-<div class="password-box">
+        <span>
+          मैं DraftAI की
+          <a href="#" onclick="showTerms()">Terms & Conditions</a>
+          से सहमत हूँ।
+        </span>
 
-<input
-id="confirm"
-type="password"
-placeholder="Password दोबारा लिखें"
-required
->
+      </div>
 
-<button
-type="button"
-class="show"
-onclick="togglePassword('confirm',this)"
->
-Show
-</button>
+      <button class="main" type="submit">
+        Create Account
+      </button>
 
-</div>
+      <div id="message" class="message"></div>
 
-<div class="terms">
+    </form>
 
-<input id="terms" type="checkbox" required>
+    <div class="divider">
+      OR
+    </div>
 
-<span>
-मैं DraftAI की
-<a href="#" onclick="terms(event)">Terms & Conditions</a>
-से सहमत हूँ।
-</span>
+    <div class="login">
+      पहले से अकाउंट है?
+      <a href="login.html">Login करें</a>
+    </div>
 
-</div>
+    <div class="home">
+      <a href="index.html">← वापस Home पर जाएँ</a>
+    </div>
 
-<button class="main-btn" type="submit">
-Create Account
-</button>
-
-</form>
-
-<div class="demo" id="demo"></div>
-
-<div class="divider">
-<span>OR</span>
-</div>
-
-<div class="login">
-पहले से account है?
-<a href="login.html">Login</a>
-</div>
-
-<a class="home" href="index.html">
-← Back to Home
-</a>
-
-</div>
+  </div>
 
 </div>
 
@@ -306,80 +351,161 @@ Create Account
 
 function togglePassword(id,button){
 
-let input=document.getElementById(id);
+  const input = document.getElementById(id);
 
-if(input.type==="password"){
-input.type="text";
-button.innerText="Hide";
-}else{
-input.type="password";
-button.innerText="Show";
-}
+  if(input.type === "password"){
 
-}
+    input.type = "text";
+    button.innerText = "Hide";
 
+  }else{
 
-function signup(event){
+    input.type = "password";
+    button.innerText = "Show";
 
-event.preventDefault();
-
-let name=
-document.getElementById("name").value.trim();
-
-let email=
-document.getElementById("email").value.trim();
-
-let password=
-document.getElementById("password").value;
-
-let confirm=
-document.getElementById("confirm").value;
-
-if(password.length<6){
-
-alert("Password कम से कम 6 characters का होना चाहिए।");
-return;
-
-}
-
-if(password!==confirm){
-
-alert("दोनों passwords समान नहीं हैं।");
-return;
-
-}
-
-let user={
-name:name,
-email:email
-};
-
-localStorage.setItem(
-"draftai_user",
-JSON.stringify(user)
-);
-
-let demo=
-document.getElementById("demo");
-
-demo.style.display="block";
-
-demo.innerText=
-"✓ Account Demo में create हो गया!\n\n"+
-"अब आप Login page पर जा सकते हैं।";
+  }
 
 }
 
 
-function terms(event){
+function showMessage(text,type){
 
-event.preventDefault();
+  const message = document.getElementById("message");
 
-alert(
-"DraftAI Terms & Conditions अभी demo mode में हैं।"
-);
+  message.innerText = text;
+
+  message.className = "message " + type;
 
 }
+
+
+function showTerms(){
+
+  alert(
+    "DraftAI Demo Terms:\n\n" +
+    "यह वेबसाइट अभी Demo/Prototype version है। " +
+    "अकाउंट की जानकारी आपके browser में localStorage में save होती है।"
+  );
+
+}
+
+
+document
+.getElementById("signupForm")
+.addEventListener("submit",function(e){
+
+  e.preventDefault();
+
+  const name =
+    document.getElementById("name").value.trim();
+
+  const email =
+    document.getElementById("email").value.trim().toLowerCase();
+
+  const password =
+    document.getElementById("password").value;
+
+  const confirmPassword =
+    document.getElementById("confirmPassword").value;
+
+  const terms =
+    document.getElementById("terms").checked;
+
+
+  if(name.length < 2){
+
+    showMessage(
+      "❌ कृपया सही नाम लिखें।",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if(password.length < 6){
+
+    showMessage(
+      "❌ Password कम से कम 6 characters का होना चाहिए।",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if(password !== confirmPassword){
+
+    showMessage(
+      "❌ दोनों Password एक जैसे नहीं हैं।",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if(!terms){
+
+    showMessage(
+      "❌ पहले Terms & Conditions स्वीकार करें।",
+      "error"
+    );
+
+    return;
+  }
+
+
+  /*
+    IMPORTANT:
+    Password को भी save किया जा रहा है
+    ताकि login.html उससे match कर सके।
+  */
+
+  const user = {
+
+    name: name,
+
+    email: email,
+
+    password: password,
+
+    createdAt: new Date().toISOString()
+
+  };
+
+
+  localStorage.setItem(
+    "draftai_user",
+    JSON.stringify(user)
+  );
+
+
+  localStorage.setItem(
+    "draftai_logged_in",
+    "true"
+  );
+
+
+  localStorage.setItem(
+    "draftai_login_email",
+    email
+  );
+
+
+  showMessage(
+    "✅ Account successfully create हो गया!",
+    "success"
+  );
+
+
+  setTimeout(function(){
+
+    window.location.href = "dashboard.html";
+
+  },1000);
+
+});
 
 </script>
 
