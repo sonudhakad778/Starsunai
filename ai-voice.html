@@ -2,215 +2,1096 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AI Voice - DraftAI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Video Maker - DraftAI</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f7f7fb;color:#222}
-header{background:#fff;padding:16px 20px;border-bottom:1px solid #ddd;display:flex;justify-content:space-between}
-.logo{color:#6c3cff;font-size:23px;font-weight:bold;text-decoration:none}
-.back{color:#555;text-decoration:none}
-.container{max-width:900px;margin:auto;padding:30px 16px}
-h1{text-align:center;font-size:34px;margin:10px 0}
-h1 span{color:#6c3cff}
-.sub{text-align:center;color:#666;font-size:17px;margin-bottom:25px}
-.box{background:#fff;border:1px solid #ddd;border-radius:16px;padding:20px;margin-bottom:20px}
-label{display:block;font-weight:bold;margin:16px 0 7px}
-textarea,select{width:100%;padding:13px;border:1px solid #ccc;border-radius:9px;font-size:16px}
-textarea{height:180px;resize:vertical}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-.range{display:flex;gap:12px;align-items:center}
-.range input{flex:1}
-.val{width:50px;text-align:center;font-weight:bold}
-.preview{border:2px dashed #ccc;border-radius:12px;padding:25px;text-align:center;color:#888;margin-top:20px;white-space:pre-line}
-.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
-button{padding:13px 20px;border-radius:9px;font-size:15px;font-weight:bold;cursor:pointer}
-.primary{background:#6c3cff;color:white;border:0}
-.secondary{background:white;color:#6c3cff;border:1px solid #6c3cff}
-@media(max-width:650px){.grid{grid-template-columns:1fr}h1{font-size:28px}}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#080b14;
+  color:white;
+  min-height:100vh;
+}
+
+.header{
+  height:70px;
+  background:#0b0f1c;
+  border-bottom:1px solid #202535;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 6%;
+}
+
+.logo{
+  font-size:24px;
+  font-weight:bold;
+}
+
+.logo span{
+  color:#7c5cff;
+}
+
+.header a{
+  color:#aaa;
+  text-decoration:none;
+  font-size:14px;
+}
+
+.container{
+  max-width:1150px;
+  margin:auto;
+  padding:40px 20px;
+}
+
+.title{
+  margin-bottom:30px;
+}
+
+.title h1{
+  font-size:34px;
+  margin-bottom:10px;
+}
+
+.title p{
+  color:#9da5b8;
+  line-height:1.6;
+}
+
+.workspace{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+}
+
+.card{
+  background:#111625;
+  border:1px solid #252c3e;
+  border-radius:18px;
+  padding:24px;
+}
+
+.card h2{
+  font-size:20px;
+  margin-bottom:18px;
+}
+
+label{
+  display:block;
+  color:#dfe3ed;
+  font-size:14px;
+  margin:16px 0 8px;
+}
+
+textarea,
+select,
+input[type="number"]{
+  width:100%;
+  border:1px solid #30384d;
+  background:#090d17;
+  color:white;
+  border-radius:10px;
+  outline:none;
+  font-size:15px;
+}
+
+textarea{
+  min-height:180px;
+  resize:vertical;
+  padding:15px;
+  line-height:1.5;
+}
+
+select,
+input[type="number"]{
+  padding:13px;
+}
+
+textarea:focus,
+select:focus,
+input:focus{
+  border-color:#7c5cff;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.switch-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#090d17;
+  border:1px solid #30384d;
+  padding:13px;
+  border-radius:10px;
+  margin-top:16px;
+}
+
+.switch-row span{
+  color:#ddd;
+  font-size:14px;
+}
+
+.switch{
+  width:45px;
+  height:24px;
+  position:relative;
+}
+
+.switch input{
+  display:none;
+}
+
+.slider{
+  position:absolute;
+  inset:0;
+  background:#343b4e;
+  border-radius:30px;
+  cursor:pointer;
+}
+
+.slider:before{
+  content:"";
+  position:absolute;
+  width:18px;
+  height:18px;
+  left:3px;
+  top:3px;
+  background:white;
+  border-radius:50%;
+  transition:.2s;
+}
+
+.switch input:checked + .slider{
+  background:#7c5cff;
+}
+
+.switch input:checked + .slider:before{
+  transform:translateX(21px);
+}
+
+.button-row{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:10px;
+  margin-top:20px;
+}
+
+.btn{
+  width:100%;
+  padding:14px 8px;
+  border:0;
+  border-radius:10px;
+  background:#7c5cff;
+  color:white;
+  font-size:14px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.btn:hover{
+  opacity:.9;
+}
+
+.btn.clear{
+  background:#252c3e;
+}
+
+.btn.download{
+  background:#168a57;
+}
+
+.preview{
+  min-height:360px;
+  border:1px dashed #3a4258;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:25px;
+  background:#0b101c;
+}
+
+.preview-icon{
+  font-size:65px;
+  margin-bottom:15px;
+}
+
+.preview p{
+  color:#8f98aa;
+  line-height:1.6;
+}
+
+.details{
+  margin-top:20px;
+  background:#0b101c;
+  border:1px solid #30384d;
+  border-radius:12px;
+  padding:16px;
+  color:#b9c0d0;
+  line-height:1.7;
+  word-break:break-word;
+}
+
+.project-buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:15px;
+}
+
+.save{
+  background:#315bdc;
+}
+
+.message{
+  text-align:center;
+  margin-top:15px;
+  min-height:22px;
+  color:#48e68a;
+}
+
+.footer{
+  text-align:center;
+  color:#687084;
+  padding:40px 20px 25px;
+  font-size:13px;
+}
+
+@media(max-width:800px){
+
+  .header{
+    padding:0 18px;
+  }
+
+  .workspace{
+    grid-template-columns:1fr;
+  }
+
+  .title h1{
+    font-size:28px;
+  }
+
+  .row{
+    grid-template-columns:1fr;
+  }
+
+  .button-row{
+    grid-template-columns:1fr;
+  }
+
+  .project-buttons{
+    grid-template-columns:1fr;
+  }
+
+  .container{
+    padding:30px 15px;
+  }
+}
+
 </style>
 </head>
 
+
 <body>
 
-<header>
-<a class="logo" href="index.html">DraftAI</a>
-<a class="back" href="dashboard.html">← Dashboard</a>
+
+<header class="header">
+
+  <div class="logo">
+    Draft<span>AI</span>
+  </div>
+
+  <a href="dashboard.html">
+    ← Dashboard
+  </a>
+
 </header>
 
-<div class="container">
 
-<h1>AI <span>Voice</span></h1>
-<p class="sub">अपनी script को AI voice के लिए तैयार करें।</p>
+<main class="container">
 
-<div class="box">
-<h2>Voice Script</h2>
-<label>Text / Script</label>
-<textarea id="script" placeholder="यहाँ अपनी script लिखें..."></textarea>
+
+<section class="title">
+
+  <h1>🎬 AI Video Maker</h1>
+
+  <p>
+    अपनी story या prompt से AI video project तैयार करें।
+    Duration, style, voice और scenes अपनी जरूरत के अनुसार चुनें।
+  </p>
+
+</section>
+
+
+<div class="workspace">
+
+
+<!-- LEFT SIDE -->
+
+<section class="card">
+
+  <h2>📝 Video Story / Prompt</h2>
+
+
+  <label>
+    अपनी Story या Video Prompt लिखें
+  </label>
+
+  <textarea
+    id="prompt"
+    placeholder="उदाहरण: एक गरीब किसान की कहानी जो मेहनत करके अपने गाँव का सबसे सफल किसान बन जाता है..."
+  ></textarea>
+
+
+  <div class="row">
+
+    <div>
+
+      <label>Video Duration</label>
+
+      <select id="duration">
+
+        <option>15 Seconds</option>
+        <option>30 Seconds</option>
+        <option>60 Seconds</option>
+        <option>2 Minutes</option>
+        <option>5 Minutes</option>
+        <option>10 Minutes</option>
+
+      </select>
+
+    </div>
+
+
+    <div>
+
+      <label>Aspect Ratio</label>
+
+      <select id="ratio">
+
+        <option>9:16 Portrait</option>
+        <option>16:9 Landscape</option>
+        <option>1:1 Square</option>
+        <option>4:5 Portrait</option>
+
+      </select>
+
+    </div>
+
+  </div>
+
+
+  <div class="row">
+
+    <div>
+
+      <label>Video Style</label>
+
+      <select id="style">
+
+        <option>Ultra Realistic</option>
+        <option>Cinematic</option>
+        <option>2D Animation</option>
+        <option>3D Animation</option>
+        <option>Indian Cartoon</option>
+        <option>Documentary</option>
+        <option>Fantasy</option>
+        <option>Realistic Film</option>
+
+      </select>
+
+    </div>
+
+
+    <div>
+
+      <label>Number of Scenes</label>
+
+      <select id="scenes">
+
+        <option>3 Scenes</option>
+        <option>5 Scenes</option>
+        <option>8 Scenes</option>
+        <option>10 Scenes</option>
+        <option>15 Scenes</option>
+        <option>20 Scenes</option>
+
+      </select>
+
+    </div>
+
+  </div>
+
+
+  <div class="row">
+
+    <div>
+
+      <label>Voice</label>
+
+      <select id="voice">
+
+        <option>Male Natural</option>
+        <option>Male Deep</option>
+        <option>Male Energetic</option>
+        <option>Female Natural</option>
+        <option>Female Soft</option>
+        <option>No Voice</option>
+
+      </select>
+
+    </div>
+
+
+    <div>
+
+      <label>Voice Language</label>
+
+      <select id="language">
+
+        <option>Hindi</option>
+        <option>Hinglish</option>
+        <option>English</option>
+        <option>Marathi</option>
+
+      </select>
+
+    </div>
+
+  </div>
+
+
+  <div class="row">
+
+    <div>
+
+      <label>Background Music</label>
+
+      <select id="music">
+
+        <option>None</option>
+        <option>Cinematic</option>
+        <option>Emotional</option>
+        <option>Motivational</option>
+        <option>Suspense</option>
+        <option>Village / Desi</option>
+        <option>Documentary</option>
+
+      </select>
+
+    </div>
+
+
+    <div>
+
+      <label>Video Quality</label>
+
+      <select id="quality">
+
+        <option>Standard</option>
+        <option>HD</option>
+        <option>Full HD</option>
+        <option>Ultra HD</option>
+
+      </select>
+
+    </div>
+
+  </div>
+
+
+  <div class="switch-row">
+
+    <span>
+      📝 Generate Subtitles
+    </span>
+
+    <label class="switch">
+
+      <input
+        type="checkbox"
+        id="subtitles"
+        checked
+      >
+
+      <span class="slider"></span>
+
+    </label>
+
+  </div>
+
+
+  <div class="switch-row">
+
+    <span>
+      🎞️ Character Consistency
+    </span>
+
+    <label class="switch">
+
+      <input
+        type="checkbox"
+        id="consistency"
+        checked
+      >
+
+      <span class="slider"></span>
+
+    </label>
+
+  </div>
+
+
+  <!-- ALL MAIN BUTTONS -->
+
+  <div class="button-row">
+
+    <button
+      class="btn"
+      onclick="generateVideo()"
+    >
+      ✨ Generate
+    </button>
+
+
+    <button
+      class="btn clear"
+      onclick="clearAll()"
+    >
+      🗑️ Clear
+    </button>
+
+
+    <button
+      class="btn download"
+      onclick="downloadProject()"
+    >
+      ⬇️ Download
+    </button>
+
+  </div>
+
+
+  <div
+    id="message"
+    class="message"
+  ></div>
+
+
+</section>
+
+
+<!-- RIGHT SIDE -->
+
+<section class="card">
+
+  <h2>🎥 Video Preview</h2>
+
+
+  <div
+    class="preview"
+    id="preview"
+  >
+
+    <div>
+
+      <div class="preview-icon">
+        🎬
+      </div>
+
+      <h3>
+        आपका Video Preview
+      </h3>
+
+      <p style="margin-top:12px;">
+        Story लिखकर Generate दबाएँ।
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div
+    class="details"
+    id="details"
+  >
+
+    <strong>
+      Video Project Details
+    </strong>
+
+    <br><br>
+
+    अभी कोई video project generate नहीं हुआ है।
+
+  </div>
+
+
+  <div class="project-buttons">
+
+    <button
+      class="btn save"
+      onclick="saveProject()"
+    >
+      💾 Save Project
+    </button>
+
+
+    <button
+      class="btn clear"
+      onclick="openEditor()"
+    >
+      ✂️ Open Editor
+    </button>
+
+  </div>
+
+
+</section>
+
+
 </div>
 
-<div class="box">
-<h2>Voice Settings</h2>
+</main>
 
-<div class="grid">
 
-<div>
-<label>Language</label>
-<select id="language">
-<option>Hindi</option>
-<option>English</option>
-<option>Hinglish</option>
-<option>Marathi</option>
-</select>
-</div>
+<footer class="footer">
 
-<div>
-<label>Voice</label>
-<select id="voice">
-<option>Male - Natural</option>
-<option>Male - Deep</option>
-<option>Male - Energetic</option>
-<option>Female - Natural</option>
-<option>Female - Soft</option>
-</select>
-</div>
+  DraftAI — AI Video Maker
 
-<div>
-<label>Voice Style</label>
-<select id="style">
-<option>Natural</option>
-<option>Motivational</option>
-<option>Emotional</option>
-<option>Storytelling</option>
-<option>Documentary</option>
-</select>
-</div>
+</footer>
 
-<div>
-<label>Audio Format</label>
-<select id="format">
-<option>MP3</option>
-<option>WAV</option>
-</select>
-</div>
-
-</div>
-
-<label>Speed</label>
-<div class="range">
-<input id="speed" type="range" min="50" max="150" value="100" oninput="values()">
-<span class="val" id="sv">100%</span>
-</div>
-
-<label>Pitch</label>
-<div class="range">
-<input id="pitch" type="range" min="50" max="150" value="100" oninput="values()">
-<span class="val" id="pv">100%</span>
-</div>
-
-</div>
-
-<div class="box">
-<h2>Voice Preview</h2>
-
-<div class="preview" id="preview">
-Voice preview यहाँ दिखाई देगा
-</div>
-
-<div class="buttons">
-
-<button class="primary" onclick="generate()">Generate Voice</button>
-
-<button class="secondary" onclick="play()">▶ Play</button>
-
-<button class="secondary" onclick="pause()">⏸ Pause</button>
-
-<button class="secondary" onclick="clearAll()">Clear</button>
-
-<button class="secondary" onclick="download()">Download</button>
-
-</div>
-</div>
-
-</div>
 
 <script>
 
-let ready=false;
+let generatedData = "";
 
-function values(){
-sv.innerText=speed.value+"%";
-pv.innerText=pitch.value+"%";
+
+/* Generate Video */
+
+function generateVideo(){
+
+  const prompt =
+    document
+    .getElementById("prompt")
+    .value
+    .trim();
+
+
+  if(!prompt){
+
+    document
+    .getElementById("message")
+    .innerText =
+      "❌ पहले अपनी Story या Video Prompt लिखिए।";
+
+    return;
+  }
+
+
+  const duration =
+    document.getElementById("duration").value;
+
+  const ratio =
+    document.getElementById("ratio").value;
+
+  const style =
+    document.getElementById("style").value;
+
+  const scenes =
+    document.getElementById("scenes").value;
+
+  const voice =
+    document.getElementById("voice").value;
+
+  const language =
+    document.getElementById("language").value;
+
+  const music =
+    document.getElementById("music").value;
+
+  const quality =
+    document.getElementById("quality").value;
+
+  const subtitles =
+    document.getElementById("subtitles").checked
+    ? "Yes"
+    : "No";
+
+  const consistency =
+    document.getElementById("consistency").checked
+    ? "Yes"
+    : "No";
+
+
+  generatedData =
+
+    "DraftAI AI Video Project\n\n" +
+
+    "Story / Prompt:\n" +
+    prompt +
+
+    "\n\nDuration: " +
+    duration +
+
+    "\nAspect Ratio: " +
+    ratio +
+
+    "\nVideo Style: " +
+    style +
+
+    "\nScenes: " +
+    scenes +
+
+    "\nVoice: " +
+    voice +
+
+    "\nLanguage: " +
+    language +
+
+    "\nBackground Music: " +
+    music +
+
+    "\nQuality: " +
+    quality +
+
+    "\nSubtitles: " +
+    subtitles +
+
+    "\nCharacter Consistency: " +
+    consistency;
+
+
+  document
+  .getElementById("preview")
+  .innerHTML =
+
+    "<div>" +
+
+    "<div class='preview-icon'>✨</div>" +
+
+    "<h3>Video Project Ready!</h3>" +
+
+    "<p style='margin-top:12px;'>" +
+
+    "आपका video project successfully तैयार है।" +
+
+    "<br><br>" +
+
+    "Real AI video rendering अगले चरण में जोड़ी जाएगी।" +
+
+    "</p>" +
+
+    "</div>";
+
+
+  document
+  .getElementById("details")
+  .innerHTML =
+
+    "<strong>Video Project Details</strong>" +
+
+    "<br><br>" +
+
+    "<b>Story:</b><br>" +
+
+    prompt +
+
+    "<br><br>" +
+
+    "<b>Duration:</b> " +
+    duration +
+
+    "<br>" +
+
+    "<b>Aspect Ratio:</b> " +
+    ratio +
+
+    "<br>" +
+
+    "<b>Style:</b> " +
+    style +
+
+    "<br>" +
+
+    "<b>Scenes:</b> " +
+    scenes +
+
+    "<br>" +
+
+    "<b>Voice:</b> " +
+    voice +
+
+    "<br>" +
+
+    "<b>Language:</b> " +
+    language +
+
+    "<br>" +
+
+    "<b>Music:</b> " +
+    music +
+
+    "<br>" +
+
+    "<b>Quality:</b> " +
+    quality +
+
+    "<br>" +
+
+    "<b>Subtitles:</b> " +
+    subtitles +
+
+    "<br>" +
+
+    "<b>Character Consistency:</b> " +
+    consistency;
+
+
+  localStorage.setItem(
+    "draftai_video_project",
+    generatedData
+  );
+
+
+  document
+  .getElementById("message")
+  .innerText =
+    "✅ Video project तैयार है।";
+
 }
 
-function generate(){
 
-if(!script.value.trim()){
-alert("पहले script लिखें।");
-return;
-}
-
-ready=true;
-
-preview.innerText=
-"✓ Voice तैयार है\n\n"+
-"Language: "+language.value+
-"\nVoice: "+voice.value+
-"\nStyle: "+style.value+
-"\n\nAI Voice के लिए audio ready है।";
-}
-
-function play(){
-
-if(!ready){
-alert("पहले Generate Voice दबाएँ।");
-return;
-}
-
-preview.innerText="▶ Voice Playing...";
-}
-
-function pause(){
-
-if(!ready){
-alert("पहले Generate Voice दबाएँ।");
-return;
-}
-
-preview.innerText="⏸ Voice Paused";
-}
+/* Clear */
 
 function clearAll(){
 
-script.value="";
-ready=false;
-preview.innerText="Voice preview यहाँ दिखाई देगा";
+  document.getElementById("prompt").value = "";
+
+  document.getElementById("duration").selectedIndex = 0;
+
+  document.getElementById("ratio").selectedIndex = 0;
+
+  document.getElementById("style").selectedIndex = 0;
+
+  document.getElementById("scenes").selectedIndex = 0;
+
+  document.getElementById("voice").selectedIndex = 0;
+
+  document.getElementById("language").selectedIndex = 0;
+
+  document.getElementById("music").selectedIndex = 0;
+
+  document.getElementById("quality").selectedIndex = 0;
+
+  document.getElementById("subtitles").checked = true;
+
+  document.getElementById("consistency").checked = true;
+
+
+  generatedData = "";
+
+
+  document
+  .getElementById("preview")
+  .innerHTML =
+
+    "<div>" +
+
+    "<div class='preview-icon'>🎬</div>" +
+
+    "<h3>आपका Video Preview</h3>" +
+
+    "<p style='margin-top:12px;'>Story लिखकर Generate दबाएँ।</p>" +
+
+    "</div>";
+
+
+  document
+  .getElementById("details")
+  .innerHTML =
+
+    "<strong>Video Project Details</strong>" +
+
+    "<br><br>" +
+
+    "अभी कोई video project generate नहीं हुआ है।";
+
+
+  document
+  .getElementById("message")
+  .innerText =
+    "🗑️ सभी fields clear हो गईं।";
+
 }
 
-function download(){
 
-if(!ready){
-alert("पहले Generate Voice दबाएँ।");
-return;
+/* Download */
+
+function downloadProject(){
+
+  if(!generatedData){
+
+    const prompt =
+      document
+      .getElementById("prompt")
+      .value
+      .trim();
+
+
+    if(!prompt){
+
+      alert(
+        "पहले Story / Prompt लिखें या Generate दबाएँ।"
+      );
+
+      return;
+    }
+
+
+    generatedData =
+      "DraftAI AI Video Project\n\n" +
+
+      "Story / Prompt:\n" +
+      prompt +
+
+      "\n\nDuration: " +
+      document.getElementById("duration").value +
+
+      "\nAspect Ratio: " +
+      document.getElementById("ratio").value +
+
+      "\nVideo Style: " +
+      document.getElementById("style").value +
+
+      "\nScenes: " +
+      document.getElementById("scenes").value +
+
+      "\nVoice: " +
+      document.getElementById("voice").value +
+
+      "\nLanguage: " +
+      document.getElementById("language").value +
+
+      "\nMusic: " +
+      document.getElementById("music").value +
+
+      "\nQuality: " +
+      document.getElementById("quality").value;
+
+  }
+
+
+  const blob =
+    new Blob(
+      [generatedData],
+      {type:"text/plain"}
+    );
+
+
+  const url =
+    URL.createObjectURL(blob);
+
+
+  const link =
+    document.createElement("a");
+
+
+  link.href = url;
+
+  link.download =
+    "draftai-video-project.txt";
+
+
+  document.body.appendChild(link);
+
+  link.click();
+
+  document.body.removeChild(link);
+
+  URL.revokeObjectURL(url);
+
+
+  document
+  .getElementById("message")
+  .innerText =
+    "✅ Video project download हो गया।";
+
 }
 
-let text=
-"DraftAI AI Voice\n\n"+
-"Language: "+language.value+
-"\nVoice: "+voice.value+
-"\nStyle: "+style.value+
-"\nSpeed: "+speed.value+"%"+
-"\nPitch: "+pitch.value+"%"+
-"\n\nScript:\n"+script.value;
 
-let blob=new Blob([text],{type:"text/plain"});
-let a=document.createElement("a");
+/* Save Project */
 
-a.href=URL.createObjectURL(blob);
-a.download="draftai-ai-voice.txt";
-a.click();
+function saveProject(){
 
-URL.revokeObjectURL(a.href);
+  const prompt =
+    document
+    .getElementById("prompt")
+    .value
+    .trim();
+
+
+  if(!prompt){
+
+    alert(
+      "पहले Story / Prompt लिखें।"
+    );
+
+    return;
+  }
+
+
+  localStorage.setItem(
+    "draftai_video_saved",
+    generatedData || prompt
+  );
+
+
+  alert(
+    "✅ Video Project browser में save हो गया।"
+  );
+
+}
+
+
+/* Open Editor */
+
+function openEditor(){
+
+  const prompt =
+    document
+    .getElementById("prompt")
+    .value
+    .trim();
+
+
+  if(prompt){
+
+    localStorage.setItem(
+      "draftai_script",
+      prompt
+    );
+
+  }
+
+
+  window.location.href =
+    "ai-editor.html";
+
 }
 
 </script>
