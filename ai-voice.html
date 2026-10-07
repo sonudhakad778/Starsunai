@@ -1,1100 +1,1100 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>AI Video Maker - DraftAI</title>
 
 <style>
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
+*{box-sizing:border-box}
 body{
-  font-family:Arial,sans-serif;
-  background:#080b14;
-  color:white;
-  min-height:100vh;
+margin:0;
+font-family:Arial,Helvetica,sans-serif;
+background:#0b0d12;
+color:#fff;
 }
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
 
-.header{
-  height:70px;
-  background:#0b0f1c;
-  border-bottom:1px solid #202535;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 6%;
+.topbar{
+height:64px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 20px;
+background:#11141b;
+border-bottom:1px solid #252a35;
+position:sticky;
+top:0;
+z-index:20;
 }
-
 .logo{
-  font-size:24px;
-  font-weight:bold;
+font-size:21px;
+font-weight:800;
+color:#fff;
+}
+.logo span{color:#7c5cff}
+.top-actions{display:flex;gap:8px;align-items:center}
+.top-btn{
+background:#1a1e27;
+border:1px solid #303644;
+color:#fff;
+padding:9px 13px;
+border-radius:8px;
+}
+.top-btn:hover{background:#242936}
+
+.layout{
+display:grid;
+grid-template-columns:220px 1fr 300px;
+min-height:calc(100vh - 64px);
 }
 
-.logo span{
-  color:#7c5cff;
+.sidebar{
+background:#10131a;
+border-right:1px solid #252a35;
+padding:16px 10px;
+}
+.sidebar-title{
+font-size:11px;
+color:#777f91;
+text-transform:uppercase;
+letter-spacing:1px;
+padding:8px 12px;
+}
+.step{
+display:flex;
+align-items:center;
+gap:10px;
+padding:12px;
+border-radius:8px;
+margin-bottom:4px;
+color:#aab1c0;
+font-size:14px;
+}
+.step:hover{background:#191d26;color:#fff}
+.step.active{
+background:#261d50;
+color:#fff;
+border:1px solid #49359a;
+}
+.step-number{
+width:25px;
+height:25px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+background:#222733;
+font-size:12px;
+}
+.step.active .step-number{
+background:#7c5cff;
 }
 
-.header a{
-  color:#aaa;
-  text-decoration:none;
-  font-size:14px;
+.main{
+padding:20px;
+overflow:hidden;
 }
-
-.container{
-  max-width:1150px;
-  margin:auto;
-  padding:40px 20px;
+.page-head{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+margin-bottom:18px;
 }
-
-.title{
-  margin-bottom:30px;
+.page-head h1{
+font-size:25px;
+margin:0 0 5px;
 }
-
-.title h1{
-  font-size:34px;
-  margin-bottom:10px;
+.page-head p{
+margin:0;
+color:#8d95a5;
+font-size:13px;
 }
-
-.title p{
-  color:#9da5b8;
-  line-height:1.6;
-}
-
-.workspace{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:22px;
+.badge{
+background:#1c1734;
+border:1px solid #403080;
+color:#b9aaff;
+padding:7px 10px;
+border-radius:20px;
+font-size:12px;
 }
 
 .card{
-  background:#111625;
-  border:1px solid #252c3e;
-  border-radius:18px;
-  padding:24px;
+background:#11151d;
+border:1px solid #272d39;
+border-radius:12px;
+padding:18px;
+margin-bottom:16px;
 }
-
 .card h2{
-  font-size:20px;
-  margin-bottom:18px;
+font-size:16px;
+margin:0 0 14px;
 }
+.card-title{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:14px;
+}
+.muted{color:#8d95a5;font-size:12px}
 
 label{
-  display:block;
-  color:#dfe3ed;
-  font-size:14px;
-  margin:16px 0 8px;
+display:block;
+font-size:12px;
+color:#aeb5c3;
+margin-bottom:7px;
+}
+textarea,input,select{
+width:100%;
+background:#0b0e14;
+color:#fff;
+border:1px solid #303643;
+border-radius:8px;
+padding:11px;
+outline:none;
+}
+textarea:focus,input:focus,select:focus{
+border-color:#7657e8;
+}
+textarea{min-height:125px;resize:vertical}
+
+.grid2{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+.grid3{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
 }
 
-textarea,
-select,
-input[type="number"]{
-  width:100%;
-  border:1px solid #30384d;
-  background:#090d17;
-  color:white;
-  border-radius:10px;
-  outline:none;
-  font-size:15px;
+.primary{
+background:#7657e8;
+border:0;
+color:#fff;
+padding:11px 16px;
+border-radius:8px;
+font-weight:700;
 }
-
-textarea{
-  min-height:180px;
-  resize:vertical;
-  padding:15px;
-  line-height:1.5;
+.primary:hover{background:#896cf2}
+.secondary{
+background:#1a1e27;
+border:1px solid #343b49;
+color:#fff;
+padding:11px 15px;
+border-radius:8px;
 }
-
-select,
-input[type="number"]{
-  padding:13px;
-}
-
-textarea:focus,
-select:focus,
-input:focus{
-  border-color:#7c5cff;
-}
-
-.row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-.switch-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  background:#090d17;
-  border:1px solid #30384d;
-  padding:13px;
-  border-radius:10px;
-  margin-top:16px;
-}
-
-.switch-row span{
-  color:#ddd;
-  font-size:14px;
-}
-
-.switch{
-  width:45px;
-  height:24px;
-  position:relative;
-}
-
-.switch input{
-  display:none;
-}
-
-.slider{
-  position:absolute;
-  inset:0;
-  background:#343b4e;
-  border-radius:30px;
-  cursor:pointer;
-}
-
-.slider:before{
-  content:"";
-  position:absolute;
-  width:18px;
-  height:18px;
-  left:3px;
-  top:3px;
-  background:white;
-  border-radius:50%;
-  transition:.2s;
-}
-
-.switch input:checked + .slider{
-  background:#7c5cff;
-}
-
-.switch input:checked + .slider:before{
-  transform:translateX(21px);
+.danger{
+background:#3a1820;
+border:1px solid #642533;
+color:#ff9cab;
+padding:10px 13px;
+border-radius:8px;
 }
 
 .button-row{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:10px;
-  margin-top:20px;
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-top:14px;
 }
 
-.btn{
-  width:100%;
-  padding:14px 8px;
-  border:0;
-  border-radius:10px;
-  background:#7c5cff;
-  color:white;
-  font-size:14px;
-  font-weight:bold;
-  cursor:pointer;
+.option-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:9px;
+}
+.option{
+background:#151922;
+border:1px solid #2b303c;
+padding:11px;
+border-radius:8px;
+text-align:center;
+font-size:12px;
+color:#b9c0ce;
+}
+.option.selected{
+border-color:#7c5cff;
+background:#211b3e;
+color:#fff;
 }
 
-.btn:hover{
-  opacity:.9;
+.scene{
+border:1px solid #2b303c;
+background:#0d1016;
+border-radius:10px;
+padding:13px;
+margin-bottom:10px;
+}
+.scene-head{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:10px;
+}
+.scene-name{
+font-weight:700;
+font-size:13px;
+}
+.scene-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+.scene-actions{
+display:flex;
+gap:7px;
+margin-top:10px;
 }
 
-.btn.clear{
-  background:#252c3e;
+.chip{
+display:inline-block;
+padding:5px 8px;
+border-radius:15px;
+background:#1d2230;
+color:#abb3c2;
+font-size:11px;
+margin:2px;
 }
 
-.btn.download{
-  background:#168a57;
+.character{
+display:flex;
+align-items:center;
+gap:10px;
+padding:10px;
+background:#0d1016;
+border:1px solid #2a303b;
+border-radius:8px;
+margin-bottom:8px;
+}
+.avatar{
+width:42px;
+height:42px;
+border-radius:8px;
+background:linear-gradient(135deg,#7657e8,#30215f);
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:bold;
+}
+.character-info{flex:1}
+.character-info b{font-size:13px}
+.character-info small{
+display:block;
+color:#7f8797;
+margin-top:4px;
 }
 
+.right{
+background:#10131a;
+border-left:1px solid #252a35;
+padding:15px;
+}
 .preview{
-  min-height:360px;
-  border:1px dashed #3a4258;
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:25px;
-  background:#0b101c;
+height:205px;
+background:#050608;
+border:1px solid #2a303a;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
+overflow:hidden;
+}
+.preview-screen{
+width:88%;
+height:78%;
+border:1px solid #3b414d;
+border-radius:6px;
+background:linear-gradient(135deg,#191d27,#090b10);
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:15px;
+color:#777f91;
+font-size:13px;
+}
+.play{
+position:absolute;
+width:45px;
+height:45px;
+border-radius:50%;
+border:0;
+background:#7657e8;
+color:#fff;
+font-size:18px;
 }
 
-.preview-icon{
-  font-size:65px;
-  margin-bottom:15px;
+.right h3{
+font-size:14px;
+margin:18px 0 10px;
+}
+.stat{
+display:flex;
+justify-content:space-between;
+padding:9px 0;
+border-bottom:1px solid #222733;
+font-size:12px;
+}
+.stat span:last-child{color:#b9aaff}
+
+.asset{
+background:#151922;
+border:1px solid #2b303a;
+border-radius:8px;
+padding:10px;
+margin-bottom:8px;
+font-size:12px;
+}
+.asset small{
+display:block;
+color:#7d8595;
+margin-top:4px;
 }
 
-.preview p{
-  color:#8f98aa;
-  line-height:1.6;
+.timeline{
+background:#0c0f15;
+border:1px solid #2b303a;
+border-radius:10px;
+overflow:hidden;
+}
+.time-head{
+height:36px;
+display:grid;
+grid-template-columns:100px repeat(6,1fr);
+border-bottom:1px solid #292f39;
+}
+.time-head div{
+padding:10px;
+font-size:10px;
+color:#747c8c;
+border-right:1px solid #202530;
+}
+.track{
+display:grid;
+grid-template-columns:100px 1fr;
+min-height:52px;
+border-bottom:1px solid #222732;
+}
+.track-name{
+padding:12px;
+font-size:11px;
+color:#9098a8;
+border-right:1px solid #222732;
+}
+.track-content{
+position:relative;
+padding:8px;
+}
+.clip{
+display:inline-block;
+background:#49379a;
+border:1px solid #7657e8;
+padding:9px 13px;
+border-radius:5px;
+font-size:11px;
+margin-right:5px;
 }
 
-.details{
-  margin-top:20px;
-  background:#0b101c;
-  border:1px solid #30384d;
-  border-radius:12px;
-  padding:16px;
-  color:#b9c0d0;
-  line-height:1.7;
-  word-break:break-word;
+.hidden{display:none!important}
+
+.toast{
+position:fixed;
+right:18px;
+bottom:18px;
+background:#191e27;
+border:1px solid #343b48;
+padding:12px 16px;
+border-radius:9px;
+display:none;
+z-index:100;
+font-size:13px;
 }
 
-.project-buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:15px;
+@media(max-width:1000px){
+.layout{grid-template-columns:180px 1fr}
+.right{display:none}
+.option-grid{grid-template-columns:repeat(2,1fr)}
 }
 
-.save{
-  background:#315bdc;
+@media(max-width:700px){
+.topbar{padding:0 10px}
+.top-actions .top-btn:nth-child(2),
+.top-actions .top-btn:nth-child(3){display:none}
+.layout{display:block}
+.sidebar{
+display:flex;
+overflow-x:auto;
+padding:8px;
+border-right:0;
+border-bottom:1px solid #252a35;
 }
-
-.message{
-  text-align:center;
-  margin-top:15px;
-  min-height:22px;
-  color:#48e68a;
+.sidebar-title{display:none}
+.step{
+min-width:max-content;
+margin:0 4px;
 }
-
-.footer{
-  text-align:center;
-  color:#687084;
-  padding:40px 20px 25px;
-  font-size:13px;
+.main{padding:12px}
+.grid2,.grid3,.scene-grid{grid-template-columns:1fr}
+.page-head{align-items:flex-start}
+.page-head h1{font-size:20px}
 }
-
-@media(max-width:800px){
-
-  .header{
-    padding:0 18px;
-  }
-
-  .workspace{
-    grid-template-columns:1fr;
-  }
-
-  .title h1{
-    font-size:28px;
-  }
-
-  .row{
-    grid-template-columns:1fr;
-  }
-
-  .button-row{
-    grid-template-columns:1fr;
-  }
-
-  .project-buttons{
-    grid-template-columns:1fr;
-  }
-
-  .container{
-    padding:30px 15px;
-  }
-}
-
 </style>
 </head>
 
-
 <body>
 
+<header class="topbar">
+<div class="logo">Draft<span>AI</span></div>
 
-<header class="header">
-
-  <div class="logo">
-    Draft<span>AI</span>
-  </div>
-
-  <a href="dashboard.html">
-    ← Dashboard
-  </a>
-
+<div class="top-actions">
+<button class="top-btn" onclick="goHome()">Home</button>
+<button class="top-btn" onclick="saveProject()">Save</button>
+<button class="top-btn" onclick="showToast('Export settings opened')">Export</button>
+</div>
 </header>
 
-
-<main class="container">
-
-
-<section class="title">
-
-  <h1>🎬 AI Video Maker</h1>
-
-  <p>
-    अपनी story या prompt से AI video project तैयार करें।
-    Duration, style, voice और scenes अपनी जरूरत के अनुसार चुनें।
-  </p>
-
-</section>
-
-
-<div class="workspace">
-
-
-<!-- LEFT SIDE -->
-
-<section class="card">
-
-  <h2>📝 Video Story / Prompt</h2>
-
-
-  <label>
-    अपनी Story या Video Prompt लिखें
-  </label>
-
-  <textarea
-    id="prompt"
-    placeholder="उदाहरण: एक गरीब किसान की कहानी जो मेहनत करके अपने गाँव का सबसे सफल किसान बन जाता है..."
-  ></textarea>
-
-
-  <div class="row">
-
-    <div>
-
-      <label>Video Duration</label>
-
-      <select id="duration">
-
-        <option>15 Seconds</option>
-        <option>30 Seconds</option>
-        <option>60 Seconds</option>
-        <option>2 Minutes</option>
-        <option>5 Minutes</option>
-        <option>10 Minutes</option>
-
-      </select>
-
-    </div>
-
-
-    <div>
-
-      <label>Aspect Ratio</label>
-
-      <select id="ratio">
-
-        <option>9:16 Portrait</option>
-        <option>16:9 Landscape</option>
-        <option>1:1 Square</option>
-        <option>4:5 Portrait</option>
-
-      </select>
-
-    </div>
-
-  </div>
-
-
-  <div class="row">
-
-    <div>
-
-      <label>Video Style</label>
-
-      <select id="style">
-
-        <option>Ultra Realistic</option>
-        <option>Cinematic</option>
-        <option>2D Animation</option>
-        <option>3D Animation</option>
-        <option>Indian Cartoon</option>
-        <option>Documentary</option>
-        <option>Fantasy</option>
-        <option>Realistic Film</option>
-
-      </select>
-
-    </div>
-
-
-    <div>
-
-      <label>Number of Scenes</label>
-
-      <select id="scenes">
-
-        <option>3 Scenes</option>
-        <option>5 Scenes</option>
-        <option>8 Scenes</option>
-        <option>10 Scenes</option>
-        <option>15 Scenes</option>
-        <option>20 Scenes</option>
-
-      </select>
-
-    </div>
-
-  </div>
-
-
-  <div class="row">
-
-    <div>
-
-      <label>Voice</label>
-
-      <select id="voice">
-
-        <option>Male Natural</option>
-        <option>Male Deep</option>
-        <option>Male Energetic</option>
-        <option>Female Natural</option>
-        <option>Female Soft</option>
-        <option>No Voice</option>
-
-      </select>
-
-    </div>
-
-
-    <div>
-
-      <label>Voice Language</label>
-
-      <select id="language">
-
-        <option>Hindi</option>
-        <option>Hinglish</option>
-        <option>English</option>
-        <option>Marathi</option>
-
-      </select>
-
-    </div>
-
-  </div>
-
-
-  <div class="row">
-
-    <div>
-
-      <label>Background Music</label>
-
-      <select id="music">
-
-        <option>None</option>
-        <option>Cinematic</option>
-        <option>Emotional</option>
-        <option>Motivational</option>
-        <option>Suspense</option>
-        <option>Village / Desi</option>
-        <option>Documentary</option>
-
-      </select>
-
-    </div>
-
-
-    <div>
-
-      <label>Video Quality</label>
-
-      <select id="quality">
-
-        <option>Standard</option>
-        <option>HD</option>
-        <option>Full HD</option>
-        <option>Ultra HD</option>
-
-      </select>
-
-    </div>
-
-  </div>
-
-
-  <div class="switch-row">
-
-    <span>
-      📝 Generate Subtitles
-    </span>
-
-    <label class="switch">
-
-      <input
-        type="checkbox"
-        id="subtitles"
-        checked
-      >
-
-      <span class="slider"></span>
-
-    </label>
-
-  </div>
-
-
-  <div class="switch-row">
-
-    <span>
-      🎞️ Character Consistency
-    </span>
-
-    <label class="switch">
-
-      <input
-        type="checkbox"
-        id="consistency"
-        checked
-      >
-
-      <span class="slider"></span>
-
-    </label>
-
-  </div>
-
-
-  <!-- ALL MAIN BUTTONS -->
-
-  <div class="button-row">
-
-    <button
-      class="btn"
-      onclick="generateVideo()"
-    >
-      ✨ Generate
-    </button>
-
-
-    <button
-      class="btn clear"
-      onclick="clearAll()"
-    >
-      🗑️ Clear
-    </button>
-
-
-    <button
-      class="btn download"
-      onclick="downloadProject()"
-    >
-      ⬇️ Download
-    </button>
-
-  </div>
-
-
-  <div
-    id="message"
-    class="message"
-  ></div>
-
-
-</section>
-
-
-<!-- RIGHT SIDE -->
-
-<section class="card">
-
-  <h2>🎥 Video Preview</h2>
-
-
-  <div
-    class="preview"
-    id="preview"
-  >
-
-    <div>
-
-      <div class="preview-icon">
-        🎬
-      </div>
-
-      <h3>
-        आपका Video Preview
-      </h3>
-
-      <p style="margin-top:12px;">
-        Story लिखकर Generate दबाएँ।
-      </p>
-
-    </div>
-
-  </div>
-
-
-  <div
-    class="details"
-    id="details"
-  >
-
-    <strong>
-      Video Project Details
-    </strong>
-
-    <br><br>
-
-    अभी कोई video project generate नहीं हुआ है।
-
-  </div>
-
-
-  <div class="project-buttons">
-
-    <button
-      class="btn save"
-      onclick="saveProject()"
-    >
-      💾 Save Project
-    </button>
-
-
-    <button
-      class="btn clear"
-      onclick="openEditor()"
-    >
-      ✂️ Open Editor
-    </button>
-
-  </div>
-
-
-</section>
-
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+<div class="sidebar-title">Video Workflow</div>
+
+<div class="step active" onclick="showStep(1,this)">
+<div class="step-number">1</div>
+<div>Idea & Script</div>
+</div>
+
+<div class="step" onclick="showStep(2,this)">
+<div class="step-number">2</div>
+<div>Storyboard</div>
+</div>
+
+<div class="step" onclick="showStep(3,this)">
+<div class="step-number">3</div>
+<div>Characters</div>
+</div>
+
+<div class="step" onclick="showStep(4,this)">
+<div class="step-number">4</div>
+<div>Backgrounds</div>
+</div>
+
+<div class="step" onclick="showStep(5,this)">
+<div class="step-number">5</div>
+<div>Voice</div>
+</div>
+
+<div class="step" onclick="showStep(6,this)">
+<div class="step-number">6</div>
+<div>Animation</div>
+</div>
+
+<div class="step" onclick="showStep(7,this)">
+<div class="step-number">7</div>
+<div>Timeline</div>
+</div>
+
+<div class="step" onclick="showStep(8,this)">
+<div class="step-number">8</div>
+<div>Export</div>
+</div>
+
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+<div class="page-head">
+<div>
+<h1>AI Video Maker</h1>
+<p>Create script, scenes, characters, voice and video from one workspace.</p>
+</div>
+<div class="badge">AI VIDEO STUDIO</div>
+</div>
+
+<!-- STEP 1 -->
+<section id="step1">
+
+<div class="card">
+<div class="card-title">
+<h2>1. Start Your Video</h2>
+<span class="muted">Idea → Script → Video</span>
+</div>
+
+<label>Video Topic / Story Prompt</label>
+<textarea id="videoPrompt" placeholder="Example: एक गरीब किसान की मेहनत और सफलता की भावुक कहानी..."></textarea>
+
+<div class="button-row">
+<button class="primary" onclick="generateScript()">✨ Generate Script</button>
+<button class="secondary" onclick="document.getElementById('videoPrompt').value=''">Clear</button>
+</div>
+</div>
+
+<div class="card">
+<h2>Video Settings</h2>
+
+<div class="grid3">
+
+<div>
+<label>Duration</label>
+<select id="duration">
+<option>30 Seconds</option>
+<option>1 Minute</option>
+<option>2 Minutes</option>
+<option>3 Minutes</option>
+<option>5 Minutes</option>
+<option>10 Minutes</option>
+</select>
+</div>
+
+<div>
+<label>Language</label>
+<select id="language">
+<option>Hindi</option>
+<option>English</option>
+<option>Bengali</option>
+<option>Gujarati</option>
+<option>Kannada</option>
+<option>Malayalam</option>
+<option>Marathi</option>
+<option>Punjabi</option>
+<option>Tamil</option>
+<option>Telugu</option>
+<option>Urdu</option>
+</select>
+</div>
+
+<div>
+<label>Aspect Ratio</label>
+<select id="ratio">
+<option>16:9 YouTube</option>
+<option>9:16 Shorts / Reels</option>
+<option>1:1 Square</option>
+</select>
+</div>
 
 </div>
 
+<br>
+
+<label>Video Style</label>
+<div class="option-grid">
+<div class="option selected" onclick="selectOption(this)">2D Indian Toon</div>
+<div class="option" onclick="selectOption(this)">Cinematic</div>
+<div class="option" onclick="selectOption(this)">Realistic</div>
+<div class="option" onclick="selectOption(this)">3D Animation</div>
+</div>
+
+<div style="margin-top:15px">
+<label>Reference Document</label>
+<input type="file" id="referenceFile">
+</div>
+</div>
+
+<div class="card">
+<h2>Generated Script</h2>
+<textarea id="scriptBox" placeholder="Your AI generated script will appear here..."></textarea>
+
+<div class="button-row">
+<button class="primary" onclick="generateStoryboard()">Create Storyboard →</button>
+<button class="secondary" onclick="showToast('Script copied')">Copy Script</button>
+</div>
+</div>
+
+</section>
+
+<!-- STEP 2 -->
+<section id="step2" class="hidden">
+
+<div class="card">
+<div class="card-title">
+<h2>2. Storyboard</h2>
+<button class="primary" onclick="addScene()">+ Add Scene</button>
+</div>
+
+<div id="sceneList"></div>
+
+<div class="button-row">
+<button class="primary" onclick="generateAllScenes()">✨ Generate All Scenes</button>
+<button class="secondary" onclick="showToast('Storyboard saved')">Save Storyboard</button>
+</div>
+</div>
+
+</section>
+
+<!-- STEP 3 -->
+<section id="step3" class="hidden">
+
+<div class="card">
+<div class="card-title">
+<h2>3. Character Creator</h2>
+<button class="primary" onclick="addCharacter()">+ Character</button>
+</div>
+
+<div class="grid2">
+
+<div>
+<label>Character Name</label>
+<input id="charName" placeholder="Example: Raju">
+</div>
+
+<div>
+<label>Character Type</label>
+<select id="charType">
+<option>Human</option>
+<option>Cartoon Character</option>
+<option>Animal</option>
+<option>Fantasy Character</option>
+</select>
+</div>
+
+</div>
+
+<br>
+
+<label>Character Description</label>
+<textarea id="charDescription" placeholder="Age, clothes, face, body type, personality, hairstyle, accessories..."></textarea>
+
+<div class="button-row">
+<button class="primary" onclick="createCharacter()">Create Character</button>
+<button class="secondary" onclick="showToast('Character reference uploaded')">Upload Reference</button>
+</div>
+</div>
+
+<div class="card">
+<h2>Character Library</h2>
+<div id="characterList">
+
+<div class="character">
+<div class="avatar">R</div>
+<div class="character-info">
+<b>Raju</b>
+<small>Young Indian farmer • Main Character</small>
+</div>
+<span class="chip">Consistent</span>
+</div>
+
+</div>
+</div>
+
+</section>
+
+<!-- STEP 4 -->
+<section id="step4" class="hidden">
+
+<div class="card">
+<h2>4. Background & Assets</h2>
+
+<label>Generate Background Prompt</label>
+<textarea id="backgroundPrompt" placeholder="Example: Indian village at sunrise, mud houses, green fields, cinematic lighting..."></textarea>
+
+<div class="button-row">
+<button class="primary" onclick="generateBackground()">✨ Generate Background</button>
+<button class="secondary" onclick="showToast('Asset uploaded')">Upload Asset</button>
+</div>
+</div>
+
+<div class="card">
+<h2>Asset Library</h2>
+
+<div class="grid2">
+<div class="asset">
+<b>Indian Village</b>
+<small>Background • 16:9</small>
+</div>
+
+<div class="asset">
+<b>Farm Field</b>
+<small>Background • Cinematic</small>
+</div>
+
+<div class="asset">
+<b>House Interior</b>
+<small>Environment</small>
+</div>
+
+<div class="asset">
+<b>Sunset Sky</b>
+<small>Background</small>
+</div>
+</div>
+</div>
+
+</section>
+
+<!-- STEP 5 -->
+<section id="step5" class="hidden">
+
+<div class="card">
+<h2>5. AI Voiceover</h2>
+
+<div class="grid2">
+
+<div>
+<label>Voice</label>
+<select>
+<option>Hindi Male - Natural</option>
+<option>Hindi Female - Natural</option>
+<option>Hindi Male - Deep</option>
+<option>Hindi Female - Emotional</option>
+<option>English Male</option>
+<option>English Female</option>
+</select>
+</div>
+
+<div>
+<label>Voice Style</label>
+<select>
+<option>Natural</option>
+<option>Emotional</option>
+<option>Storytelling</option>
+<option>Energetic</option>
+<option>Dramatic</option>
+<option>Calm</option>
+</select>
+</div>
+
+<div>
+<label>Speed</label>
+<input type="range" min="0.5" max="1.5" value="1" step="0.1">
+</div>
+
+<div>
+<label>Pitch</label>
+<input type="range" min="-10" max="10" value="0">
+</div>
+
+</div>
+
+<br>
+
+<label>Voiceover Text</label>
+<textarea id="voiceText" placeholder="Script text for voiceover..."></textarea>
+
+<div class="button-row">
+<button class="primary" onclick="generateVoice()">🎙 Generate Voice</button>
+<button class="secondary" onclick="showToast('Voice preview playing')">▶ Preview</button>
+</div>
+</div>
+
+</section>
+
+<!-- STEP 6 -->
+<section id="step6" class="hidden">
+
+<div class="card">
+<h2>6. Animation & Motion</h2>
+
+<div class="grid2">
+
+<div>
+<label>Animation Type</label>
+<select>
+<option>Natural Motion</option>
+<option>Cinematic Camera</option>
+<option>Character Action</option>
+<option>Lip Sync</option>
+<option>Expression Animation</option>
+<option>Zoom & Pan</option>
+</select>
+</div>
+
+<div>
+<label>Camera Movement</label>
+<select>
+<option>Static</option>
+<option>Slow Zoom In</option>
+<option>Slow Zoom Out</option>
+<option>Pan Left</option>
+<option>Pan Right</option>
+<option>Tracking Shot</option>
+</select>
+</div>
+
+<div>
+<label>Character Expression</label>
+<select>
+<option>Neutral</option>
+<option>Happy</option>
+<option>Sad</option>
+<option>Angry</option>
+<option>Surprised</option>
+<option>Emotional</option>
+</select>
+</div>
+
+<div>
+<label>Motion Strength</label>
+<input type="range" min="0" max="100" value="60">
+</div>
+
+</div>
+
+<br>
+
+<label>Motion Prompt</label>
+<textarea placeholder="Describe how the characters, camera and environment should move..."></textarea>
+
+<div class="button-row">
+<button class="primary" onclick="showToast('Animation generation queued')">✨ Generate Animation</button>
+</div>
+</div>
+
+</section>
+
+<!-- STEP 7 -->
+<section id="step7" class="hidden">
+
+<div class="card">
+<div class="card-title">
+<h2>7. Timeline Editor</h2>
+<div>
+<button class="secondary" onclick="addTimelineClip()">+ Add Clip</button>
+</div>
+</div>
+
+<div class="timeline">
+
+<div class="time-head">
+<div>Track</div>
+<div>0s</div>
+<div>5s</div>
+<div>10s</div>
+<div>15s</div>
+<div>20s</div>
+<div>25s</div>
+</div>
+
+<div class="track">
+<div class="track-name">VIDEO</div>
+<div class="track-content">
+<span class="clip">Scene 1</span>
+<span class="clip">Scene 2</span>
+<span class="clip">Scene 3</span>
+</div>
+</div>
+
+<div class="track">
+<div class="track-name">VOICE</div>
+<div class="track-content">
+<span class="clip">Voiceover</span>
+</div>
+</div>
+
+<div class="track">
+<div class="track-name">MUSIC</div>
+<div class="track-content">
+<span class="clip">Background Music</span>
+</div>
+</div>
+
+<div class="track">
+<div class="track-name">TEXT</div>
+<div class="track-content">
+<span class="clip">Subtitle</span>
+</div>
+</div>
+
+</div>
+
+<br>
+
+<div class="grid3">
+
+<div>
+<label>Transition</label>
+<select>
+<option>None</option>
+<option>Fade</option>
+<option>Dissolve</option>
+<option>Slide</option>
+<option>Zoom</option>
+</select>
+</div>
+
+<div>
+<label>Effect</label>
+<select>
+<option>None</option>
+<option>Cinematic</option>
+<option>Glow</option>
+<option>Film</option>
+<option>Shake</option>
+</select>
+</div>
+
+<div>
+<label>Subtitle</label>
+<select>
+<option>Enabled</option>
+<option>Disabled</option>
+</select>
+</div>
+
+</div>
+
+<div class="button-row">
+<button class="primary" onclick="showToast('Timeline saved')">Save Timeline</button>
+<button class="secondary" onclick="showToast('Preview started')">▶ Preview Video</button>
+</div>
+</div>
+
+</section>
+
+<!-- STEP 8 -->
+<section id="step8" class="hidden">
+
+<div class="card">
+<h2>8. Export Video</h2>
+
+<div class="grid2">
+
+<div>
+<label>Resolution</label>
+<select id="resolution">
+<option>1080p Full HD</option>
+<option>720p HD</option>
+<option>4K Ultra HD</option>
+</select>
+</div>
+
+<div>
+<label>Format</label>
+<select>
+<option>MP4</option>
+<option>WebM</option>
+</select>
+</div>
+
+<div>
+<label>Frame Rate</label>
+<select>
+<option>30 FPS</option>
+<option>24 FPS</option>
+<option>60 FPS</option>
+</select>
+</div>
+
+<div>
+<label>Quality</label>
+<select>
+<option>High</option>
+<option>Standard</option>
+<option>Maximum</option>
+</select>
+</div>
+
+</div>
+
+<div class="button-row">
+<button class="primary" onclick="exportVideo()">⬇ Export Video</button>
+<button class="secondary" onclick="saveProject()">💾 Save Project</button>
+</div>
+</div>
+
+<div class="card">
+<h2>Project Summary</h2>
+
+<div class="stat">
+<span>Video Duration</span>
+<span id="summaryDuration">1 Minute</span>
+</div>
+
+<div class="stat">
+<span>Language</span>
+<span id="summaryLanguage">Hindi</span>
+</div>
+
+<div class="stat">
+<span>Aspect Ratio</span>
+<span id="summaryRatio">16:9</span>
+</div>
+
+<div class="stat">
+<span>Scenes</span>
+<span id="summaryScenes">3</span>
+</div>
+
+<div class="stat">
+<span>Voiceover</span>
+<span>Ready</span>
+</div>
+
+<div class="stat">
+<span>Characters</span>
+<span>Consistent</span>
+</div>
+
+</div>
+
+</section>
+
 </main>
 
+<!-- RIGHT PANEL -->
+<aside class="right">
 
-<footer class="footer">
+<h3>Preview</h3>
 
-  DraftAI — AI Video Maker
+<div class="preview">
+<div class="preview-screen" id="previewScreen">
+Your video preview will appear here
+</div>
+<button class="play" onclick="showToast('Video preview started')">▶</button>
+</div>
 
-</footer>
+<h3>Project</h3>
 
+<div class="stat">
+<span>Scenes</span>
+<span id="sideScenes">3</span>
+</div>
+
+<div class="stat">
+<span>Characters</span>
+<span>1</span>
+</div>
+
+<div class="stat">
+<span>Voice</span>
+<span>Ready</span>
+</div>
+
+<div class="stat">
+<span>Assets</span>
+<span>4</span>
+</div>
+
+<h3>Quick Tools</h3>
+
+<button class="secondary" style="width:100%;margin-bottom:7px"
+onclick="showStep(2)">Storyboard</button>
+
+<button class="secondary" style="width:100%;margin-bottom:7px"
+onclick="showStep(3)">Character Creator</button>
+
+<button class="secondary" style="width:100%;margin-bottom:7px"
+onclick="showStep(5)">AI Voice</button>
+
+<button class="secondary" style="width:100%;margin-bottom:7px"
+onclick="showStep(7)">Timeline Editor</button>
+
+<button class="primary" style="width:100%;margin-top:8px"
+onclick="showStep(8)">Export Video</button>
+
+</aside>
+
+</div>
+
+<div class="toast" id="toast"></div>
 
 <script>
 
-let generatedData = "";
-
-
-/* Generate Video */
-
-function generateVideo(){
-
-  const prompt =
-    document
-    .getElementById("prompt")
-    .value
-    .trim();
-
-
-  if(!prompt){
-
-    document
-    .getElementById("message")
-    .innerText =
-      "❌ पहले अपनी Story या Video Prompt लिखिए।";
-
-    return;
-  }
-
-
-  const duration =
-    document.getElementById("duration").value;
-
-  const ratio =
-    document.getElementById("ratio").value;
-
-  const style =
-    document.getElementById("style").value;
-
-  const scenes =
-    document.getElementById("scenes").value;
-
-  const voice =
-    document.getElementById("voice").value;
-
-  const language =
-    document.getElementById("language").value;
-
-  const music =
-    document.getElementById("music").value;
-
-  const quality =
-    document.getElementById("quality").value;
-
-  const subtitles =
-    document.getElementById("subtitles").checked
-    ? "Yes"
-    : "No";
-
-  const consistency =
-    document.getElementById("consistency").checked
-    ? "Yes"
-    : "No";
-
-
-  generatedData =
-
-    "DraftAI AI Video Project\n\n" +
-
-    "Story / Prompt:\n" +
-    prompt +
-
-    "\n\nDuration: " +
-    duration +
-
-    "\nAspect Ratio: " +
-    ratio +
-
-    "\nVideo Style: " +
-    style +
-
-    "\nScenes: " +
-    scenes +
-
-    "\nVoice: " +
-    voice +
-
-    "\nLanguage: " +
-    language +
-
-    "\nBackground Music: " +
-    music +
-
-    "\nQuality: " +
-    quality +
-
-    "\nSubtitles: " +
-    subtitles +
-
-    "\nCharacter Consistency: " +
-    consistency;
-
-
-  document
-  .getElementById("preview")
-  .innerHTML =
-
-    "<div>" +
-
-    "<div class='preview-icon'>✨</div>" +
-
-    "<h3>Video Project Ready!</h3>" +
-
-    "<p style='margin-top:12px;'>" +
-
-    "आपका video project successfully तैयार है।" +
-
-    "<br><br>" +
-
-    "Real AI video rendering अगले चरण में जोड़ी जाएगी।" +
-
-    "</p>" +
-
-    "</div>";
-
-
-  document
-  .getElementById("details")
-  .innerHTML =
-
-    "<strong>Video Project Details</strong>" +
-
-    "<br><br>" +
-
-    "<b>Story:</b><br>" +
-
-    prompt +
-
-    "<br><br>" +
-
-    "<b>Duration:</b> " +
-    duration +
-
-    "<br>" +
-
-    "<b>Aspect Ratio:</b> " +
-    ratio +
-
-    "<br>" +
-
-    "<b>Style:</b> " +
-    style +
-
-    "<br>" +
-
-    "<b>Scenes:</b> " +
-    scenes +
-
-    "<br>" +
-
-    "<b>Voice:</b> " +
-    voice +
-
-    "<br>" +
-
-    "<b>Language:</b> " +
-    language +
-
-    "<br>" +
-
-    "<b>Music:</b> " +
-    music +
-
-    "<br>" +
-
-    "<b>Quality:</b> " +
-    quality +
-
-    "<br>" +
-
-    "<b>Subtitles:</b> " +
-    subtitles +
-
-    "<br>" +
-
-    "<b>Character Consistency:</b> " +
-    consistency;
-
-
-  localStorage.setItem(
-    "draftai_video_project",
-    generatedData
-  );
-
-
-  document
-  .getElementById("message")
-  .innerText =
-    "✅ Video project तैयार है।";
-
-}
-
-
-/* Clear */
-
-function clearAll(){
-
-  document.getElementById("prompt").value = "";
-
-  document.getElementById("duration").selectedIndex = 0;
-
-  document.getElementById("ratio").selectedIndex = 0;
-
-  document.getElementById("style").selectedIndex = 0;
-
-  document.getElementById("scenes").selectedIndex = 0;
-
-  document.getElementById("voice").selectedIndex = 0;
-
-  document.getElementById("language").selectedIndex = 0;
-
-  document.getElementById("music").selectedIndex = 0;
-
-  document.getElementById("quality").selectedIndex = 0;
-
-  document.getElementById("subtitles").checked = true;
-
-  document.getElementById("consistency").checked = true;
-
-
-  generatedData = "";
-
-
-  document
-  .getElementById("preview")
-  .innerHTML =
-
-    "<div>" +
-
-    "<div class='preview-icon'>🎬</div>" +
-
-    "<h3>आपका Video Preview</h3>" +
-
-    "<p style='margin-top:12px;'>Story लिखकर Generate दबाएँ।</p>" +
-
-    "</div>";
-
-
-  document
-  .getElementById("details")
-  .innerHTML =
-
-    "<strong>Video Project Details</strong>" +
-
-    "<br><br>" +
-
-    "अभी कोई video project generate नहीं हुआ है।";
-
-
-  document
-  .getElementById("message")
-  .innerText =
-    "🗑️ सभी fields clear हो गईं।";
-
-}
-
-
-/* Download */
-
-function downloadProject(){
-
-  if(!generatedData){
-
-    const prompt =
-      document
-      .getElementById("prompt")
-      .value
-      .trim();
-
-
-    if(!prompt){
-
-      alert(
-        "पहले Story / Prompt लिखें या Generate दबाएँ।"
-      );
-
-      return;
-    }
-
-
-    generatedData =
-      "DraftAI AI Video Project\n\n" +
-
-      "Story / Prompt:\n" +
-      prompt +
-
-      "\n\nDuration: " +
-      document.getElementById("duration").value +
-
-      "\nAspect Ratio: " +
-      document.getElementById("ratio").value +
-
-      "\nVideo Style: " +
-      document.getElementById("style").value +
-
-      "\nScenes: " +
-      document.getElementById("scenes").value +
-
-      "\nVoice: " +
-      document.getElementById("voice").value +
-
-      "\nLanguage: " +
-      document.getElementById("language").value +
-
-      "\nMusic: " +
-      document.getElementById("music").value +
-
-      "\nQuality: " +
-      document.getElementById("quality").value;
-
-  }
-
-
-  const blob =
-    new Blob(
-      [generatedData],
-      {type:"text/plain"}
-    );
-
-
-  const url =
-    URL.createObjectURL(blob);
-
-
-  const link =
-    document.createElement("a");
-
-
-  link.href = url;
-
-  link.download =
-    "draftai-video-project.txt";
-
-
-  document.body.appendChild(link);
-
-  link.click();
-
-  document.body.removeChild(link);
-
-  URL.revokeObjectURL(url);
-
-
-  document
-  .getElementById("message")
-  .innerText =
-    "✅ Video project download हो गया।";
-
-}
-
-
-/* Save Project */
-
-function saveProject(){
-
-  const prompt =
-    document
-    .getElementById("prompt")
-    .value
-    .trim();
-
-
-  if(!prompt){
-
-    alert(
-      "पहले Story / Prompt लिखें।"
-    );
-
-    return;
-  }
-
-
-  localStorage.setItem(
-    "draftai_video_saved",
-    generatedData || prompt
-  );
-
-
-  alert(
-    "✅ Video Project browser में save हो गया।"
-  );
-
-}
-
-
-/* Open Editor */
-
-function openEditor(){
-
-  const prompt =
-    document
-    .getElementById("prompt")
-    .value
-    .trim();
-
-
-  if(prompt){
-
-    localStorage.setItem(
-      "draftai_script",
-      prompt
-    );
-
-  }
-
-
-  window.location.href =
-    "ai-editor.html";
-
-}
-
-</script>
-
-</body>
-</html>
+let currentStep=1;
+  
