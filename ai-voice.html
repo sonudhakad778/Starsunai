@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Voice - DraftAI</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f7f7fb;
+color:#222
+}
+
+header{
+background:#fff;
+padding:16px 20px;
+border-bottom:1px solid #ddd;
+display:flex;
+justify-content:space-between;
+align-items:center
+}
+
+.logo{
+color:#6c3cff;
+font-size:23px;
+font-weight:bold;
+text-decoration:none
+}
+
+.back{
+color:#555;
+text-decoration:none
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:30px 16px
+}
+
+h1{
+text-align:center;
+font-size:34px;
+margin:10px 0
+}
+
+h1 span{color:#6c3cff}
+
+.subtitle{
+text-align:center;
+color:#666;
+font-size:17px;
+margin-bottom:25px
+}
+
+.box{
+background:#fff;
+border:1px solid #ddd;
+border-radius:16px;
+padding:20px;
+margin-bottom:20px
+}
+
+h2{margin-top:0}
+
+label{
+display:block;
+font-weight:bold;
+margin:16px 0 7px
+}
+
+textarea,
+select,
+input[type=range]{
+width:100%
+}
+
+textarea{
+min-height:180px;
+padding:14px;
+border:1px solid #ccc;
+border-radius:10px;
+font-size:16px;
+font-family:inherit;
+resize:vertical
+}
+
+select{
+padding:13px;
+border:1px solid #ccc;
+border-radius:9px;
+font-size:16px
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px
+}
+
+.range-row{
+display:flex;
+align-items:center;
+gap:12px
+}
+
+.range-row input{
+flex:1
+}
+
+.value{
+min-width:45px;
+font-weight:bold;
+text-align:center
+}
+
+.player{
+border:2px dashed #ccc;
+border-radius:12px;
+padding:25px 15px;
+text-align:center;
+color:#888;
+margin-top:20px
+}
+
+.status{
+font-size:18px;
+font-weight:bold;
+margin-bottom:15px
+}
+
+.actions{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-top:20px
+}
+
+button{
+padding:13px 20px;
+border-radius:9px;
+font-size:15px;
+font-weight:bold;
+cursor:pointer
+}
+
+.primary{
+background:#6c3cff;
+color:white;
+border:0
+}
+
+.secondary{
+background:white;
+color:#6c3cff;
+border:1px solid #6c3cff
+}
+
+@media(max-width:650px){
+.grid{grid-template-columns:1fr}
+h1{font-size:28px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a class="logo" href="index.html">DraftAI</a>
+<a class="back" href="dashboard.html">← Dashboard</a>
+</header>
+
+<div class="container">
+
+<h1>AI <span>Voice</span></h1>
+
+<p class="subtitle">
+अपनी script को AI voice के लिए तैयार करें।
+</p>
+
+<div class="box">
+
+<h2>Voice Script</h2>
+
+<label>Text / Script</label>
+
+<textarea
+id="script"
+placeholder="यहाँ अपनी script लिखें..."></textarea>
+
+</div>
+
+<div class="box">
+
+<h2>Voice Settings</h2>
+
+<div class="grid">
+
+<div>
+
+<label>Language</label>
+
+<select id="language">
+<option>Hindi</
